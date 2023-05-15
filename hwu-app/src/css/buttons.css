@@ -1,0 +1,26 @@
+.button {
+    display: block;
+    padding: 12px;
+    border: 1px solid;
+    border-radius: 30px;
+    min-width: 80px;
+    margin: 12px auto;
+}
+
+.btn_primary {
+    border-color: #5BA2AD;
+    background-color: #5BA2AD;
+    color: white;
+}
+
+.btn_secondary {
+    border-color: white;
+    background-color: #5BA2AD;
+    color: white;
+}
+
+.btn_contrast {
+    border-color: #5BA2AD;
+    background-color: white;
+    color: #5BA2AD;
+}
