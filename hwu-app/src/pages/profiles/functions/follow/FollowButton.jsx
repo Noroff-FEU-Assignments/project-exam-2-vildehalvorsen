@@ -75,9 +75,11 @@ export default function FollowButton({ name, updateFollowersCount }) {
 
   return (
     <>
-      <button disabled={loading} onClick={handleClick}>
-        {isFollowing ? "Unfollow" : "Follow"}
-      </button>
+      {name === auth.name ? null : (
+        <button disabled={loading} onClick={handleClick}>
+          {isFollowing ? "Unfollow" : "Follow"}
+        </button>
+      )}
     </>
   );
 }

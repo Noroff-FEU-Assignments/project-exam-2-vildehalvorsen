@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import PostsListHtml from "./PostsListHtml";
 
-export default function DisplayPostsList({ url }) {
+export default function DisplayPostsList({ url, handlePostModification }) {
   const [auth] = useContext(AuthContext);
   const [posts, setPosts] = useState([]);
   const [selectedPost, setSelectedPost] = useState(null);
@@ -14,6 +14,7 @@ export default function DisplayPostsList({ url }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const accessToken = auth.accessToken;
+  const [isModified, setIsModified] = useState(false);
 
   useEffect(() => {
     getPostsData();
@@ -70,12 +71,16 @@ export default function DisplayPostsList({ url }) {
     if (postModalIsOpen) {
       setPostModalIsOpen(false);
       setSelectedPost(null);
+      if(isModified) {
+        handlePostModification();
+      }
     }
   };
-  
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>An error occurred</div>;
-  if (latestPosts.length === 0) return <div>The user hasn't published any posts yet</div>;
+  if (latestPosts.length === 0)
+    return <div>The user hasn't published any posts yet</div>;
 
   return (
     <PostsListHtml
@@ -86,6 +91,8 @@ export default function DisplayPostsList({ url }) {
       postModalIsOpen={postModalIsOpen}
       handleCloseModal={handleCloseModal}
       handleOpenModal={handleOpenModal}
+      handlePostModification={handlePostModification}
+      setIsModified={setIsModified}
     />
   );
 }

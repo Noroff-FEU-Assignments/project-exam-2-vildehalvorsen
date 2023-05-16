@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import Head from "../../components/layout/Head";
 import DisplayProfileList from "./functions/DisplayProfileList";
 import DisplayPostsList from "../../components/posts/DisplayPostsList";
@@ -7,11 +9,17 @@ import { BASE_URL, POSTS_PATH } from "../../constants/api";
 
 export default function DashboardPage() {
   const auth = useRequireAuth();
+  const [refreshKey, setRefreshKey] = useState(0);
+
   const url = BASE_URL + POSTS_PATH;
 
   if (!auth) {
     window.location.reload();
   }
+
+  const handlePostModification = () => {
+    setRefreshKey((prevKey) => prevKey + 1);
+  };
 
   return (
     <>
@@ -19,10 +27,13 @@ export default function DashboardPage() {
       <h1>hi</h1>
 
       <DisplayProfileList />
-
       <div>
         <h2>Latest posts:</h2>
-        <DisplayPostsList url={url} />
+        <DisplayPostsList
+          key={refreshKey}
+          url={url}
+          handlePostModification={handlePostModification}
+        />
       </div>
     </>
   );

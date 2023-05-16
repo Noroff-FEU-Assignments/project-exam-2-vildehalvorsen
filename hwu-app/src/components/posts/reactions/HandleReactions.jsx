@@ -4,7 +4,7 @@ import axios from "axios";
 import AuthContext from "../../../context/AuthContext";
 import { BASE_URL, POSTS_PATH } from "../../../constants/api";
 
-export default function HandleReactions({ postId, initialCount }) {
+export default function HandleReactions({ postId, initialCount, setIsModified }) {
   const [auth] = useContext(AuthContext);
   const accessToken = auth.accessToken;
 
@@ -24,11 +24,12 @@ export default function HandleReactions({ postId, initialCount }) {
     try {
       await axios.put(`${url}/react/${symbol}`, {}, options);
       setReactionCount(reactionCount + 1);
+      setIsModified(true);
     } catch (error) {
       console.log(error);
     }
   }
-
+  
   return (
     <>
       <div>

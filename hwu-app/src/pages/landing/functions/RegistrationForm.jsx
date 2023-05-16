@@ -22,9 +22,6 @@ export default function RegistrationForm() {
   async function onSubmit(data) {
     setSubmitting(true);
     setRegError(null);
-    
-    console.log(data);
-    
     try {
       await axios.post(url, data, {headers: {
         'Content-Type': 'application/json'

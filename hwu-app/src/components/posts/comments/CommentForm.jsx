@@ -47,6 +47,7 @@ export default function CommentForm({
       <img src={imageSrc} alt="Profile avatar" />
       <label htmlFor="comment">Comment</label>
       <textarea
+        name="comment"
         value={commentBody}
         onChange={handleInputChange}
         placeholder="Write a comment..."

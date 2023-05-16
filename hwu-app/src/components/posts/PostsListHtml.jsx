@@ -1,8 +1,8 @@
+import { useContext } from "react";
 import PostsModal from "../modal/PostsModal";
-import { useState } from "react";
-import axios from "axios";
-import { BASE_URL, POSTS_PATH } from "../../constants/api";
 import HandleReactions from "./reactions/HandleReactions";
+import AuthContext from "../../context/AuthContext";
+import EditPost from "./settings/EditPost";
 
 export default function PostsListHtml({
   posts,
@@ -12,7 +12,11 @@ export default function PostsListHtml({
   postModalIsOpen,
   handleCloseModal,
   handleOpenModal,
+  handlePostModification,
+  setIsModified,
 }) {
+  const [auth] = useContext(AuthContext);
+
   return (
     <>
       <ul>
@@ -25,19 +29,24 @@ export default function PostsListHtml({
             month: "long",
             year: "numeric",
           });
-          
+
           function getInitialCount() {
             const obj = reactions.find((item) => item.symbol === "👍");
-            if(obj) {
-              console.log(obj.count);
+            if (obj) {
               return obj.count;
             } else {
               return 0;
             }
           }
-          
+
           return (
             <li key={id} className="postsList__item">
+              {auth.name === author.name && (
+                <EditPost
+                  postData={post}
+                  handlePostModification={handlePostModification}
+                />
+              )}
               <div>
                 <p>{author.name}</p>
                 <p>{convertedDate}</p>
@@ -68,6 +77,7 @@ export default function PostsListHtml({
           accessToken={accessToken}
           isOpen={postModalIsOpen}
           onRequestClose={handleCloseModal}
+          setIsModified={setIsModified}
         />
       )}
     </>

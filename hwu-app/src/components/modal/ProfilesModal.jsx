@@ -43,8 +43,8 @@ export default function ProfilesModal({ isOpen, onRequestClose }) {
 
   return (
     <Modal isOpen={isOpen} onRequestClose={onRequestClose}>
-      <h2>Hellooo</h2>
-      <button onClick={onRequestClose}>Close</button>
+      <button className="closeBtn" onClick={onRequestClose}>Close</button>
+      <h2>Hang out with these:</h2>
       <ul className="profileList">
         {allProfiles.slice(0, 20).map((profile) => {
           return (
