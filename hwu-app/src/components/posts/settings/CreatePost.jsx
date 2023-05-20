@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CreatePostModal from "../../modal/CreatePostModal";
 
-export default function CreatePost({ handlePostModification }) {
+export default function CreatePost({ handlePostModification, showAlert }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -22,6 +22,7 @@ export default function CreatePost({ handlePostModification }) {
           isOpen={modalIsOpen}
           onRequestClose={handleCloseModal}
           handlePostModification={handlePostModification}
+          showAlert={showAlert}
         />
       )}
     </>

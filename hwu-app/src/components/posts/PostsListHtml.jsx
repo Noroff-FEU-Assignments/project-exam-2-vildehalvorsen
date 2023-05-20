@@ -3,6 +3,7 @@ import PostsModal from "../modal/PostsModal";
 import HandleReactions from "./reactions/HandleReactions";
 import AuthContext from "../../context/AuthContext";
 import EditPost from "./settings/EditPost";
+import defaultAvatar from "../../images/avatar_default.jpg";
 
 export default function PostsListHtml({
   posts,
@@ -14,6 +15,7 @@ export default function PostsListHtml({
   handleOpenModal,
   handlePostModification,
   setIsModified,
+  showAlert,
 }) {
   const [auth] = useContext(AuthContext);
 
@@ -45,9 +47,14 @@ export default function PostsListHtml({
                 <EditPost
                   postData={post}
                   handlePostModification={handlePostModification}
+                  showAlert={showAlert}
                 />
               )}
               <div>
+                <img
+                  src={author.avatar ? author.avatar : defaultAvatar}
+                  alt="Profile avatar"
+                />
                 <p>{author.name}</p>
                 <p>{convertedDate}</p>
               </div>
@@ -57,7 +64,11 @@ export default function PostsListHtml({
                 <p>{body}</p>
               </div>
               <div>
-                <HandleReactions postId={id} initialCount={getInitialCount} />
+                <HandleReactions
+                  postId={id}
+                  initialCount={getInitialCount}
+                  setIsModified={setIsModified}
+                />
                 {_count.comments === 0 ? null : (
                   <p>{_count.comments} comments</p>
                 )}

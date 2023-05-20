@@ -4,7 +4,7 @@ import { BASE_URL, PROFILES_PATH } from "../../../constants/api";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../../context/AuthContext";
 import { Link } from "react-router-dom";
-import ProfilesModal from "../../../components/modal/ProfilesModal";
+import ProfilesListModal from "../../../components/modal/ProfilesListModal";
 
 export default function DisplayProfileList() {
   const url = BASE_URL + PROFILES_PATH + `${"?sortOrder=asc"}`;
@@ -83,7 +83,7 @@ export default function DisplayProfileList() {
         })}
       </ul>
       <button onClick={handleOpenModal}>Browse</button>
-      <ProfilesModal
+      <ProfilesListModal
         isOpen={profilesModalIsOpen}
         onRequestClose={handleCloseModal}
       />

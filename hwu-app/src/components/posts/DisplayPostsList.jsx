@@ -4,7 +4,11 @@ import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import PostsListHtml from "./PostsListHtml";
 
-export default function DisplayPostsList({ url, handlePostModification }) {
+export default function DisplayPostsList({
+  url,
+  handlePostModification,
+  showAlert,
+}) {
   const [auth] = useContext(AuthContext);
   const [posts, setPosts] = useState([]);
   const [selectedPost, setSelectedPost] = useState(null);
@@ -71,7 +75,7 @@ export default function DisplayPostsList({ url, handlePostModification }) {
     if (postModalIsOpen) {
       setPostModalIsOpen(false);
       setSelectedPost(null);
-      if(isModified) {
+      if (isModified) {
         handlePostModification();
       }
     }
@@ -93,6 +97,7 @@ export default function DisplayPostsList({ url, handlePostModification }) {
       handleOpenModal={handleOpenModal}
       handlePostModification={handlePostModification}
       setIsModified={setIsModified}
+      showAlert={showAlert}
     />
   );
 }

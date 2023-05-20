@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { useForm } from "react-hook-form";
 import { BASE_URL, POSTS_PATH } from "../../../constants/api";
 
 export default function CommentForm({
@@ -9,14 +10,22 @@ export default function CommentForm({
   imageSrc,
   autoFocus,
 }) {
-  const [commentBody, setCommentBody] = useState("");
-
+  const [error, setError] = useState(null);
   const url = BASE_URL + POSTS_PATH;
 
-  async function handleSubmit(event) {
-    event.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isDirty },
+  } = useForm({
+    defaultValues: {
+      body: "",
+    },
+  });
 
-    const data = { body: commentBody };
+  async function submitNewComment(data) {
+    setError(null);
 
     const options = {
       headers: {
@@ -31,29 +40,28 @@ export default function CommentForm({
         options
       );
       const newComment = response.data;
-      setCommentBody("");
+      reset();
       onCommentAdded(newComment);
     } catch (error) {
-      console.log(error.toString());
+      console.log(error);
+      setError(error.toString());
     }
   }
 
-  function handleInputChange(event) {
-    setCommentBody(event.target.value);
-  }
-
   return (
-    <form id="commentForm" onSubmit={handleSubmit}>
+    <form id="commentForm" onSubmit={handleSubmit(submitNewComment)}>
       <img src={imageSrc} alt="Profile avatar" />
-      <label htmlFor="comment">Comment</label>
+      <label htmlFor="comment" hidden>
+        Comment
+      </label>
       <textarea
+        id="comment"
         name="comment"
-        value={commentBody}
-        onChange={handleInputChange}
         placeholder="Write a comment..."
         autoFocus={autoFocus}
+        {...register("body")}
       />
-      <button id="commentBtn" disabled={!commentBody.trim()}>
+      <button id="commentBtn" disabled={!isDirty}>
         add
       </button>
     </form>

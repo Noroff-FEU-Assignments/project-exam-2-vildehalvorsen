@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import UpdatePostModal from "../../modal/UpdatePostModal";
 import DeletePost from "./DeletePost";
 
-export default function EditPost({ postData, handlePostModification }) {
+export default function EditPost({ postData, handlePostModification, showAlert }) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -24,11 +24,13 @@ export default function EditPost({ postData, handlePostModification }) {
           onRequestClose={handleCloseModal}
           postData={postData}
           handlePostModification={handlePostModification}
+          showAlert={showAlert}
         />
       )}
       <DeletePost
         postData={postData}
         handlePostModification={handlePostModification}
+        showAlert={showAlert}
       />
     </>
   );

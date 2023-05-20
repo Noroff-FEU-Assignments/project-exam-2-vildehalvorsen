@@ -1,6 +1,6 @@
 import Head from "../../components/layout/Head";
 import useRequireAuth from "../../hooks/useRequireAuth";
-import ProfileDetails from "./functions/ProfileDetails";
+import ProfileDetails from "../../components/profiles/ProfileDetails";
 import DisplayPostList from "../../components/posts/DisplayPostsList"
 import { useParams } from "react-router-dom";
 import { BASE_URL, PROFILES_PATH } from "../../constants/api";

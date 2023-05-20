@@ -10,26 +10,27 @@ export default function CreatePostModal({
   isOpen,
   onRequestClose,
   handlePostModification,
+  showAlert
 }) {
   const [auth] = useContext(AuthContext);
   const accessToken = auth.accessToken;
-  const [, setSubmitting] = useState(false);
-  const [error, setError] = useState(null);
 
   const url = BASE_URL + POSTS_PATH;
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty },
     reset,
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      title: "",
+      media: "",
+      body: "",
+    }
+  });
 
-  async function submitCreatePost(data) {
-    setSubmitting(true);
-    setError(null);
-
-    const options = {
+  async function submitCreatePost(data) {const options = {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -40,12 +41,11 @@ export default function CreatePostModal({
         reset();
         onRequestClose();
         handlePostModification();
+        showAlert('You published a new post', 'success')
       }
     } catch (error) {
       console.log(error.toString());
-      setError(error.toString());
-    } finally {
-      setSubmitting(false);
+      showAlert('An error occurred when trying to publish the post', 'error')
     }
   }
 
@@ -55,7 +55,6 @@ export default function CreatePostModal({
         Close
       </button>
       <form onSubmit={handleSubmit(submitCreatePost)} id="createPostForm">
-        {error}
         <div>
           <label htmlFor="title" hidden>
             Title
@@ -95,7 +94,7 @@ export default function CreatePostModal({
           {errors.body && <p>{errors.body.message}</p>}
         </div>
 
-        <button>Submit</button>
+        <button disabled={!isDirty}>Publish</button>
       </form>
     </Modal>
   );

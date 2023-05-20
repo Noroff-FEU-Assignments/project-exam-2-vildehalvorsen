@@ -6,6 +6,7 @@ import axios from "axios";
 import { BASE_URL, POSTS_PATH } from "../../constants/api";
 import CommentForm from "../posts/comments/CommentForm";
 import HandleReactions from "../posts/reactions/HandleReactions";
+import defaultAvatar from "../../images/avatar_default.jpg";
 
 export default function PostsModal({
   isOpen,
@@ -60,7 +61,6 @@ export default function PostsModal({
   function getInitialCount() {
     const obj = reactions.find((item) => item.symbol === "👍");
     if (obj) {
-      console.log(obj.count);
       return obj.count;
     } else {
       return 0;
@@ -79,9 +79,12 @@ export default function PostsModal({
       ) : (
         <>
           <div>
-            {/* {auth.name === postData.author.name && <EditPost />} */}
-          </div>
-          <div>
+            <img
+              src={
+                postData.author.avatar ? postData.author.avatar : defaultAvatar
+              }
+              alt="Profile avatar"
+            />
             <p>{postData.author.name}</p>
             <p>
               {new Date(postData.created).toLocaleString("en-GB", {
@@ -122,7 +125,14 @@ export default function PostsModal({
             {comments.map((comment) => {
               return (
                 <li key={comment.id}>
-                  <img src={comment.author.avatar} alt="profile avatar" />
+                  <img
+                    src={
+                      comment.author.avatar
+                        ? comment.author.avatar
+                        : defaultAvatar
+                    }
+                    alt="profile avatar"
+                  />
                   <p>{comment.author.name}</p>
                   <p>{comment.body}</p>
                 </li>

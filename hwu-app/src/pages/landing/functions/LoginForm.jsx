@@ -18,7 +18,7 @@ export default function LoginForm() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm(); 
 
   const [, setAuth] = useContext(AuthContext);
 

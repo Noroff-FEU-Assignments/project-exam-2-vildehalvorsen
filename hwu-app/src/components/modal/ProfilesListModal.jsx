@@ -7,7 +7,7 @@ import axios from "axios";
 
 import { BASE_URL, PROFILES_PATH } from "../../constants/api";
 
-export default function ProfilesModal({ isOpen, onRequestClose }) {
+export default function ProfilesListModal({ isOpen, onRequestClose }) {
   const url = BASE_URL + PROFILES_PATH + `${"?sortOrder=asc"}`;
 
   const [auth] = useContext(AuthContext);
@@ -43,7 +43,9 @@ export default function ProfilesModal({ isOpen, onRequestClose }) {
 
   return (
     <Modal isOpen={isOpen} onRequestClose={onRequestClose}>
-      <button className="closeBtn" onClick={onRequestClose}>Close</button>
+      <button className="closeBtn" onClick={onRequestClose}>
+        Close
+      </button>
       <h2>Hang out with these:</h2>
       <ul className="profileList">
         {allProfiles.slice(0, 20).map((profile) => {

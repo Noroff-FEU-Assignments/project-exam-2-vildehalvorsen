@@ -11,18 +11,17 @@ export default function UpdatePostModal({
   isOpen,
   onRequestClose,
   handlePostModification,
+  showAlert
 }) {
   const [auth] = useContext(AuthContext);
   const accessToken = auth.accessToken;
-  const [, setSubmitting] = useState(false);
-  const [error, setError] = useState(null);
 
   const url = BASE_URL + POSTS_PATH + `/${postData.id}`;
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm({
     defaultValues: {
       title: postData.title,
@@ -32,9 +31,6 @@ export default function UpdatePostModal({
   });
 
   async function submitUpdatePost(data) {
-    setSubmitting(true);
-    setError(null);
-
     const options = {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -44,12 +40,11 @@ export default function UpdatePostModal({
       const response = await axios.put(url, data, options);
       if (response.status === 200) {
         handlePostModification();
+        showAlert('Post updated successfully', 'success');
       }
     } catch (error) {
       console.log(error.toString());
-      setError(error.toString());
-    } finally {
-      setSubmitting(false);
+      showAlert('An error occurred trying to update the post', 'error');
     }
   }
 
@@ -59,7 +54,6 @@ export default function UpdatePostModal({
         Close
       </button>
       <form onSubmit={handleSubmit(submitUpdatePost)} id="updatePostForm">
-        {error}
         <div>
           <label htmlFor="title" hidden>
             Title
@@ -99,7 +93,7 @@ export default function UpdatePostModal({
           {errors.body && <p>{errors.body.message}</p>}
         </div>
 
-        <button>Save changes</button>
+        <button disabled={!isDirty}>Save changes</button>
       </form>
     </Modal>
   );

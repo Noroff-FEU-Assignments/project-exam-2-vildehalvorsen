@@ -3,7 +3,7 @@ export const regEmail = /^\w+([-+.']\w+)*@?(stud.noroff.no|noroff.no)$/;
 
 export function replaceSpaces(e) {
   if (e.keyCode === 32) {
-    e.preventDefault(); 
-    e.target.value += '_'; 
+    e.preventDefault();
+    e.target.value += "_";
   }
 }
