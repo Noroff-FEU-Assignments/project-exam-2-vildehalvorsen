@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { AuthProvider } from "./context/AuthContext";
+import AuthContext, { AuthProvider } from "./context/AuthContext";
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Modal from "react-modal";
@@ -12,18 +12,18 @@ import DashboardPage from "./pages/dashboard/DashboardPage";
 import AccountPage from './pages/account/AccountPage';
 import ProfilesPage from './pages/profiles/ProfilesPage';
 import FeedPage from "./pages/feed/FeedPage";
+import React, { useContext, useEffect, useState } from "react";
 
 Modal.setAppElement('#root');
 
-
 function App() {
-  const auth = localStorage.getItem("auth");
+  const [auth] = useContext(AuthContext);
 
   return (
     <>
     <AuthProvider>
       <Router>
-        {auth && <Nav />}
+        {/* {auth && <Nav avatar={userAvatar}/>} */}
         <Routes>
           <Route path='/' element={auth ? <DashboardPage /> : <LandingPage />} />
           <Route path='/account' element={<AccountPage />} />

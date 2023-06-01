@@ -1,16 +1,26 @@
-import { useState } from "react";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { BASE_URL, POSTS_PATH } from "../../../constants/api";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
+
+import defaultAvatar from "../../../images/avatar_default.jpg";
+import { CommentAvatar } from "../../styledComponents/Avatars";
+import {
+  CommentSubmitBtn,
+  PostCommentForm,
+  PostCommentTextarea,
+} from "../../styledComponents/Posts";
 
 export default function CommentForm({
   postId,
   accessToken,
   onCommentAdded,
   imageSrc,
-  autoFocus,
+  showAlert,
+  isCommenting,
 }) {
-  const [error, setError] = useState(null);
   const url = BASE_URL + POSTS_PATH;
 
   const {
@@ -25,8 +35,6 @@ export default function CommentForm({
   });
 
   async function submitNewComment(data) {
-    setError(null);
-
     const options = {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -44,26 +52,29 @@ export default function CommentForm({
       onCommentAdded(newComment);
     } catch (error) {
       console.log(error);
-      setError(error.toString());
+      showAlert("Something went wrong trying to add comment", "error");
     }
   }
-
+  
   return (
-    <form id="commentForm" onSubmit={handleSubmit(submitNewComment)}>
-      <img src={imageSrc} alt="Profile avatar" />
+    <PostCommentForm id="commentForm" onSubmit={handleSubmit(submitNewComment)}>
+      <CommentAvatar
+        src={imageSrc ? imageSrc : defaultAvatar}
+        alt="Profile avatar"
+      />
       <label htmlFor="comment" hidden>
         Comment
       </label>
-      <textarea
+      <PostCommentTextarea
         id="comment"
         name="comment"
         placeholder="Write a comment..."
-        autoFocus={autoFocus}
+        autoFocus={isCommenting}
         {...register("body")}
       />
-      <button id="commentBtn" disabled={!isDirty}>
-        add
-      </button>
-    </form>
+      <CommentSubmitBtn id="commentBtn" disabled={!isDirty}>
+        <FontAwesomeIcon icon={faCaretRight} />
+      </CommentSubmitBtn>
+    </PostCommentForm>
   );
 }

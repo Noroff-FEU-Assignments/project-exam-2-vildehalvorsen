@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
@@ -7,24 +8,32 @@ import AuthContext from "../../../context/AuthContext";
 
 import { BASE_URL, LOGIN_PATH } from "../../../constants/api";
 import { regEmail } from "../../../components/common/ValidateInputs";
+import {
+  StyledForm,
+  StyledInput,
+} from "../../../components/styledComponents/Forms";
+import { Paragraph } from "../../../components/styledComponents/Paragraph";
+import { ButtonPrimary } from "../../../components/styledComponents/Buttons";
+import { FlexContainer } from "../../../components/styledComponents/Containers";
+
 
 const url = BASE_URL + LOGIN_PATH;
 
-export default function LoginForm() {
+export default function LoginForm({ showAlert }) {
   const [submitting, setSubmitting] = useState(false);
-  const [loginError, setLoginError] = useState(null);
+  const [, setAuth] = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm(); 
+  } = useForm();
 
-  const [, setAuth] = useContext(AuthContext);
+  
 
   async function onSubmit(data) {
     setSubmitting(true);
-    setLoginError(null);
 
     try {
       const response = await axios.post(url, data, {
@@ -33,57 +42,64 @@ export default function LoginForm() {
         },
       });
       setAuth(response.data);
-      window.location.reload();
+      navigate("/account");
     } catch (error) {
       console.log("error: ", error.response.data.errors);
-      setLoginError(error.response.data.errors[0].message);
+      const loginError = error.response.data.errors[0].message;
+      showAlert(loginError, "error");
     } finally {
       setSubmitting(false);
     }
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} id="loginForm">
-      {loginError}
-      <fieldset disabled={submitting}>
+    <StyledForm onSubmit={handleSubmit(onSubmit)} id="loginForm">
+      <div>
         <div>
-          <div>
-            <label htmlFor="email" hidden>
-              Email
-            </label>
-            <input
-              name="email"
-              id="login-email"
-              placeholder="email"
-              {...register("email", {
-                required: true,
-                pattern: regEmail,
-              })}
-            />
-            {errors.email && (
-              <p>Must be a valid stud.noroff.no or noroff.no email address</p>
-            )}
-          </div>
-
-          <div>
-            <label htmlFor="password" hidden>
-              Password
-            </label>
-            <input
-              type="password"
-              name="password"
-              id="login-password"
-              placeholder="password"
-              {...register("password", {
-                required: true,
-                minLength: 8,
-              })}
-            />
-            {errors.password && <p>Must be at least 8 characters</p>}
-          </div>
+          <label htmlFor="email" hidden>
+            Email
+          </label>
+          <StyledInput
+            name="email"
+            id="login-email"
+            placeholder="email"
+            {...register("email", {
+              required: true,
+              pattern: {
+                value: regEmail,
+                message:
+                  "Must be a valid stud.noroff.no or noroff.no email address",
+              },
+            })}
+          />
+          {errors.email && <Paragraph>{errors.email.message}</Paragraph>}
         </div>
-        <button id="loginBtn">{submitting ? "Logging in..." : "Log in"}</button>
-      </fieldset>
-    </form>
+
+        <div>
+          <label htmlFor="password" hidden>
+            Password
+          </label>
+          <StyledInput
+            type="password"
+            name="password"
+            id="login-password"
+            placeholder="password"
+            {...register("password", {
+              required: true,
+              minLength: {
+                value: 8,
+                message: "Must be at least 8 characters",
+              },
+            })}
+          />
+          {errors.password && <Paragraph>{errors.password.message}</Paragraph>}
+        </div>
+      </div>
+      <FlexContainer center>
+        <ButtonPrimary id="loginBtn">
+          {submitting ? "Logging in..." : "Log in"}
+        </ButtonPrimary>
+      </FlexContainer>
+    </StyledForm>
   );
 }

@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 import { BASE_URL, PROFILES_PATH } from "../../constants/api";
 import FollowButton from "../../components/profiles/follow/FollowButton";
@@ -10,7 +11,20 @@ import defaultAvatar from "../../images/avatar_default.jpg";
 import EditBanner from "./settings/EditBanner";
 import EditAvatar from "./settings/EditAvatar";
 
-export default function ProfileDetails({ name }) {
+import { Heading4, ProfileTitle } from "../styledComponents/Headings";
+import { BannerBackground, ProfileBanner } from "../styledComponents/Banners";
+import { MainAvatar, FollowerAvatar } from "../styledComponents/Avatars";
+import {
+  AvatarContainer,
+  FlexContainer,
+  FollowBtnContainer,
+  FollowerContainer,
+  FollowerListContainer,
+} from "../styledComponents/Containers";
+import LoadingIndicator from "../common/LoadingIndicator";
+import { Paragraph } from "../styledComponents/Paragraph";
+
+export default function ProfileDetails({ name, showAlert }) {
   const [auth] = useContext(AuthContext);
   const [details, setDetails] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -47,62 +61,96 @@ export default function ProfileDetails({ name }) {
     getDetails();
   }
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>An error occurred</div>;
+  if (loading) return <LoadingIndicator />;
+  if (error) return <Paragraph align="center">An error occurred</Paragraph>;
 
   return (
     <div>
       <div>
-        {details.banner ? (
-          <img src={details.banner} alt="Profile banner" />
-        ) : (
-          <img src={defaultBanner} alt="Profile banner" />
-        )}
-        <EditBanner
-          name={name}
-          details={details}
-          handleModifications={handleModifications}
-        />
+        <BannerBackground>
+          {name === auth.name && (
+            <EditBanner
+              name={name}
+              details={details}
+              handleModifications={handleModifications}
+              showAlert={showAlert}
+            />
+          )}
+          {details.banner ? (
+            <ProfileBanner src={details.banner} alt="Profile banner" />
+          ) : (
+            <ProfileBanner src={defaultBanner} alt="Profile banner" />
+          )}
+        </BannerBackground>
+
+        <FollowBtnContainer>
+          <FollowButton name={name} handleModifications={handleModifications} />
+        </FollowBtnContainer>
       </div>
 
-      <div>
-        <FollowButton name={name} handleModifications={handleModifications} />
-      </div>
-
-      <div>
-        <h1>{details.name}</h1>
+      <AvatarContainer>
         {details.avatar ? (
-          <img src={details.avatar} alt="Profile avatar" />
+          <MainAvatar src={details.avatar} alt="Profile avatar" />
         ) : (
-          <img src={defaultAvatar} alt="Profile avatar" />
+          <MainAvatar src={defaultAvatar} alt="Profile avatar" />
         )}
-        <EditAvatar
-          name={name}
-          details={details}
-          handleModifications={handleModifications}
-        />
-      </div>
+        {name === auth.name && (
+          <EditAvatar
+            name={name}
+            details={details}
+            handleModifications={handleModifications}
+            showAlert={showAlert}
+          />
+        )}
+      </AvatarContainer>
 
-      <div>
-        {details.followers.map((follower) => {
-          return (
-            <li>
-              <img src={follower.avatar ? follower.avatar : defaultAvatar} />
-              <p>{follower.name}</p>
-            </li>
-          );
-        })}
-        {details.following.map((follower) => {
-          return (
-            <li>
-              <img src={follower.avatar ? follower.avatar : defaultAvatar} />
-              <p>{follower.name}</p>
-            </li>
-          );
-        })}
-        <h3>Followers: {details._count.followers}</h3>
-        <h3>Following: {details._count.following}</h3>
-      </div>
+      <ProfileTitle>{details.name}</ProfileTitle>
+
+      <FlexContainer center>
+        <FollowerContainer>
+          <Heading4 align="center">
+            Followers: {details._count.followers}
+          </Heading4>
+
+          <FollowerListContainer>
+            {details.followers.slice(0, 30).map((follower) => {
+              return (
+                <Link
+                  to={`/profiles/${follower.name}`}
+                  title={follower.name}
+                  key={follower.name}
+                >
+                  <FollowerAvatar
+                    src={follower.avatar ? follower.avatar : defaultAvatar}
+                  />
+                </Link>
+              );
+            })}
+          </FollowerListContainer>
+        </FollowerContainer>
+
+        <FollowerContainer>
+          <Heading4 align="center">
+            Following: {details._count.following}
+          </Heading4>
+
+          <FollowerListContainer>
+            {details.following.slice(0, 30).map((follower) => {
+              return (
+                <Link
+                  to={`/profiles/${follower.name}`}
+                  title={follower.name}
+                  key={follower.name}
+                >
+                  <FollowerAvatar
+                    src={follower.avatar ? follower.avatar : defaultAvatar}
+                  />
+                </Link>
+              );
+            })}
+          </FollowerListContainer>
+        </FollowerContainer>
+      </FlexContainer>
     </div>
   );
 }

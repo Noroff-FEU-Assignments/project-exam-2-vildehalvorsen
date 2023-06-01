@@ -1,18 +1,30 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { StyledNav, StyledNavLink } from '../styledComponents/Nav';
+import { XSmallAvatar } from '../styledComponents/Avatars';
+import defaultAvatar from "../../images/avatar_default.jpg";
 
-export default function Nav() {
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faHouse, faUserGroup} from "@fortawesome/free-solid-svg-icons";
+
+export default function Nav({ avatar }) {
   return (
-    <nav>
+    <StyledNav>
       <li>
-        <Link to='/account'>Account</Link>
+        <StyledNavLink to='/account' title='Account'>
+          <XSmallAvatar src={avatar ? avatar : defaultAvatar} alt='Profile avatar' />
+        </StyledNavLink>
       </li>
       <li>
-        <Link to='/feed'>Feed</Link>
+        <StyledNavLink to='/' title='Dashboard'>
+          <FontAwesomeIcon icon={faHouse} />
+        </StyledNavLink>
       </li>
       <li>
-        <Link to='/'>Dashboard</Link>
+        <StyledNavLink to='/feed' title='Profiles'>
+          <FontAwesomeIcon icon={faUserGroup} />
+        </StyledNavLink>
       </li>
-    </nav>
+      
+    </StyledNav>
   )
 }

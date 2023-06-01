@@ -4,7 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import UpdateBannerModal from "../modals/UpdateBannerModal";
 
-export default function EditBanner({ name, details, handleModifications }) {
+import { EditImageBtn } from "../../styledComponents/Buttons";
+import { EditBannerBtnContainer } from "../../styledComponents/Containers";
+
+export default function EditBanner({ name, details, handleModifications, showAlert }) {
   const [bannerModalIsOpen, setBannerModalIsOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -21,10 +24,10 @@ export default function EditBanner({ name, details, handleModifications }) {
 
   return (
     <>
-      <div>
-        <button className="editMediaBtn" onClick={handleOpenModal}>
-          <FontAwesomeIcon icon={faCamera} />
-        </button>
+      <EditBannerBtnContainer>
+        <EditImageBtn onClick={handleOpenModal}>
+          <FontAwesomeIcon icon={faCamera} title="Edit Banner"/>
+        </EditImageBtn>
         {bannerModalIsOpen && (
           <UpdateBannerModal
             name={name}
@@ -32,9 +35,10 @@ export default function EditBanner({ name, details, handleModifications }) {
             isOpen={bannerModalIsOpen}
             onRequestClose={handleCloseModal}
             handleModifications={handleModifications}
+            showAlert={showAlert}
           />
         )}
-      </div>
+      </EditBannerBtnContainer>
     </>
   );
 }

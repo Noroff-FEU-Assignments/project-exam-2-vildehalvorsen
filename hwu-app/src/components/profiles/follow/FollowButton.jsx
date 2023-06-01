@@ -2,8 +2,9 @@ import { useContext, useState, useEffect } from "react";
 import { BASE_URL, PROFILES_PATH } from "../../../constants/api";
 import axios from "axios";
 import AuthContext from "../../../context/AuthContext";
+import { FollowBtn } from "../../styledComponents/Buttons";
 
-export default function FollowButton({ name, updateModifications }) {
+export default function FollowButton({ name, handleModifications }) {
   const [auth] = useContext(AuthContext);
   const [isFollowing, setIsFollowing] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -40,7 +41,7 @@ export default function FollowButton({ name, updateModifications }) {
     try {
       await axios.put(url + "/follow", {}, options);
       setIsFollowing(true);
-      updateModifications();
+      handleModifications();
     } catch (error) {
       console.log(error);
       setError(error.toString());
@@ -54,7 +55,7 @@ export default function FollowButton({ name, updateModifications }) {
     try {
       await axios.put(url + "/unfollow", {}, options);
       setIsFollowing(false);
-      updateModifications();
+      handleModifications();
     } catch (error) {
       console.log(error);
       setError(error.toString());
@@ -76,9 +77,9 @@ export default function FollowButton({ name, updateModifications }) {
   return (
     <>
       {name === auth.name ? null : (
-        <button disabled={loading} onClick={handleClick}>
+        <FollowBtn disabled={loading} onClick={handleClick}>
           {isFollowing ? "Unfollow" : "Follow"}
-        </button>
+        </FollowBtn>
       )}
     </>
   );

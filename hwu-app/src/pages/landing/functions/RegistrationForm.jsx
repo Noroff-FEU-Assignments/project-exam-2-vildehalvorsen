@@ -1,92 +1,126 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
 
-import axios from 'axios';
+import axios from "axios";
 
-import { BASE_URL, REGISTER_PATH } from '../../../constants/api';
-import { regName, regEmail, replaceSpaces } from '../../../components/common/ValidateInputs';
+import { BASE_URL, REGISTER_PATH } from "../../../constants/api";
+import {
+  regName,
+  regEmail,
+  replaceSpaces,
+} from "../../../components/common/ValidateInputs";
 
+import {
+  StyledForm,
+  StyledInput,
+} from "../../../components/styledComponents/Forms";
+import { ButtonPrimary } from "../../../components/styledComponents/Buttons";
+import { FlexContainer } from "../../../components/styledComponents/Containers";
+import { Paragraph } from "../../../components/styledComponents/Paragraph";
 
 const url = BASE_URL + REGISTER_PATH;
 
-export default function RegistrationForm() {
+export default function RegistrationForm({ showAlert }) {
   const [submitting, setSubmitting] = useState(false);
-  const [regError, setRegError] = useState(null);
 
-  const { 
+  const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  
+
   async function onSubmit(data) {
     setSubmitting(true);
-    setRegError(null);
+
     try {
-      await axios.post(url, data, {headers: {
-        'Content-Type': 'application/json'
-      }});
+      await axios.post(url, data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       window.location.reload();
     } catch (error) {
-      console.log('error: ', error.response.data.errors[0].message);
-      setRegError(error.response.data.errors[0].message);
+      console.log("error: ", error.response.data.errors[0].message);
+      const regError = error.response.data.errors[0].message;
+      showAlert(regError, "error");
     } finally {
       setSubmitting(false);
     }
-  };
-  
+  }
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} id='regForm'>
-      {regError}
-      <fieldset disabled={submitting}>
+    <StyledForm onSubmit={handleSubmit(onSubmit)} id="regForm">
+      <div>
         <div>
-          <div>
-            <label htmlFor='name' hidden>Name</label>
-            <input
-              name='name' 
-              id='reg-name'
-              placeholder='name'
-              onKeyDown={replaceSpaces}
-              
-              {...register('name', { 
-                required: true, 
-                pattern: regName })}
-            />
-            {errors.name && <p>Must not contain punctuation symbols apart from underscore: _</p>}
-          </div>
-          
-          <div>
-            <label htmlFor='email' hidden>Email</label>
-            <input
-              name='email' 
-              id='reg-email'
-              placeholder='email'
-              {...register('email', { 
-                required: true, 
-                pattern: regEmail })} 
-            />
-            {errors.email && <p>Must be a valid stud.noroff.no or noroff.no email address</p>}
-          </div>
-          
-          <div>
-            <label htmlFor='password' hidden>Password</label>
-            <input
-              type='password'
-              name='password' 
-              id='reg-password'
-              placeholder='password'
-              {...register('password', { 
-                required: true, 
-                minLength: 8
-              })} 
-            />
-            {errors.password && <p>Must be at least 8 characters</p>}
-          </div>
+          <label htmlFor="name" hidden>
+            Name
+          </label>
+          <StyledInput
+            name="name"
+            id="reg-name"
+            placeholder="name"
+            onKeyDown={replaceSpaces}
+            {...register("name", {
+              required: "Name is required",
+              pattern: {
+                value: regName,
+                message:
+                  "Must not contain special characters or punctuation symbols other than underscore _",
+              },
+              minLength: {
+                value: 2,
+                message: "Name must be at least two characters",
+              },
+            })}
+          />
+          {errors.name && <Paragraph>{errors.name.message}</Paragraph>}
         </div>
-        <button id='regBtn'>
-        {submitting ? 'Validating...' : 'Submit'}
-        </button> 
-      </fieldset>
-    </form>
-  )
-};
+
+        <div>
+          <label htmlFor="email" hidden>
+            Email
+          </label>
+          <StyledInput
+            name="email"
+            id="reg-email"
+            placeholder="email"
+            {...register("email", {
+              required: true,
+              pattern: {
+                value: regEmail,
+                message:
+                  "Must be a valid stud.noroff.no or noroff.no email address",
+              },
+            })}
+          />
+          {errors.email && <Paragraph>{errors.email.message}</Paragraph>}
+        </div>
+
+        <div>
+          <label htmlFor="password" hidden>
+            Password
+          </label>
+          <StyledInput
+            type="password"
+            name="password"
+            id="reg-password"
+            placeholder="password"
+            {...register("password", {
+              required: true,
+              minLength: {
+                value: 8,
+                message: "Must be at least 8 characters",
+              },
+            })}
+          />
+          {errors.password && <Paragraph>{errors.password.message}</Paragraph>}
+        </div>
+      </div>
+      <FlexContainer center>
+        <ButtonPrimary id="regBtn">
+          {submitting ? "Validating..." : "Submit"}
+        </ButtonPrimary>
+      </FlexContainer>
+    </StyledForm>
+  );
+}

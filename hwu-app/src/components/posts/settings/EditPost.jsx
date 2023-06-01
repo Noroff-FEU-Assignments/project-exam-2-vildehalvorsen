@@ -1,8 +1,17 @@
 import React, { useState } from "react";
-import UpdatePostModal from "../../modal/UpdatePostModal";
+import UpdatePostModal from "../modals/UpdatePostModal";
 import DeletePost from "./DeletePost";
 
-export default function EditPost({ postData, handlePostModification, showAlert }) {
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+
+import { EditBtn } from "../../styledComponents/Buttons";
+
+export default function EditPost({
+  postData,
+  handlePostModification,
+  showAlert,
+}) {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -15,23 +24,25 @@ export default function EditPost({ postData, handlePostModification, showAlert }
 
   return (
     <>
-      <button className="editBtn" onClick={handleOpenModal}>
-        Edit Post
-      </button>
-      {modalIsOpen && (
-        <UpdatePostModal
-          isOpen={modalIsOpen}
-          onRequestClose={handleCloseModal}
+      <div>
+        <EditBtn onClick={handleOpenModal}>
+          <FontAwesomeIcon icon={faPenToSquare} title="Edit post" />
+        </EditBtn>
+        {modalIsOpen && (
+          <UpdatePostModal
+            isOpen={modalIsOpen}
+            onRequestClose={handleCloseModal}
+            postData={postData}
+            handlePostModification={handlePostModification}
+            showAlert={showAlert}
+          />
+        )}
+        <DeletePost
           postData={postData}
           handlePostModification={handlePostModification}
           showAlert={showAlert}
         />
-      )}
-      <DeletePost
-        postData={postData}
-        handlePostModification={handlePostModification}
-        showAlert={showAlert}
-      />
+      </div>
     </>
   );
 }

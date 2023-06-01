@@ -4,6 +4,11 @@ import axios from "axios";
 
 import { BASE_URL, POSTS_PATH } from "../../../constants/api";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+
+import { DeleteBtn } from "../../styledComponents/Buttons";
+
 export default function DeletePost({
   postData,
   handlePostModification,
@@ -28,16 +33,16 @@ export default function DeletePost({
       try {
         await axios.delete(url, options);
         handlePostModification();
-        showAlert("You deleted a post", "success");
+        showAlert("Post deleted", "success");
       } catch (error) {
         console.log(error.toString());
-        showAlert("An error occurred whent rying to delete the post", "error");
+        showAlert("An error occurred when trying to delete the post", "error");
       }
     }
   }
   return (
-    <button className="deleteBtn" onClick={handleDeletePost}>
-      Delete
-    </button>
+    <DeleteBtn onClick={handleDeletePost}>
+      <FontAwesomeIcon icon={faTrashCan} title="Delete post" />
+    </DeleteBtn>
   );
 }

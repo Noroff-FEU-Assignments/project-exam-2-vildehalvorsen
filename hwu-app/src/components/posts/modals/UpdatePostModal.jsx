@@ -3,15 +3,27 @@ import Modal from "react-modal";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
-import { BASE_URL, POSTS_PATH } from "../../constants/api";
-import AuthContext from "../../context/AuthContext";
+import { BASE_URL, POSTS_PATH } from "../../../constants/api";
+import AuthContext from "../../../context/AuthContext";
+import { StyledModal } from "../../styledComponents/Modals";
+import { ButtonPrimary, ExitBtn } from "../../styledComponents/Buttons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  StyledForm,
+  StyledInput,
+  StyledTextarea,
+} from "../../styledComponents/Forms";
+import { Paragraph } from "../../styledComponents/Paragraph";
+import { FlexContainer } from "../../styledComponents/Containers";
+import { Heading2 } from "../../styledComponents/Headings";
 
 export default function UpdatePostModal({
   postData,
   isOpen,
   onRequestClose,
   handlePostModification,
-  showAlert
+  showAlert,
 }) {
   const [auth] = useContext(AuthContext);
   const accessToken = auth.accessToken;
@@ -40,25 +52,26 @@ export default function UpdatePostModal({
       const response = await axios.put(url, data, options);
       if (response.status === 200) {
         handlePostModification();
-        showAlert('Post updated successfully', 'success');
+        showAlert("Post updated successfully", "success");
       }
     } catch (error) {
       console.log(error.toString());
-      showAlert('An error occurred trying to update the post', 'error');
+      showAlert(error.response.data.errors[0].message, "error");
     }
   }
 
   return (
-    <Modal isOpen={isOpen} onRequestClose={onRequestClose}>
-      <button className="closeBtn" onClick={onRequestClose}>
-        Close
-      </button>
-      <form onSubmit={handleSubmit(submitUpdatePost)} id="updatePostForm">
+    <StyledModal isOpen={isOpen} onRequestClose={onRequestClose} overlayClassName={"customOverlay"}>
+      <ExitBtn className="closeBtn" onClick={onRequestClose}>
+        <FontAwesomeIcon icon={faXmark} />
+      </ExitBtn>
+      <StyledForm onSubmit={handleSubmit(submitUpdatePost)} id="updatePostForm">
+        <Heading2 align="center">Update post</Heading2>
         <div>
           <label htmlFor="title" hidden>
             Title
           </label>
-          <input
+          <StyledInput
             name="title"
             id="title"
             placeholder="title"
@@ -66,35 +79,34 @@ export default function UpdatePostModal({
               required: true,
             })}
           />
-          {errors.title && <p>Required</p>}
+          {errors.title && <Paragraph>Required</Paragraph>}
         </div>
         <div>
           <label htmlFor="media" hidden>
             Image
           </label>
-          <input
+          <StyledInput
             name="media"
             id="media"
             placeholder="Image URL"
             {...register("media")}
           />
-          {errors.media && <p>{errors.media.message}</p>}
         </div>
         <div>
           <label htmlFor="body" hidden>
             Post content
           </label>
-          <textarea
+          <StyledTextarea
             name="body"
             id="body"
             placeholder="What's on your mind?"
             {...register("body")}
           />
-          {errors.body && <p>{errors.body.message}</p>}
         </div>
-
-        <button disabled={!isDirty}>Save changes</button>
-      </form>
-    </Modal>
+        <FlexContainer center>
+          <ButtonPrimary disabled={!isDirty}>Save changes</ButtonPrimary>
+        </FlexContainer>
+      </StyledForm>
+    </StyledModal>
   );
 }

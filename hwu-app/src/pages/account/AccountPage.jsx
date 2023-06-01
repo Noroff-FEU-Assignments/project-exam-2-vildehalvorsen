@@ -9,6 +9,9 @@ import CreatePost from "../../components/posts/settings/CreatePost";
 import DisplayPostsList from "../../components/posts/DisplayPostsList";
 import { useAlert } from "../../hooks/useAlert";
 
+import { Container } from "../../components/styledComponents/Containers";
+import AlertMessage from "../../components/common/AlertMessage";
+
 export default function AccountPage() {
   useRequireAuth();
   const auth = localStorage.getItem("auth");
@@ -26,24 +29,24 @@ export default function AccountPage() {
       <Head title={"Hi " + user.name} />
 
       {showMessage && (
-        <div className={type}>
-          <p>{message}</p>
-        </div>
+        <AlertMessage type={type} message={message}/>
       )}
 
-      <ProfileDetails name={user.name} />
+      <ProfileDetails name={user.name} showAlert={showAlert} />
 
-      <CreatePost
-        handlePostModification={handlePostModification}
-        showAlert={showAlert}
-      />
+      <Container>
+        <CreatePost
+          handlePostModification={handlePostModification}
+          showAlert={showAlert}
+        />
 
-      <DisplayPostsList
-        key={refreshKey}
-        url={BASE_URL + PROFILES_PATH + `/${user.name}/posts`}
-        handlePostModification={handlePostModification}
-        showAlert={showAlert}
-      />
+        <DisplayPostsList
+          key={refreshKey}
+          url={BASE_URL + PROFILES_PATH + `/${user.name}/posts`}
+          handlePostModification={handlePostModification}
+          showAlert={showAlert}
+        />
+      </Container>
     </>
   );
 }

@@ -1,11 +1,22 @@
 import { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
-import Modal from "react-modal";
 
 import axios from "axios";
 
 import { BASE_URL, PROFILES_PATH } from "../../../constants/api";
 import AuthContext from "../../../context/AuthContext";
+import { StyledModal } from "../../styledComponents/Modals";
+import {
+  ButtonPrimary,
+  ButtonSecondary,
+  ExitBtn,
+} from "../../styledComponents/Buttons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { StyledForm, StyledInput } from "../../styledComponents/Forms";
+import { Heading2 } from "../../styledComponents/Headings";
+import { Paragraph } from "../../styledComponents/Paragraph";
+import { FlexContainer } from "../../styledComponents/Containers";
 
 export default function UpdateBannerModal({
   name,
@@ -13,9 +24,11 @@ export default function UpdateBannerModal({
   isOpen,
   onRequestClose,
   handleModifications,
+  showAlert,
 }) {
-  const [auth] = useContext(AuthContext);
+  const [auth, setAuth] = useContext(AuthContext);
   const accessToken = auth.accessToken;
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const url = BASE_URL + PROFILES_PATH + `/${name}/media`;
@@ -24,7 +37,7 @@ export default function UpdateBannerModal({
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { isDirty },
   } = useForm({
     defaultValues: {
       banner: details.banner,
@@ -33,6 +46,7 @@ export default function UpdateBannerModal({
 
   async function submitUpdateBanner(data) {
     setError(null);
+    setLoading(true);
 
     const options = {
       headers: {
@@ -41,16 +55,25 @@ export default function UpdateBannerModal({
     };
 
     if (!data.banner) {
-      setError("Please enter an image URL before updating");
+      showAlert("Please enter an image URL before updating", "warning");
+      setLoading(false);
     } else {
       try {
         const response = await axios.put(url, data, options);
         if (response.status === 200) {
+          setAuth({
+            ...auth,
+            banner: data.banner,
+          });
+
           handleModifications();
+          showAlert("Banner updated", "success");
         }
       } catch (error) {
         console.log(error.toString());
-        setError(error.toString());
+        showAlert("Image URL is not valid or publicly accessible", "error");
+      } finally {
+        setLoading(false);
       }
     }
   }
@@ -78,46 +101,65 @@ export default function UpdateBannerModal({
           options
         );
         if (response.status === 200) {
+          setAuth({
+            ...auth,
+            banner: null,
+          });
+
           handleModifications();
           reset();
           onRequestClose();
+          showAlert("Banner deleted", "success");
         }
       } catch (error) {
         console.log(error);
-        setError(error.toString());
+        showAlert("Something went wrong trying to delete the banner", "error");
       }
     }
   }
 
   return (
-    <Modal isOpen={isOpen} onRequestClose={onRequestClose}>
-      <button className="closeBtn" onClick={onRequestClose}>
-        Close
-      </button>
-      <form onSubmit={handleSubmit(submitUpdateBanner)} id="updateBannerForm">
-        {error}
+    <StyledModal isOpen={isOpen} onRequestClose={onRequestClose} overlayClassName={"customOverlay"}>
+      <ExitBtn className="closeBtn" onClick={onRequestClose}>
+        <FontAwesomeIcon icon={faXmark} />
+      </ExitBtn>
+      <StyledForm
+        onSubmit={handleSubmit(submitUpdateBanner)}
+        id="updateBannerForm"
+      >
+        <Heading2 align="center">Update banner</Heading2>
         <div>
           <label htmlFor="banner" hidden>
             Image URL
           </label>
-          <input
+          <StyledInput
             name="banner"
             id="banner"
             placeholder="Image URL"
             {...register("banner")}
           />
-          {errors.banner && <p>Image URL must be publicly accessible</p>}
+          {error && (
+            <Paragraph align="center">
+              Image URL must be publicly accessible
+            </Paragraph>
+          )}
         </div>
-        <button>Update banner</button>
-        <button
-          type="click"
-          className="deleteBtn"
-          onClick={handleSubmit(submitDeleteBanner)}
-          disabled={details.banner ? false : true}
-        >
-          Delete
-        </button>
-      </form>
-    </Modal>
+        <FlexContainer center>
+          <ButtonPrimary disabled={!isDirty || loading}>
+            {loading ? "Updating..." : "Update"}
+          </ButtonPrimary>
+        </FlexContainer>
+        <FlexContainer center>
+          <ButtonSecondary
+            type="click"
+            className="deleteBtn"
+            onClick={handleSubmit(submitDeleteBanner)}
+            disabled={details.banner ? false : true}
+          >
+            Delete
+          </ButtonSecondary>
+        </FlexContainer>
+      </StyledForm>
+    </StyledModal>
   );
 }

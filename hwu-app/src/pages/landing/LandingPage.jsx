@@ -1,17 +1,21 @@
-import React from "react";
+import { useAlert } from "../../hooks/useAlert";
 
-import Registration from "./functions/RegistrationForm";
-import LoginForm from "./functions/LoginForm";
 import Head from "../../components/layout/Head";
+import AlertMessage from "../../components/common/AlertMessage";
+import DisplayForms from "./functions/DisplayForms";
+
+
 
 export default function LandingPage() {
+  const { showMessage, message, type, showAlert } = useAlert();
+  
   return (
     <>
       <Head />
-      <div>LandingPage</div>
 
-      <Registration />
-      <LoginForm />
+      {showMessage && <AlertMessage type={type} message={message} />}
+
+      <DisplayForms showAlert={showAlert}/>
     </>
   );
 }

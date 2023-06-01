@@ -1,11 +1,22 @@
 import { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
-import Modal from "react-modal";
 
 import axios from "axios";
 
 import { BASE_URL, PROFILES_PATH } from "../../../constants/api";
 import AuthContext from "../../../context/AuthContext";
+import { StyledModal } from "../../styledComponents/Modals";
+import {
+  ButtonPrimary,
+  ButtonSecondary,
+  ExitBtn,
+} from "../../styledComponents/Buttons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { StyledForm, StyledInput } from "../../styledComponents/Forms";
+import { Heading2 } from "../../styledComponents/Headings";
+import { Paragraph } from "../../styledComponents/Paragraph";
+import { FlexContainer } from "../../styledComponents/Containers";
 
 export default function UpdateAvatarModal({
   name,
@@ -13,9 +24,11 @@ export default function UpdateAvatarModal({
   isOpen,
   onRequestClose,
   handleModifications,
+  showAlert,
 }) {
-  const [auth] = useContext(AuthContext);
+  const [auth, setAuth] = useContext(AuthContext);
   const accessToken = auth.accessToken;
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const url = BASE_URL + PROFILES_PATH + `/${name}/media`;
@@ -24,7 +37,7 @@ export default function UpdateAvatarModal({
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { isDirty },
   } = useForm({
     defaultValues: {
       avatar: details.avatar,
@@ -33,6 +46,7 @@ export default function UpdateAvatarModal({
 
   async function submitUpdateAvatar(data) {
     setError(null);
+    setLoading(true);
 
     const options = {
       headers: {
@@ -41,16 +55,25 @@ export default function UpdateAvatarModal({
     };
 
     if (!data.avatar) {
-      setError("Please enter an image URL before updating");
+      showAlert("Please enter an image URL before updating", "warning");
+      setLoading(false);
     } else {
       try {
         const response = await axios.put(url, data, options);
         if (response.status === 200) {
+          setAuth({
+            ...auth,
+            avatar: data.avatar,
+          });
+
           handleModifications();
+          showAlert("Avatar updated", "success");
         }
       } catch (error) {
         console.log(error.toString());
-        setError(error.toString());
+        showAlert("Image URL is not valid or publicly accessible", "error");
+      } finally {
+        setLoading(false);
       }
     }
   }
@@ -78,46 +101,66 @@ export default function UpdateAvatarModal({
           options
         );
         if (response.status === 200) {
+          setAuth({
+            ...auth,
+            avatar: null,
+          });
+
           handleModifications();
           reset();
           onRequestClose();
+          showAlert("Avatar updated", "success");
         }
       } catch (error) {
-        console.log(error);
-        setError(error.toString());
+        console.log(error.toString());
+        showAlert("Something went wrong trying to delete the avatar", "error");
       }
     }
   }
 
   return (
-    <Modal isOpen={isOpen} onRequestClose={onRequestClose}>
-      <button className="closeBtn" onClick={onRequestClose}>
-        Close
-      </button>
-      <form onSubmit={handleSubmit(submitUpdateAvatar)} id="updateAvatarForm">
-        {error}
+    <StyledModal isOpen={isOpen} onRequestClose={onRequestClose} overlayClassName={"customOverlay"}>
+      <ExitBtn className="closeBtn" onClick={onRequestClose}>
+        <FontAwesomeIcon icon={faXmark} />
+      </ExitBtn>
+      <StyledForm
+        onSubmit={handleSubmit(submitUpdateAvatar)}
+        id="updateAvatarForm"
+      >
+        <Heading2 align="center">Update avatar</Heading2>
         <div>
           <label htmlFor="avatar" hidden>
             Image URL
           </label>
-          <input
+          <StyledInput
             name="avatar"
             id="avatar"
             placeholder="Image URL"
             {...register("avatar")}
           />
-          {errors.avatar && <p>Image URL must be publicly accessible</p>}
+          {error && (
+            <Paragraph align="center">
+              Image URL must be publicly accessible
+            </Paragraph>
+          )}
         </div>
-        <button>Update avatar</button>
-        <button
-          type="click"
-          className="deleteBtn"
-          onClick={handleSubmit(submitDeleteAvatar)}
-          disabled={details.avatar ? false : true}
-        >
-          Delete
-        </button>
-      </form>
-    </Modal>
+
+        <FlexContainer center>
+          <ButtonPrimary disabled={!isDirty || loading}>
+            {loading ? "Updating..." : "Update"}
+          </ButtonPrimary>
+        </FlexContainer>
+        <FlexContainer center>
+          <ButtonSecondary
+            type="click"
+            className="deleteBtn"
+            onClick={handleSubmit(submitDeleteAvatar)}
+            disabled={details.avatar ? false : true}
+          >
+            Delete
+          </ButtonSecondary>
+        </FlexContainer>
+      </StyledForm>
+    </StyledModal>
   );
 }

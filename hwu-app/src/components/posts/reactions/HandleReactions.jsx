@@ -4,7 +4,15 @@ import axios from "axios";
 import AuthContext from "../../../context/AuthContext";
 import { BASE_URL, POSTS_PATH } from "../../../constants/api";
 
-export default function HandleReactions({ postId, initialCount, setIsModified }) {
+import { PostReactionBtn } from "../../styledComponents/Buttons";
+import { Paragraph } from "../../styledComponents/Paragraph";
+
+export default function HandleReactions({
+  postId,
+  initialCount,
+  setIsModified,
+  isOpen,
+}) {
   const [auth] = useContext(AuthContext);
   const accessToken = auth.accessToken;
 
@@ -29,14 +37,16 @@ export default function HandleReactions({ postId, initialCount, setIsModified })
       console.log(error);
     }
   }
-  
+
   return (
     <>
       <div>
         {reactionCount === 0 ? null : (
-        <p>Reactions: {reactionCount}</p>
+          <Paragraph xsmall m5>
+            {reactionCount} {reactionCount === 1 ? "like" : "likes"}
+          </Paragraph>
         )}
-        <button onClick={handleLike}>👍</button>
+        <PostReactionBtn borderNone={isOpen} onClick={handleLike}>👍</PostReactionBtn>
       </div>
     </>
   );
