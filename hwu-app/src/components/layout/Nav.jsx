@@ -15,12 +15,12 @@ export default function Nav({ avatar }) {
         </StyledNavLink>
       </li>
       <li>
-        <StyledNavLink to='/' title='Dashboard'>
+        <StyledNavLink to='/dashboard' title='Dashboard'>
           <FontAwesomeIcon icon={faHouse} />
         </StyledNavLink>
       </li>
       <li>
-        <StyledNavLink to='/feed' title='Profiles'>
+        <StyledNavLink to='/profilelist' title='Profiles'>
           <FontAwesomeIcon icon={faUserGroup} />
         </StyledNavLink>
       </li>

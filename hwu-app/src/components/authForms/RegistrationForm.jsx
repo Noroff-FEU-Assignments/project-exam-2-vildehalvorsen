@@ -1,28 +1,24 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
-import AuthContext from "../../../context/AuthContext";
-
-import { BASE_URL, LOGIN_PATH } from "../../../constants/api";
-import { regEmail } from "../../../components/common/ValidateInputs";
+import { BASE_URL, REGISTER_PATH } from "../../constants/api";
 import {
-  StyledForm,
-  StyledInput,
-} from "../../../components/styledComponents/Forms";
-import { Paragraph } from "../../../components/styledComponents/Paragraph";
-import { ButtonPrimary } from "../../../components/styledComponents/Buttons";
-import { FlexContainer } from "../../../components/styledComponents/Containers";
+  regEmail,
+  replaceSpaces,
+  validateName,
+} from "../../constants/formValidation";
 
+import { StyledForm, StyledInput } from "../styledComponents/Forms";
+import { ButtonPrimary } from "../styledComponents/Buttons";
+import { FlexContainer } from "../styledComponents/Containers";
+import { Paragraph } from "../styledComponents/Paragraph";
 
-const url = BASE_URL + LOGIN_PATH;
+const url = BASE_URL + REGISTER_PATH;
 
-export default function LoginForm({ showAlert }) {
+export default function RegistrationForm({ showAlert }) {
   const [submitting, setSubmitting] = useState(false);
-  const [, setAuth] = useContext(AuthContext);
-  const navigate = useNavigate();
 
   const {
     register,
@@ -30,38 +26,56 @@ export default function LoginForm({ showAlert }) {
     formState: { errors },
   } = useForm();
 
-  
-
   async function onSubmit(data) {
     setSubmitting(true);
 
     try {
-      const response = await axios.post(url, data, {
+      await axios.post(url, data, {
         headers: {
           "Content-Type": "application/json",
         },
       });
-      setAuth(response.data);
-      navigate("/account");
+      window.location.reload();
     } catch (error) {
-      console.log("error: ", error.response.data.errors);
-      const loginError = error.response.data.errors[0].message;
-      showAlert(loginError, "error");
+      console.log("error: ", error.response.data.errors[0].message);
+      const regError = error.response.data.errors[0].message;
+      showAlert(regError, "error");
     } finally {
       setSubmitting(false);
     }
   }
 
   return (
-    <StyledForm onSubmit={handleSubmit(onSubmit)} id="loginForm">
+    <StyledForm onSubmit={handleSubmit(onSubmit)} id="regForm">
       <div>
+        <div>
+          <label htmlFor="name" hidden>
+            Name
+          </label>
+          <StyledInput
+            name="name"
+            id="reg-name"
+            placeholder="name"
+            onKeyDown={replaceSpaces}
+            {...register("name", {
+              required: "Name is required",
+              validate: validateName,
+              minLength: {
+                value: 2,
+                message: "Name must be at least two characters",
+              },
+            })}
+          />
+          {errors.name && <Paragraph>{errors.name.message}</Paragraph>}
+        </div>
+
         <div>
           <label htmlFor="email" hidden>
             Email
           </label>
           <StyledInput
             name="email"
-            id="login-email"
+            id="reg-email"
             placeholder="email"
             {...register("email", {
               required: true,
@@ -82,7 +96,7 @@ export default function LoginForm({ showAlert }) {
           <StyledInput
             type="password"
             name="password"
-            id="login-password"
+            id="reg-password"
             placeholder="password"
             {...register("password", {
               required: true,
@@ -96,8 +110,8 @@ export default function LoginForm({ showAlert }) {
         </div>
       </div>
       <FlexContainer center>
-        <ButtonPrimary id="loginBtn">
-          {submitting ? "Logging in..." : "Log in"}
+        <ButtonPrimary id="regBtn">
+          {submitting ? "Validating..." : "Submit"}
         </ButtonPrimary>
       </FlexContainer>
     </StyledForm>

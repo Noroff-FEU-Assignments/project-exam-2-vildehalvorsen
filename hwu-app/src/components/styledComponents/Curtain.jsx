@@ -1,7 +1,7 @@
 import styled, { keyframes, css } from "styled-components";
 import colors from "../../theme/colors";
 import typography from "../../theme/typography";
-import { device } from "../../theme/device";
+import device from "../../theme/device";
 
 const curtainAnimationMobile = keyframes`
 25% {

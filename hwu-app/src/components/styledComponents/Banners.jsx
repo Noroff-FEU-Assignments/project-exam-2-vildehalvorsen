@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import colors from "../../theme/colors";
 import typography from "../../theme/typography";
+import device from "../../theme/device";
 
 const BannerBackground = styled.div`
   height: 250px;
@@ -49,6 +50,92 @@ const BannerBackground = styled.div`
       }
     }
   }
+  @media (${device.mobileL}) {
+    border-radius: 0 0 55%;
+
+    .bannerLogo {
+      max-width: 650px;
+      margin: 0 auto;
+      .line1 {
+        p {
+          margin: 55px 0 0 15%;
+          font-size: 55px;
+        }
+      }
+
+      .line2 {
+        p {
+          margin: -35px 0 0 15%;
+          font-size: 65px;
+        }
+      }
+
+      .line3 {
+        p {
+          margin: 70px 25% 0 0;
+          font-size: 35px;
+        }
+      }
+    }
+  }
+
+  @media (${device.tablet}) {
+    height: 275px;
+    border-radius: 0 0 45%;
+    
+    .bannerLogo {
+      max-width: 900px;
+      .line1 {
+        p {
+          margin: 30px 0 0 15%;
+          font-size: 75px;
+        }
+      }
+
+      .line2 {
+        p {
+          margin: -55px 0 0 15%;
+          font-size: 105px;
+        }
+      }
+
+      .line3 {
+        p {
+          margin: 50px 20% 0 0;
+          font-size: 70px;
+        }
+      }
+    }
+  }
+
+  @media (${device.laptop}) {
+    height: 400px;
+    border-radius: 0 0 35%;
+    
+    .bannerLogo {
+      max-width: 1200px;
+      .line1 {
+        p {
+          margin: 50px 0 0 15%;
+          font-size: 110px;
+        }
+      }
+
+      .line2 {
+        p {
+          margin: -10px 0 0 15%;
+          font-size: 140px;
+        }
+      }
+
+      .line3 {
+        p {
+          margin: 80px 20% 0 0;
+          font-size: 90px;
+        }
+      }
+    }
+  }
 `;
 
 const ProfileBanner = styled.img`
@@ -57,6 +144,20 @@ const ProfileBanner = styled.img`
   object-fit: cover;
   border-radius: 0 0 65%;
   background-color: ${colors.primary};
+
+  @media (${device.mobileL}) {
+    border-radius: 0 0 55%;
+  }
+
+  @media (${device.tablet}) {
+    height: 275px;
+    border-radius: 0 0 45%;
+  }
+
+  @media (${device.laptop}) {
+    height: 400px;
+    border-radius: 0 0 35%;
+  }
 `;
 
 export { BannerBackground, ProfileBanner };

@@ -6,12 +6,9 @@ import {
   MobileCurtain,
   CurtainTop,
   Container,
-} from "../../../components/styledComponents/Curtain";
-import { LogoHeading } from "../../../components/layout/LogoHeading";
-import {
-  ButtonPrimary,
-  ButtonSecondary,
-} from "../../../components/styledComponents/Buttons";
+} from "../styledComponents/Curtain";
+import { LogoHeading } from "../layout/LogoHeading";
+import { ButtonPrimary, ButtonSecondary } from "../styledComponents/Buttons";
 
 export default function DisplayForms({ showAlert }) {
   const [showLogin, setShowLogin] = useState(true);

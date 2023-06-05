@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import colors from "../../theme/colors";
 import borders from "../../theme/borders";
-import { device } from "../../theme/device";
+import device from "../../theme/device";
 import Modal from "react-modal";
 
 const StyledModal = styled(Modal)`

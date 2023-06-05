@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import colors from "../../theme/colors";
+import device from "../../theme/device";
 import { NavLink } from "react-router-dom";
 
 const StyledNav = styled.nav`
+z-index: 10000;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -15,6 +17,16 @@ const StyledNav = styled.nav`
 
   li {
     margin: 0 23px;
+  }
+
+  @media (${device.laptop}) {
+    position: fixed;
+    top: 0;
+    bottom: initial;
+
+    li {
+      margin: 0 50px;
+    }
   }
 `;
 

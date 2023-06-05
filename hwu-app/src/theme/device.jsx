@@ -7,7 +7,7 @@ const size = {
   desktop: "2560px",
 };
 
-export const device = {
+const device = {
   mobileS: `(min-width: ${size.mobileS})`,
   mobileL: `(min-width: ${size.mobileL})`,
   tablet: `(min-width: ${size.tablet})`,
@@ -15,3 +15,5 @@ export const device = {
   laptopL: `(min-width: ${size.laptopL})`,
   desktop: `(min-width: ${size.desktop})`,
 };
+
+export default device;

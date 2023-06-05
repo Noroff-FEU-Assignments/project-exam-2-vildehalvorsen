@@ -1,6 +1,5 @@
-import { useState, useEffect, useContext, useRef } from "react";
+import { useState, useEffect, useContext } from "react";
 import AuthContext from "../../../context/AuthContext";
-import Modal from "react-modal";
 import axios from "axios";
 
 import { BASE_URL, POSTS_PATH } from "../../../constants/api";
@@ -25,7 +24,6 @@ import { Heading3, Heading4 } from "../../styledComponents/Headings";
 import { Paragraph } from "../../styledComponents/Paragraph";
 import { FlexContainer } from "../../styledComponents/Containers";
 import LoadingIndicator from "../../common/LoadingIndicator";
-import { Link } from "react-router-dom";
 
 export default function PostsModal({
   isOpen,

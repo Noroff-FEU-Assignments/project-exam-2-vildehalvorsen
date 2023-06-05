@@ -2,13 +2,13 @@ import { useContext, useState, useEffect } from "react";
 import { BASE_URL, PROFILES_PATH } from "../../../constants/api";
 import axios from "axios";
 import AuthContext from "../../../context/AuthContext";
-import { FollowBtn } from "../../styledComponents/Buttons";
+import { FollowBtn} from "../../styledComponents/Buttons";
+import LogOut from "../settings/LogOut";
 
-export default function FollowButton({ name, handleModifications }) {
+export default function FollowButton({ name, handleModifications, showAlert }) {
   const [auth] = useContext(AuthContext);
   const [isFollowing, setIsFollowing] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const accessToken = auth.accessToken;
 
   const url = BASE_URL + PROFILES_PATH + `/${name}`;
@@ -32,7 +32,6 @@ export default function FollowButton({ name, handleModifications }) {
       setIsFollowing(isUserFollowing);
     } catch (error) {
       console.log(error);
-      setError(error.toString());
     }
   }
 
@@ -44,7 +43,7 @@ export default function FollowButton({ name, handleModifications }) {
       handleModifications();
     } catch (error) {
       console.log(error);
-      setError(error.toString());
+      showAlert("An error occurred", "error");
     } finally {
       setLoading(false);
     }
@@ -58,7 +57,7 @@ export default function FollowButton({ name, handleModifications }) {
       handleModifications();
     } catch (error) {
       console.log(error);
-      setError(error.toString());
+      showAlert("An error occurred", "error");
     } finally {
       setLoading(false);
     }
@@ -72,11 +71,11 @@ export default function FollowButton({ name, handleModifications }) {
     }
   }
 
-  if (error) return <div>An error occurred</div>;
-
   return (
     <>
-      {name === auth.name ? null : (
+      {name === auth.name ? (
+       <LogOut showAlert={showAlert}/>
+      ) : (
         <FollowBtn disabled={loading} onClick={handleClick}>
           {isFollowing ? "Unfollow" : "Follow"}
         </FollowBtn>

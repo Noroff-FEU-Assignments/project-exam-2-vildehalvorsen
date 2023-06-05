@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import colors from "../../theme/colors";
+import device from "../../theme/device";
 import borders from "../../theme/borders";
 
 const AlertMessageContainer = styled.div`
@@ -28,6 +29,11 @@ div {
   background-color: ${colors.softSuccess};
   color: ${colors.darkSuccess};
   border-color: ${colors.success};
+}
+
+
+@media (${device.laptop}) {
+  top: 50px;
 }
 `;
 

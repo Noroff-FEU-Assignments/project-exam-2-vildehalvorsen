@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import typography from "../../theme/typography";
 import colors from "../../theme/colors";
+import device from "../../theme/device";
 
 const Heading1 = styled.h1`
   font-family: ${typography.heading.h1.fontFamily};
@@ -69,6 +70,12 @@ const ProfileTitle = styled.h1`
   text-align: center;
   margin-top: -115px;
   margin-bottom: 10px;
+
+  @media (${device.laptop}) {
+    position: absolute;
+    top: 580px;
+    left: 310px;
+  }
 `;
 
 export { Heading1, Heading2, Heading3, Heading4, ProfileTitle };

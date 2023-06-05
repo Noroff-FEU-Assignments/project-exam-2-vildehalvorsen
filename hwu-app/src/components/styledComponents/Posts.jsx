@@ -3,13 +3,24 @@ import styled from "styled-components";
 import colors from "../../theme/colors";
 import borders from "../../theme/borders";
 import typography from "../../theme/typography";
+import device from "../../theme/device";
 
 const PostCard = styled.li`
-  border: 1px solid ${colors.gray};
   border-radius: ${borders.mainBorder};
   color: ${colors.black};
-  margin-bottom: 50px;
   background-color: ${colors.white};
+  width: 330px;
+   padding-top: 5px;
+  margin: 0 auto 50px;
+  filter: drop-shadow(0 3px 4px ${colors.gray});
+  
+  @media (${device.mobileL}) {
+    width: 400px;
+  }
+  
+  @media (${device.tablet}) {
+    width: 500px;
+  }
 `;
 
 const PostLink = styled(Link)`
@@ -38,6 +49,10 @@ const PostImage = styled.img`
 
 const PostContentWrapper = styled.div`
   margin: 10px;
+  
+  @media (${device.mobileL}) {
+    margin: 20px;
+  }
 `;
 
 const PostBtnContainer = styled.div`

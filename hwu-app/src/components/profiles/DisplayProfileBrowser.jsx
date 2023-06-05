@@ -10,12 +10,12 @@ import defaultAvatar from "../../images/avatar_default.jpg";
 import { BrowseBtn } from "../styledComponents/Buttons";
 import { ProfileListAvatar } from "../styledComponents/Avatars";
 
-import { ProfilesListContainer } from "../styledComponents/Profiles";
+import { ProfilesBrowser } from "../styledComponents/Profiles";
 import { Heading4 } from "../styledComponents/Headings";
 import LoadingIndicator from "../common/LoadingIndicator";
 import { Paragraph } from "../styledComponents/Paragraph";
 
-export default function DisplayProfileList() {
+export default function DisplayProfileBrowser() {
   const url = BASE_URL + PROFILES_PATH;
 
   const [auth] = useContext(AuthContext);
@@ -40,7 +40,7 @@ export default function DisplayProfileList() {
       const data = response.data;
       const randomIndices = [];
 
-      while (randomIndices.length < 5) {
+      while (randomIndices.length < 10) {
         const randomIndex = Math.floor(Math.random() * data.length);
         if (!randomIndices.includes(randomIndex)) {
           randomIndices.push(randomIndex);
@@ -65,7 +65,7 @@ export default function DisplayProfileList() {
   };
 
   return (
-    <ProfilesListContainer>
+    <ProfilesBrowser>
       {loading ? (
         <LoadingIndicator />
       ) : error ? (
@@ -76,7 +76,14 @@ export default function DisplayProfileList() {
             {randomProfiles.map((profile) => {
               return (
                 <li key={profile.email}>
-                  <Link to={`/profiles/${profile.name}`} title={profile.name}>
+                  <Link
+                    to={
+                      profile.name === auth.name
+                        ? `/account`
+                        : `/profiles/${profile.name}`
+                    }
+                    title={profile.name}
+                  >
                     <ProfileListAvatar
                       src={profile.avatar ? profile.avatar : defaultAvatar}
                       alt="Profile avatar"
@@ -96,12 +103,12 @@ export default function DisplayProfileList() {
           </div>
         </>
       )}
-    </ProfilesListContainer>
+    </ProfilesBrowser>
   );
 }
 
 // {
-  /* <input
+/* <input
         value={search}
         onChange={handleSearch}
         placeholder="Search profiles"

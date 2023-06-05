@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import colors from "../../theme/colors";
 import borders from "../../theme/borders";
+import device from "../../theme/device";
 
 const MainAvatar = styled.img`
   width: 170px;
@@ -15,6 +16,11 @@ const FollowerAvatar = styled.img`
   height: 25px;
   object-fit: cover;
   border-radius: ${borders.imageBorder};
+  
+  @media (${device.laptop}) {
+    width: 40px;
+    height: 40px;
+  }
 `;
 
 const PostAvatar = styled.img`
@@ -37,6 +43,12 @@ const ProfileListAvatar = styled.img`
   height: 100px;
   object-fit: cover;
   border-radius: ${borders.imageBorder};
+  
+  @media (${device.mobileL}) {
+    width: 120px;
+    height: 120px;
+  }
+  
 `;
 
 const XSmallAvatar = styled.img`

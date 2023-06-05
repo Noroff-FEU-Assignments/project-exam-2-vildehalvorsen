@@ -2,6 +2,7 @@ import styled from "styled-components";
 import colors from "../../theme/colors";
 import borders from "../../theme/borders";
 import typography from "../../theme/typography";
+import device from "../../theme/device";
 
 const ButtonPrimary = styled.button`
   font-family: ${typography.button.fontFamilyNormal};
@@ -99,10 +100,16 @@ const CreatePostBtn = styled.button`
   border: 1px solid ${colors.gray};
   padding: 10px;
   margin-top: 50px;
-  width: stretch;
+  width: 100%;
+  max-width: 500px;
   cursor: text;
   color: ${colors.gray};
   text-align: left;
+  
+  @media (${device.laptop}) {
+    margin-top: 0;
+    margin-bottom: 50px;
+    }
 `;
 
 const EditBtn = styled.button`
@@ -132,6 +139,16 @@ const FollowBtn = styled(ButtonSecondary)`
   width: 63px;
 `;
 
+const LogoutBtn = styled(FollowBtn)`
+color: ${colors.error};
+border-color: ${colors.error};
+padding: 10px 0;
+
+&:hover {
+  background-color: ${colors.softError};
+}
+`;
+
 export {
   ButtonPrimary,
   ButtonSecondary,
@@ -144,4 +161,5 @@ export {
   DeleteBtn,
   EditImageBtn,
   FollowBtn,
+  LogoutBtn,
 };

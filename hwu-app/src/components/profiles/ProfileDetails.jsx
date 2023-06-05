@@ -16,7 +16,6 @@ import { BannerBackground, ProfileBanner } from "../styledComponents/Banners";
 import { MainAvatar, FollowerAvatar } from "../styledComponents/Avatars";
 import {
   AvatarContainer,
-  FlexContainer,
   FollowBtnContainer,
   FollowerContainer,
   FollowerListContainer,
@@ -66,48 +65,54 @@ export default function ProfileDetails({ name, showAlert }) {
 
   return (
     <div>
-      <div>
-        <BannerBackground>
+      <div className="profile__topContent">
+        <div>
+          <BannerBackground>
+            {name === auth.name && (
+              <EditBanner
+                name={name}
+                details={details}
+                handleModifications={handleModifications}
+                showAlert={showAlert}
+              />
+            )}
+            {details.banner ? (
+              <ProfileBanner src={details.banner} alt="Profile banner" />
+            ) : (
+              <ProfileBanner src={defaultBanner} alt="Profile banner" />
+            )}
+          </BannerBackground>
+
+          <FollowBtnContainer>
+            <FollowButton
+              name={name}
+              handleModifications={handleModifications}
+              showAlert={showAlert}
+            />
+          </FollowBtnContainer>
+        </div>
+
+        <AvatarContainer>
+          {details.avatar ? (
+            <MainAvatar src={details.avatar} alt="Profile avatar" />
+          ) : (
+            <MainAvatar src={defaultAvatar} alt="Profile avatar" />
+          )}
           {name === auth.name && (
-            <EditBanner
+            <EditAvatar
               name={name}
               details={details}
               handleModifications={handleModifications}
               showAlert={showAlert}
             />
           )}
-          {details.banner ? (
-            <ProfileBanner src={details.banner} alt="Profile banner" />
-          ) : (
-            <ProfileBanner src={defaultBanner} alt="Profile banner" />
-          )}
-        </BannerBackground>
+        </AvatarContainer>
 
-        <FollowBtnContainer>
-          <FollowButton name={name} handleModifications={handleModifications} />
-        </FollowBtnContainer>
+        <ProfileTitle>{details.name}</ProfileTitle>
       </div>
-
-      <AvatarContainer>
-        {details.avatar ? (
-          <MainAvatar src={details.avatar} alt="Profile avatar" />
-        ) : (
-          <MainAvatar src={defaultAvatar} alt="Profile avatar" />
-        )}
-        {name === auth.name && (
-          <EditAvatar
-            name={name}
-            details={details}
-            handleModifications={handleModifications}
-            showAlert={showAlert}
-          />
-        )}
-      </AvatarContainer>
-
-      <ProfileTitle>{details.name}</ProfileTitle>
-
-      <FlexContainer center>
-        <FollowerContainer>
+      
+      <FollowerContainer>
+        <div>
           <Heading4 align="center">
             Followers: {details._count.followers}
           </Heading4>
@@ -116,7 +121,11 @@ export default function ProfileDetails({ name, showAlert }) {
             {details.followers.slice(0, 30).map((follower) => {
               return (
                 <Link
-                  to={`/profiles/${follower.name}`}
+                  to={
+                    follower.name === auth.name
+                      ? `/account`
+                      : `/profiles/${follower.name}`
+                  }
                   title={follower.name}
                   key={follower.name}
                 >
@@ -127,9 +136,9 @@ export default function ProfileDetails({ name, showAlert }) {
               );
             })}
           </FollowerListContainer>
-        </FollowerContainer>
+        </div>
 
-        <FollowerContainer>
+        <div>
           <Heading4 align="center">
             Following: {details._count.following}
           </Heading4>
@@ -138,7 +147,11 @@ export default function ProfileDetails({ name, showAlert }) {
             {details.following.slice(0, 30).map((follower) => {
               return (
                 <Link
-                  to={`/profiles/${follower.name}`}
+                  to={
+                    follower.name === auth.name
+                      ? `/account`
+                      : `/profiles/${follower.name}`
+                  }
                   title={follower.name}
                   key={follower.name}
                 >
@@ -149,8 +162,8 @@ export default function ProfileDetails({ name, showAlert }) {
               );
             })}
           </FollowerListContainer>
-        </FollowerContainer>
-      </FlexContainer>
+        </div>
+      </FollowerContainer>
     </div>
   );
 }
