@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+# Project Exam 2
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Goal
+To take the skills learned over the last two years and take on an extensive project where the finished product should reflect the candidate's general development capabilities, in addition to visual and technical skills.
 
-## Available Scripts
+## Brief
+An existing Social Media company has approached you to create a brand new front end for their application. While they have a list of required features, the design and user experience has not been specified. Working with the official API documentation, plan, design and build a modern front end social media application.
 
-In the project directory, you can run:
+## Getting started locally
+To start the app locally, follow these steps:
+1. Clone the repository from GitHub
+2. In your code editor, open the terminal and run `cd hwu-app` to get to the correct directory.
+3. Run `npm install` to install dependencies
+4. Run `npm start`. This will run the app in development mode in your browser: http://localhost:3000
 
-### `npm start`
+### Hosting Service
+- Netlify
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+You can visit the app demo on this link:
+Link here
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Instructions
+> All admin functionality is managed by an existing application. This project only covers the front-end application for the API.
 
-### `npm test`
+1. You can register with a `stud.noroff.no` or `noroff.no` email address.
+2. When successfully registered, you can log in with your email and chosen password to get access to the app content.
+#### When logged in
+3. You can update your avatar and banner on your Account Page
+4. You can create posts
+5. You can update and delete your own posts.
+6. You an view a list of posts on the Dashboard Page.
+7. You can view a single post by clicking on the post.
+8. You can comment and react with an emoji on any post.
+9. You can view a list of profiles on the Profiles List Page.
+10. You can view a single profile by clicking on their avatar or name.
+11. You can follow and unfollow any profile.
+12. You can log out.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Limitations
+1. On the profile list page, the profiles displayed are limited to a 100 and doesn't include all registered profiles. The sort order is set to ascending, which makes only the 100 first profiles in an ascending order available for search. This is to limit the data being returned.
 
-### `npm run build`
+2. It is not possible to delete or remove comments and reactions.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## API
+The API for this project is found under Social EndPoints in the [Noroff API documentation](https://noroff-api-docs.netlify.app/).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Resources
+[API Guide](https://noroff-api-docs.netlify.app/social-endpoints/authentication)
+[API Documentation](https://nf-api.onrender.com/docs)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### JavaScript Frameworks
+- React (>16)
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### CSS Frameworks
+- Styled Components

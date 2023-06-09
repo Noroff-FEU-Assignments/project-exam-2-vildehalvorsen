@@ -19,7 +19,7 @@ const ButtonPrimary = styled.button`
   &:hover {
     background-color: ${colors.primaryHover};
   }
-  
+
   &:disabled {
     background-color: ${colors.gray};
     cursor: initial;
@@ -41,7 +41,7 @@ const ButtonSecondary = styled.button`
   &:hover {
     background-color: ${colors.softPrimary};
   }
-  
+
   &:disabled {
     background-color: ${colors.white};
     border-color: ${colors.gray};
@@ -83,12 +83,19 @@ const ExitBtn = styled.button`
   border: none;
   font-size: 20px;
   color: ${colors.black};
-  float: right;
   cursor: pointer;
-  margin: -10px;
+  position: relative;
+  top: 20px;
+  left: 90%;
+  margin: 0 auto 10px;
 
   &:hover {
     color: ${colors.primaryHover};
+  }
+  
+  @media (${device.tablet}) {
+    position: absolute;
+    left: 94%;
   }
 `;
 
@@ -100,16 +107,22 @@ const CreatePostBtn = styled.button`
   border: 1px solid ${colors.gray};
   padding: 10px;
   margin-top: 50px;
-  width: 100%;
-  max-width: 500px;
+  width: 330px;
   cursor: text;
   color: ${colors.gray};
   text-align: left;
-  
+
+  @media (${device.mobileL}) {
+    width: 400px;
+  }
+
+  @media (${device.tablet}) {
+    width: 500px;
+  }
   @media (${device.laptop}) {
     margin-top: 0;
     margin-bottom: 50px;
-    }
+  }
 `;
 
 const EditBtn = styled.button`
@@ -140,13 +153,13 @@ const FollowBtn = styled(ButtonSecondary)`
 `;
 
 const LogoutBtn = styled(FollowBtn)`
-color: ${colors.error};
-border-color: ${colors.error};
-padding: 10px 0;
+  color: ${colors.error};
+  border-color: ${colors.error};
+  padding: 10px 0;
 
-&:hover {
-  background-color: ${colors.softError};
-}
+  &:hover {
+    background-color: ${colors.softError};
+  }
 `;
 
 export {

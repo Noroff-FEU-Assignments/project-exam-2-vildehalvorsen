@@ -33,6 +33,10 @@ const StyledInput = styled.input`
   &:focus {
     outline: 2px solid ${colors.primary};
   }
+  
+  &#searchInput {
+    width: 300px;
+  }
 `;
 
 const StyledTextarea = styled.textarea`

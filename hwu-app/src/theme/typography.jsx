@@ -1,5 +1,6 @@
 const brandFont = "gill-sans-nova, sans-serif";
-const bodyFont = "Segoe UI";
+const titleFont = "Menco, sans-serif";
+const bodyFont = "Segoe UI, sans-serif";
 
 const typography = {
 heading: {

@@ -10,35 +10,74 @@ const StyledModal = styled(Modal)`
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 9999;
+  overflow-y: auto;
   background: ${colors.white};
-  padding: 40px;
-  
-  .container {
-    overflow: scroll;
-    margin: 50px auto;
+
+  .modalPostContent {
+    position: relative;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-height: 80vh;
+    min-width: 280px;
+    width: 100%;
+    overflow-y: auto;
+    padding: 10px 0;
   }
   
-  
-  @media ${device.tablet} {
-    top: 50%;
-    left: 50%;
-    right: none;
-    bottom: none;
-    width: 80%;
-    transform: translate(-50%, -50%);
-    border-radius: ${borders.mainBorder};
-    
-    .container {
-      // width: 600px;
-      height: 100px;
+  @media (${device.mobileL}) {
+    .modalPostContent {
+      max-width: 500px;
+      border: 1px solid ${colors.black};
+      border-radius: ${borders.mainBorder};
     }
+  }
+  
+  @media (${device.tablet}) {
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    max-width: 800px;
+    height: fit-content;
+    border-radius: ${borders.mainBorder};
+    padding: 40px;
+    
+    .modalPostContent {
+      top: initial;
+      left: initial;
+      transform: none;
+      margin: 40px auto;
+      max-height: 80vh;
+      min-width: 280px;
+      width: 100%;
+      overflow-y: auto;
+      padding: 10px 0;
+    }
+  }
   }
 `;
 
 const ModalPost = styled.div`
-  border: 1px solid ${colors.gray};
-  border-radius: ${borders.mainBorder};
-  color: ${colors.black};
+  .modalContent_main {
+    height: 100%;
+    max-height: 250px;
+    overflow-y: scroll;
+  }
+
+  .modalContainer_commentsList {
+    height: 100%;
+    max-height: 150px;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+  }
+  
+  .modalsContainer_commentForm {
+    background-color: ${colors.white};
+    padding: 10px 20px;
+    height: fit-content;
+  }
 `;
 
 export { StyledModal, ModalPost };

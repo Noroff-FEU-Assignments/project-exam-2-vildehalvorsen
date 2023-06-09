@@ -1,5 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import colors from "../../theme/colors";
+import borders from "../../theme/borders";
 
 const spinAnimation = keyframes`
 0% {
@@ -14,6 +15,9 @@ const StyledLoader = styled.div`
   font-size: 25px;
   color: ${colors.primary};
   text-align: center;
+  background-color: ${colors.white};
+  padding: 50px;
+  border-radius: ${borders.mainBorder};
   
   position: absolute;
   top: 50%;

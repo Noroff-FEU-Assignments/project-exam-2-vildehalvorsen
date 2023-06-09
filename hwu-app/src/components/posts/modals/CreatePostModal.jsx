@@ -63,52 +63,59 @@ export default function CreatePostModal({
   }
 
   return (
-    <StyledModal isOpen={isOpen} onRequestClose={onRequestClose} overlayClassName="customOverlay">
+    <StyledModal
+      isOpen={isOpen}
+      onRequestClose={onRequestClose}
+      overlayClassName="customOverlay"
+    >
       <ExitBtn className="closeBtn" onClick={onRequestClose}>
         <FontAwesomeIcon icon={faXmark} />
       </ExitBtn>
-      <StyledForm onSubmit={handleSubmit(submitCreatePost)} id="createPostForm">
-        <Heading2 align="center">Create a post</Heading2>
-        <div>
-          <label htmlFor="title" hidden>
-            Title
-          </label>
-          <StyledInput
-            name="title"
-            id="title"
-            placeholder="Title"
-            {...register("title", {
-              required: true,
-            })}
-          />
-          {errors.title && <Paragraph>Required</Paragraph>}
-        </div>
-        <div>
-          <label htmlFor="media" hidden>
-            Image
-          </label>
-          <StyledInput
-            name="media"
-            id="media"
-            placeholder="Image URL"
-            {...register("media")}
-          />
-        </div>
-        <div>
-          <label htmlFor="body" hidden>
-            Post content
-          </label>
-          <StyledTextarea
-            name="body"
-            id="body"
-            placeholder="What's on your mind?"
-            {...register("body")}
-          />
-        </div>
-        <FlexContainer center>
-          <ButtonPrimary disabled={!isDirty}>Publish</ButtonPrimary>
-        </FlexContainer>
-      </StyledForm>
+        <StyledForm
+          onSubmit={handleSubmit(submitCreatePost)}
+          id="createPostForm"
+        >
+          <Heading2 align="center">Create a post</Heading2>
+          <div>
+            <label htmlFor="title" hidden>
+              Title
+            </label>
+            <StyledInput
+              name="title"
+              id="title"
+              placeholder="Title"
+              {...register("title", {
+                required: true,
+              })}
+            />
+            {errors.title && <Paragraph>Required</Paragraph>}
+          </div>
+          <div>
+            <label htmlFor="media" hidden>
+              Image
+            </label>
+            <StyledInput
+              name="media"
+              id="media"
+              placeholder="Image URL"
+              {...register("media")}
+            />
+          </div>
+          <div>
+            <label htmlFor="body" hidden>
+              Post content
+            </label>
+            <StyledTextarea
+              name="body"
+              id="body"
+              placeholder="What's on your mind?"
+              {...register("body")}
+            />
+          </div>
+          <FlexContainer center>
+            <ButtonPrimary disabled={!isDirty}>Publish</ButtonPrimary>
+          </FlexContainer>
+        </StyledForm>
     </StyledModal>
   );
 }

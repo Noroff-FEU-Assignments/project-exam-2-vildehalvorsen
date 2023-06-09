@@ -29,10 +29,15 @@ export default function ProfilesPage() {
   }, [checkAuth, navigate]);
 
   const [auth] = useContext(AuthContext);
+  const [refreshKey, setRefreshKey] = useState(0);
   const { showMessage, message, type, showAlert } = useAlert();
   const { name } = useParams();
 
   const url = BASE_URL + PROFILES_PATH + `/${name}/posts`;
+
+  const handlePostModification = () => {
+    setRefreshKey((prevKey) => prevKey + 1);
+  };
 
   if (!checkAuth) {
     return <LoadingIndicator />;
@@ -44,12 +49,17 @@ export default function ProfilesPage() {
       <Nav avatar={auth.avatar} />
 
       {showMessage && <AlertMessage type={type} message={message} />}
-      
+
       <BodyContainer>
         <ProfileDetails name={name} showAlert={showAlert} />
 
         <Container>
-          <DisplayPostList url={url} />
+          <DisplayPostList
+            key={refreshKey}
+            url={url}
+            handlePostModification={handlePostModification}
+            showAlert={showAlert}
+          />
         </Container>
       </BodyContainer>
     </>

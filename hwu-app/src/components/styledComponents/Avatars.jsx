@@ -2,6 +2,7 @@ import styled from "styled-components";
 import colors from "../../theme/colors";
 import borders from "../../theme/borders";
 import device from "../../theme/device";
+import typography from "../../theme/typography";
 
 const MainAvatar = styled.img`
   width: 170px;
@@ -43,6 +44,7 @@ const ProfileListAvatar = styled.img`
   height: 100px;
   object-fit: cover;
   border-radius: ${borders.imageBorder};
+  filter: drop-shadow(0 3px 4px ${colors.gray});
   
   @media (${device.mobileL}) {
     width: 120px;

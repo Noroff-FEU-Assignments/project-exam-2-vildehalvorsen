@@ -12,24 +12,30 @@ import { Heading4 } from "../styledComponents/Headings";
 import { Paragraph } from "../styledComponents/Paragraph";
 import { ProfileListAvatar } from "../styledComponents/Avatars";
 import { ProfilesListContainer } from "../styledComponents/Profiles";
-import { SectionContainer } from "../styledComponents/Containers";
+import { StyledInput } from "../styledComponents/Forms";
 
 export default function ProfilesList() {
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(12);
-  const [totalProfiles, setTotalProfiles] = useState(0);
   const [allProfiles, setAllProfiles] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [displayedProfiles, setDisplayedProfiles] = useState([]);
+  const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const url = BASE_URL + PROFILES_PATH + `?sortOrder=asc&limit=${100}`;
   
-  const url = BASE_URL + PROFILES_PATH + `?sortOrder=asc&limit=${limit}&offset=${(page - 1) * limit}`;
-    
+  const limit = 15;
+  // const totalProfiles = 500;
+
   const [auth] = useContext(AuthContext);
   const accessToken = auth.accessToken;
-      
+
   useEffect(() => {
     fetchData();
-  }, [fetchData, page, limit]);
+  }, [accessToken, url]);
+
+  useEffect(() => {
+    fetchData();
+  }, [accessToken, url]);
 
   async function fetchData() {
     const options = {
@@ -39,70 +45,142 @@ export default function ProfilesList() {
     };
 
     try {
+      setLoading(true);
       const response = await axios.get(url, options);
       setAllProfiles(response.data);
-      setTotalProfiles(response.data.length);
+      setDisplayedProfiles(response.data.slice(0, limit));
     } catch (error) {
       console.log(error);
       setError(error.toString());
-      
-      setTimeout(() => {
-        fetchData();
-      }, 10000);
     } finally {
       setLoading(false);
     }
   }
   
-  function handleNextPage() {
-    if (page * limit < totalProfiles) {
-      setPage((prevPage) => prevPage + 1);
-    }
-    console.log(page);
-  }
-  
-  function handlePrevPage() {
-    if (page > 1) {
-      setPage((prevPage) => prevPage - 1);
-    }
+  function handleSearch(e) {
+    const searchValue = e.target.value.trim();
+    setSearch(searchValue);
+    const filteredList = allProfiles.filter((profile) =>
+      profile.name
+        .toLowerCase()
+        .includes(searchValue.replace(/\s+/g, "_").toLowerCase())
+    );
+    setDisplayedProfiles(filteredList.slice(0, limit));
   }
 
   return (
     <>
-      {loading ? (
-        <LoadingIndicator />
-      ) : error ? (
-        <Paragraph align="center">{error}</Paragraph>
-      ) : (
-        <>
-          <ProfilesListContainer>
+      <ProfilesListContainer>
+        <StyledInput
+          id="searchInput"
+          value={search}
+          onChange={handleSearch}
+          placeholder="Search profiles"
+        />
+        {loading ? (
+          <LoadingIndicator />
+        ) : error ? (
+          <Paragraph align="center">{error}</Paragraph>
+        ) : (
+          <>
             <ul>
-              {allProfiles.slice(0, limit).map((profile) => {
-                return (
-                  <li key={profile.email}>
-                    <Link to={
-                      profile.name === auth.name
-                        ? `/account`
-                        : `/profiles/${profile.name}`
-                    }>
-                      <ProfileListAvatar
-                        src={profile.avatar ? profile.avatar : defaultAvatar}
-                        alt="Profile avatar"
-                      />
-                      <Heading4>{profile.name}</Heading4>
-                    </Link>
-                  </li>
-                );
-              })}
+              {displayedProfiles.length === 0 ? (
+                <Paragraph>No profiles matches your search</Paragraph>
+              ) : (
+                displayedProfiles.map((profile) => {
+                  return (
+                    <li key={profile.email}>
+                      <Link
+                        to={
+                          profile.name === auth.name
+                            ? `/account`
+                            : `/profiles/${profile.name}`
+                        }
+                        title={profile.name}
+                      >
+                        <ProfileListAvatar
+                          src={profile.avatar ? profile.avatar : defaultAvatar}
+                          alt="Profile avatar"
+                        />
+                        <Heading4>{profile.name}</Heading4>
+                      </Link>
+                    </li>
+                  );
+                })
+              )}
             </ul>
-          </ProfilesListContainer>
-          
-          <SectionContainer>
-            <button onClick={handlePrevPage} disabled={page === 1}>Prev</button>
-            <button onClick={handleNextPage} disabled={page * limit >= allProfiles}>Next</button>
-          </SectionContainer>
-        </>
-      )}
+          </>
+        )}
+      </ProfilesListContainer>
     </>
   );
 }
+
+
+
+{/*
+
+  // async function fetchData() {
+  //   setLoading(true);
+  //   setError(null);
+  //   try {
+  //     const options = {
+  //       headers: {
+  //         Authorization: `Bearer ${accessToken}`,
+  //       },
+  //     };
+
+  //     const profiles = [];
+  //     let offset = 0;
+
+  //     while (offset < totalProfiles) {
+  //       const response = await axios.get(
+  //         `${url}&offset=${offset}`,
+  //         options
+  //       );
+  //       profiles.push(...response.data);
+  //       offset += 100; // Increment offset by 100 for the next batch
+  //     }
+
+  //     setAllProfiles(profiles);
+  //     setDisplayedProfiles(profiles.slice(0, limit));
+  //   } catch (error) {
+  //     console.log(error);
+  //     setError(error.toString());
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // }
+
+
+*/}
+
+
+{/*
+
+  useEffect(() => {
+    fetchData();
+  }, [accessToken, url]);
+
+  async function fetchData() {
+    const options = {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    };
+
+    try {
+      setLoading(true);
+      const response = await axios.get(url, options);
+      setAllProfiles(response.data);
+      setDisplayedProfiles(response.data.slice(0, limit));
+    } catch (error) {
+      console.log(error);
+      setError(error.toString());
+    } finally {
+      setLoading(false);
+    }
+  }
+
+
+*/}

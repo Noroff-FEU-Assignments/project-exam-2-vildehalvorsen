@@ -81,7 +81,12 @@ export default function PostsListHtml({
               <PostCard key={id}>
                 <PostContentWrapper>
                   <FlexContainer spaceBetween>
-                    <PostLink to={`/profiles/${author.name}`}>
+                    <PostLink to={
+                          author.name === auth.name
+                            ? `/account`
+                            : `/profiles/${author.name}`
+                        }
+                        title={author.name}>
                       <PostAvatar
                         src={author.avatar ? author.avatar : defaultAvatar}
                         alt="Profile avatar"
@@ -99,7 +104,7 @@ export default function PostsListHtml({
                       />
                     )}
                   </FlexContainer>
-                  <div>
+                  <div className="postContent" onClick={() => handleOpenModal(id)}>
                     <Heading3>{title}</Heading3>
                     {media && <PostImage src={media} alt="Post media" />}
                     <Paragraph small>{body}</Paragraph>

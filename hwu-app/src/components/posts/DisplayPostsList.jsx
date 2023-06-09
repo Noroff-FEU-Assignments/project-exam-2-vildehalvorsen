@@ -68,19 +68,18 @@ export default function DisplayPostsList({
   }
 
   const handleOpenModal = (id) => {
-    if (!postModalIsOpen) {
-      setPostModalIsOpen(true);
-      setSelectedPost(id);
-    }
+    setPostModalIsOpen(true);
+    setSelectedPost(id);
   };
 
   const handleCloseModal = () => {
-    if (postModalIsOpen) {
+    setTimeout(() => {
       setPostModalIsOpen(false);
-      setSelectedPost(null);
-      if (isModified) {
-        handlePostModification();
-      }
+    }, 300);
+
+    setSelectedPost(null);
+    if (isModified) {
+      handlePostModification();
     }
   };
 

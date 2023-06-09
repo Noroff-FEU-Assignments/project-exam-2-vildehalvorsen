@@ -10,7 +10,7 @@ const PostCard = styled.li`
   color: ${colors.black};
   background-color: ${colors.white};
   width: 330px;
-   padding-top: 5px;
+  padding-top: 5px;
   margin: 0 auto 50px;
   filter: drop-shadow(0 3px 4px ${colors.gray});
   
@@ -28,6 +28,7 @@ const PostLink = styled(Link)`
   align-items: center;
   color: ${colors.black};
   text-decoration: none;
+  width: fit-content;
 
   > div {
     margin-left: 5px;
@@ -57,11 +58,27 @@ const PostContentWrapper = styled.div`
 
 const PostBtnContainer = styled.div`
   display: flex;
+  margin-bottom: 5px;
 
   > div {
     flex: 1;
     align-self: flex-end;
   }
+`;
+
+const CommentsListContainer = styled.div`
+position: relative;
+height: 200px;
+overflow-y: scroll;
+
+> div {
+  background-color: ${colors.white};
+  position: sticky;
+  bottom: 0;
+  padding: 20px;
+  height: fit-content;
+}
+
 `;
 
 const PostCommentList = styled.li`
@@ -80,7 +97,6 @@ const PostCommentForm = styled.form`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 20px 5px;
   
   &:focus-within {
     outline: 2px solid ${colors.primary};
@@ -92,7 +108,8 @@ const PostCommentTextarea = styled.textarea`
   border: none;
   resize: none;
   background: none;
-  height: 15px;
+  height: 25px;
+  padding: 5px;
   width: 100%;
 
   &:focus {
@@ -106,6 +123,8 @@ const CommentSubmitBtn = styled.button`
   appearance: none;
   background: none;
   border: none;
+  cursor: pointer;
+  padding: 0 10px;
 
   &:disabled,
   &:disabled:hover {
@@ -124,6 +143,7 @@ export {
   PostImage,
   PostContentWrapper,
   PostBtnContainer,
+  CommentsListContainer,
   PostCommentList,
   PostCommentForm,
   PostCommentTextarea,

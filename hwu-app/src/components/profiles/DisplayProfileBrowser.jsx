@@ -3,8 +3,7 @@ import axios from "axios";
 import { BASE_URL, PROFILES_PATH } from "../../constants/api";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/AuthContext";
-import { Link } from "react-router-dom";
-import ProfilesListModal from "./modals/ProfilesListModal";
+import { Link, useNavigate } from "react-router-dom";
 
 import defaultAvatar from "../../images/avatar_default.jpg";
 import { BrowseBtn } from "../styledComponents/Buttons";
@@ -17,7 +16,8 @@ import { Paragraph } from "../styledComponents/Paragraph";
 
 export default function DisplayProfileBrowser() {
   const url = BASE_URL + PROFILES_PATH;
-
+  
+  const navigate = useNavigate();
   const [auth] = useContext(AuthContext);
   const [randomProfiles, setRandomProfiles] = useState([]);
   const [profilesModalIsOpen, setProfilesModalIsOpen] = useState(false);
@@ -56,14 +56,6 @@ export default function DisplayProfileBrowser() {
     }
   }
 
-  const handleOpenModal = () => {
-    setProfilesModalIsOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setProfilesModalIsOpen(false);
-  };
-
   return (
     <ProfilesBrowser>
       {loading ? (
@@ -95,11 +87,7 @@ export default function DisplayProfileBrowser() {
             })}
           </ul>
           <div>
-            <BrowseBtn onClick={handleOpenModal}>Browse </BrowseBtn>
-            <ProfilesListModal
-              isOpen={profilesModalIsOpen}
-              onRequestClose={handleCloseModal}
-            />
+            <BrowseBtn onClick={() => navigate("/profilelist")}>Browse</BrowseBtn>
           </div>
         </>
       )}

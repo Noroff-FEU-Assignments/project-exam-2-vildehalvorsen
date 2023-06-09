@@ -3,6 +3,8 @@ import device from "../../theme/device";
 import colors from "../../theme/colors";
 
 const BodyContainer = styled.div`
+margin-bottom: 100px;
+
   @media (${device.laptop}) {
     margin-top: 47.6px;
     
@@ -56,7 +58,7 @@ const AvatarContainer = styled.div`
   left: 50%;
   transform: translateX(-50%);
   display: inline-block;
-  min-height: 170px;
+  min-height: 175px;
   min-width: 170px;
   text-align: center;
 
