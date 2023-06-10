@@ -42,10 +42,9 @@ const PostDate = styled.p`
 `;
 
 const PostImage = styled.img`
-  width: 100%;
-  height: 100%;
   max-height: 350px;
-  object-fit: contain;
+  max-width: 100%;
+  border-radius: ${borders.mainBorder};
 `;
 
 const PostContentWrapper = styled.div`

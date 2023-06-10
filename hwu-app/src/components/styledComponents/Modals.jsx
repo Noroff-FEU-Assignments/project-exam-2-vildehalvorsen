@@ -14,26 +14,6 @@ const StyledModal = styled(Modal)`
   overflow-y: auto;
   background: ${colors.white};
 
-  .modalPostContent {
-    position: relative;
-    top: 45%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-height: 80vh;
-    min-width: 280px;
-    width: 100%;
-    overflow-y: auto;
-    padding: 10px 0;
-  }
-  
-  @media (${device.mobileL}) {
-    .modalPostContent {
-      max-width: 500px;
-      border: 1px solid ${colors.black};
-      border-radius: ${borders.mainBorder};
-    }
-  }
-  
   @media (${device.tablet}) {
     top: 45%;
     left: 50%;
@@ -43,23 +23,42 @@ const StyledModal = styled(Modal)`
     height: fit-content;
     border-radius: ${borders.mainBorder};
     padding: 40px;
-    
-    .modalPostContent {
-      top: initial;
-      left: initial;
-      transform: none;
-      margin: 40px auto;
-      max-height: 80vh;
-      min-width: 280px;
-      width: 100%;
-      overflow-y: auto;
-      padding: 10px 0;
-    }
   }
+`;
+
+const StyledPostModal = styled(Modal)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  overflow-y: auto;
+  background: ${colors.white};
+  
+  @media (${device.laptop}) {
+    top: 70px;
+    left: 50%;
+    right: initial;
+    bottom: 70px;
+    transform: translateX(-50%);
+    background: none;
+    border-radius: ${borders.mainBorder};
+    width: 80vw;
+    height: 80vh;
   }
 `;
 
 const ModalPost = styled.div`
+  display: flex;
+  flex-direction: column;
+  background: ${colors.white};
+  min-height: 400px;
+  min-width: 280px;
+  max-width: 500px;
+  overflow-y: auto;
+  margin: 65px auto;
+
   .modalContent_main {
     height: 100%;
     max-height: 250px;
@@ -72,12 +71,66 @@ const ModalPost = styled.div`
     overflow-y: scroll;
     scroll-behavior: smooth;
   }
-  
+
   .modalsContainer_commentForm {
     background-color: ${colors.white};
     padding: 10px 20px;
     height: fit-content;
   }
+  
+  @media (min-width: 500px) {
+    border-radius: ${borders.mainBorder};
+    filter: drop-shadow(0 3px 4px ${colors.gray});
+  }
+  
+  @media (${device.tablet}) {  
+    .modalContent_main {
+      max-height: 300px;
+    }
+  }
+  
+  @media (${device.laptop}) {
+    display: grid;
+    grid-template-areas:
+    "post reactions"
+    "post comments"
+    "post form";
+    grid-template-columns: 60% 40%;
+    grid-template-rows: auto 1fr auto;
+    width: 100%;
+    max-width: none;
+    height: fit-content;
+    filter: none;
+    padding: 50px 0;
+    margin: 0;
+     
+    .modalContent_main {
+      grid-area: post;
+      max-height: none;
+      height: 95%;
+      width: 100%
+      max-width: 500px;
+      padding: 0 20px;
+      margin-right: 0;
+      border-right: 2px solid ${colors.softPrimary}
+    }
+    
+    .modalContainer_reactions {
+      grid-area: reactions;
+      margin-top: 20px;
+      position: relative;
+    }
+    
+    .modalContainer_commentsList {
+      grid-area: comments;
+      max-height: 400px;
+    }
+    
+    .modalsContainer_commentForm {
+      grid-area: form;
+    }
+  }
+  
 `;
 
-export { StyledModal, ModalPost };
+export { StyledModal, StyledPostModal, ModalPost };

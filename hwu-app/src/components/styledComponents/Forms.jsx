@@ -7,7 +7,7 @@ const StyledForm = styled.form`
   min-width: 200px;
   width: 100%;
   max-width: 300px;
-  margin: 40px auto;
+  margin: 65px auto;
   
   p {
     color: ${colors.error};

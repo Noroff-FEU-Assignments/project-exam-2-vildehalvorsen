@@ -1,4 +1,4 @@
-import styled, { keyframes, css } from "styled-components";
+import styled, { keyframes } from "styled-components";
 import colors from "../../theme/colors";
 import typography from "../../theme/typography";
 import device from "../../theme/device";
@@ -202,6 +202,7 @@ const CurtainTop = styled.div`
       top: ${({ position }) => (position ? "28%" : "22%")};
       left: ${({ position }) => (position ? "42%" : "24%")};
       margin-left: 0;
+      width: fit-content;
   }
     
     h1 {

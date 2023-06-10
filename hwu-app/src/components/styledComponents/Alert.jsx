@@ -15,8 +15,9 @@ z-index: 100000;
 
 div {
   width: 300px;
-  border: 2px solid;
+  border: 2px solid ${colors.primary};
   border-radius: ${borders.mainBorder};
+  background-color: ${colors.white};
   padding: 15px;
 }
 .error {

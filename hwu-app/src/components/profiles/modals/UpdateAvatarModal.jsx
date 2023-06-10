@@ -10,6 +10,7 @@ import {
   ButtonPrimary,
   ButtonSecondary,
   ExitBtn,
+  ExitBtnContainer,
 } from "../../styledComponents/Buttons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -65,9 +66,11 @@ export default function UpdateAvatarModal({
             ...auth,
             avatar: data.avatar,
           });
-
           handleModifications();
           showAlert("Avatar updated", "success");
+          setTimeout(() => {
+            onRequestClose();
+          }, 200);
         }
       } catch (error) {
         console.log(error.toString());
@@ -105,11 +108,13 @@ export default function UpdateAvatarModal({
             ...auth,
             avatar: null,
           });
-
+          
           handleModifications();
           reset();
-          onRequestClose();
           showAlert("Avatar updated", "success");
+          setTimeout(() => {
+            onRequestClose();
+          }, 200);
         }
       } catch (error) {
         console.log(error.toString());
@@ -120,9 +125,11 @@ export default function UpdateAvatarModal({
 
   return (
     <StyledModal isOpen={isOpen} onRequestClose={onRequestClose} overlayClassName={"customOverlay"}>
+      <ExitBtnContainer>
       <ExitBtn className="closeBtn" onClick={onRequestClose}>
         <FontAwesomeIcon icon={faXmark} />
       </ExitBtn>
+      </ExitBtnContainer>
       <StyledForm
         onSubmit={handleSubmit(submitUpdateAvatar)}
         id="updateAvatarForm"

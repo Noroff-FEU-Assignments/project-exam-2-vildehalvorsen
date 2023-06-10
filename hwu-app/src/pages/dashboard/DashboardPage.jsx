@@ -15,8 +15,12 @@ import AlertMessage from "../../components/common/AlertMessage";
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import LoadingIndicator from "../../components/common/LoadingIndicator";
-import { BodyContainer } from "../../components/styledComponents/Containers";
-
+import {
+  BodyContainer,
+  FlexContainer,
+} from "../../components/styledComponents/Containers";
+import CreatePost from "../../components/posts/settings/CreatePost";
+import Footer from "../../components/layout/Footer";
 
 export default function DashboardPage() {
   const checkAuth = useRequireAuth();
@@ -57,12 +61,23 @@ export default function DashboardPage() {
 
         <DisplayProfileBrowser />
 
+        {auth && (
+          <FlexContainer center>
+            <CreatePost
+              handlePostModification={handlePostModification}
+              showAlert={showAlert}
+            />
+          </FlexContainer>
+        )}
+
         <DisplayPostsList
           key={refreshKey}
           url={url}
           handlePostModification={handlePostModification}
           showAlert={showAlert}
         />
+
+        <Footer />
       </BodyContainer>
     </>
   );

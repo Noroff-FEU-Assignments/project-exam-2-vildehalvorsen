@@ -1,9 +1,19 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import device from "../../theme/device";
 import colors from "../../theme/colors";
 
+const appearAnimation = keyframes`
+from {
+  opacity: 0;
+}
+to {
+  opacity: 1;
+}
+`;
+
 const BodyContainer = styled.div`
-margin-bottom: 100px;
+opacity: 0;
+animation: ${appearAnimation} .5s forwards .5s;
 
   @media (${device.laptop}) {
     margin-top: 47.6px;
@@ -144,6 +154,7 @@ const FollowerListContainer = styled.div`
   @media (${device.laptop}) {
     flex-wrap: wrap;
     width: 150px;
+    max-height: 300px;
     justify-content: start;
 
     > *:not(:first-child) {

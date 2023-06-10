@@ -1,12 +1,11 @@
-import { useContext, useState } from "react";
-import Modal from "react-modal";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
 import { BASE_URL, POSTS_PATH } from "../../../constants/api";
 import AuthContext from "../../../context/AuthContext";
 import { StyledModal } from "../../styledComponents/Modals";
-import { ButtonPrimary, ExitBtn } from "../../styledComponents/Buttons";
+import { ButtonPrimary, ExitBtn, ExitBtnContainer } from "../../styledComponents/Buttons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -62,9 +61,11 @@ export default function UpdatePostModal({
 
   return (
     <StyledModal isOpen={isOpen} onRequestClose={onRequestClose} overlayClassName={"customOverlay"}>
+      <ExitBtnContainer>
       <ExitBtn className="closeBtn" onClick={onRequestClose}>
         <FontAwesomeIcon icon={faXmark} />
       </ExitBtn>
+      </ExitBtnContainer>
       <StyledForm onSubmit={handleSubmit(submitUpdatePost)} id="updatePostForm">
         <Heading2 align="center">Update post</Heading2>
         <div>

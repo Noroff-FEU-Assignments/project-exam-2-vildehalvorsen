@@ -17,6 +17,7 @@ import {
   BodyContainer,
   Container,
 } from "../../components/styledComponents/Containers";
+import Footer from "../../components/layout/Footer";
 
 export default function ProfilesPage() {
   const checkAuth = useRequireAuth();
@@ -61,6 +62,8 @@ export default function ProfilesPage() {
             showAlert={showAlert}
           />
         </Container>
+
+        <Footer />
       </BodyContainer>
     </>
   );

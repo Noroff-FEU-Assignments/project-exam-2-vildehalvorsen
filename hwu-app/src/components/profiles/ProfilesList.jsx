@@ -24,7 +24,7 @@ export default function ProfilesList() {
   const url = BASE_URL + PROFILES_PATH + `?sortOrder=asc&limit=${100}`;
   
   const limit = 15;
-  // const totalProfiles = 500;
+  const totalProfiles = 500;
 
   const [auth] = useContext(AuthContext);
   const accessToken = auth.accessToken;
@@ -33,22 +33,30 @@ export default function ProfilesList() {
     fetchData();
   }, [accessToken, url]);
 
-  useEffect(() => {
-    fetchData();
-  }, [accessToken, url]);
-
   async function fetchData() {
-    const options = {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };
-
+    setLoading(true);
+    setError(null);
     try {
-      setLoading(true);
-      const response = await axios.get(url, options);
-      setAllProfiles(response.data);
-      setDisplayedProfiles(response.data.slice(0, limit));
+      const options = {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+
+      const profiles = [];
+      let offset = 100;
+
+      while (offset < totalProfiles) {
+        const response = await axios.get(
+          `${url}&offset=${offset}`,
+          options
+        );
+        profiles.push(...response.data);
+        offset += 100;
+      }
+
+      setAllProfiles(profiles);
+      setDisplayedProfiles(profiles.slice(0, limit));
     } catch (error) {
       console.log(error);
       setError(error.toString());
@@ -118,7 +126,7 @@ export default function ProfilesList() {
 
 
 
-{/*
+
 
   // async function fetchData() {
   //   setLoading(true);
@@ -152,8 +160,6 @@ export default function ProfilesList() {
   //   }
   // }
 
-
-*/}
 
 
 {/*

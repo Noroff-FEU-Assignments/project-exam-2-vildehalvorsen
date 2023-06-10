@@ -24,6 +24,10 @@ const ButtonPrimary = styled.button`
     background-color: ${colors.gray};
     cursor: initial;
   }
+  
+  @media (${device.tablet}) {
+    font-size: 13px;
+  }
 `;
 
 const ButtonSecondary = styled.button`
@@ -48,11 +52,16 @@ const ButtonSecondary = styled.button`
     color: ${colors.gray};
     cursor: initial;
   }
+  
+  @media (${device.tablet}) {
+    font-size: 13px;
+  }
 `;
 
 const BrowseBtn = styled(ButtonPrimary)`
   font-weight: bolder;
   width: 100px;
+  padding: 12px 0 10px;
 `;
 
 const PostCommentBtn = styled(ButtonPrimary)`
@@ -64,6 +73,7 @@ const PostCommentBtn = styled(ButtonPrimary)`
     if (props.borderNone) return "0";
     return "0 0 20px 0";
   }};
+
 `;
 
 const PostReactionBtn = styled(ButtonPrimary)`
@@ -77,6 +87,17 @@ const PostReactionBtn = styled(ButtonPrimary)`
   }};
 `;
 
+const ExitBtnContainer = styled.div`
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+background: ${colors.white};
+padding: 20px 30px;
+display: flex;
+justify-content: flex-end;
+`;
+
 const ExitBtn = styled.button`
   appearance: none;
   background: none;
@@ -84,33 +105,25 @@ const ExitBtn = styled.button`
   font-size: 20px;
   color: ${colors.black};
   cursor: pointer;
-  position: relative;
-  top: 20px;
-  left: 90%;
-  margin: 0 auto 10px;
 
   &:hover {
     color: ${colors.primaryHover};
-  }
-  
-  @media (${device.tablet}) {
-    position: absolute;
-    left: 94%;
   }
 `;
 
 const CreatePostBtn = styled.button`
   appearance: none;
-  background: none;
+  background: ${colors.white};
 
   border-radius: ${borders.mainBorder};
-  border: 1px solid ${colors.gray};
+  border: none;
   padding: 10px;
   margin-top: 50px;
   width: 330px;
   cursor: text;
   color: ${colors.gray};
   text-align: left;
+  filter: drop-shadow(0 3px 4px ${colors.gray});
 
   @media (${device.mobileL}) {
     width: 400px;
@@ -150,15 +163,17 @@ const EditImageBtn = styled(EditBtn)`
 
 const FollowBtn = styled(ButtonSecondary)`
   width: 63px;
+  padding: 12px 0 10px;
 `;
 
 const LogoutBtn = styled(FollowBtn)`
-  color: ${colors.error};
+  color: ${colors.white};
   border-color: ${colors.error};
-  padding: 10px 0;
+  background-color: ${colors.error};
 
   &:hover {
     background-color: ${colors.softError};
+    color: ${colors.error};
   }
 `;
 
@@ -168,6 +183,7 @@ export {
   BrowseBtn,
   PostCommentBtn,
   PostReactionBtn,
+  ExitBtnContainer,
   ExitBtn,
   CreatePostBtn,
   EditBtn,

@@ -8,7 +8,7 @@ import HandleReactions from "../reactions/HandleReactions";
 import defaultAvatar from "../../../images/avatar_default.jpg";
 
 import { PostAvatar, CommentAvatar } from "../../styledComponents/Avatars";
-import { ExitBtn, PostCommentBtn } from "../../styledComponents/Buttons";
+import { ExitBtn, ExitBtnContainer, PostCommentBtn } from "../../styledComponents/Buttons";
 import {
   PostBtnContainer,
   PostCommentList,
@@ -16,9 +16,11 @@ import {
   PostImage,
   PostLink,
   PostDate,
-  CommentsListContainer,
 } from "../../styledComponents/Posts";
-import { ModalPost, StyledModal } from "../../styledComponents/Modals";
+import {
+  ModalPost,
+  StyledPostModal,
+} from "../../styledComponents/Modals";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Heading3, Heading4 } from "../../styledComponents/Headings";
@@ -75,13 +77,13 @@ export default function PostsModal({
   }
 
   const commentListRef = useRef(null);
-  
+
   const handleCommentAdded = (comment) => {
     setComments((prevComments) => [...prevComments, comment]);
     setCommentCount((prevCount) => prevCount + 1);
     setIsModified(true);
     setIsCommenting(false);
-    
+
     const commentList = commentListRef.current;
     setTimeout(() => {
       commentList.scrollTop = commentList.scrollHeight;
@@ -98,126 +100,126 @@ export default function PostsModal({
   };
 
   return (
-    <StyledModal
+    <StyledPostModal
       isOpen={isOpen}
       onRequestClose={onRequestClose}
       overlayClassName={"customOverlay"}
     >
+      <ExitBtnContainer>
       <ExitBtn onClick={onRequestClose} className="modalButton_exit">
         <FontAwesomeIcon icon={faXmark} />
       </ExitBtn>
+      </ExitBtnContainer>
       {loading ? (
         <LoadingIndicator />
       ) : error ? (
         <Paragraph align="center">{error}</Paragraph>
       ) : (
-        <div className="modalPostContent">
-          <ModalPost>
-            <PostContentWrapper className="modalContent_main">
-              <PostLink
-                to={
-                  postData.author.name === auth.name
-                    ? `/account`
-                    : `/profiles/${postData.author.name}`
+        <ModalPost>
+          <PostContentWrapper className="modalContent_main">
+            <PostLink
+              to={
+                postData.author.name === auth.name
+                  ? `/account`
+                  : `/profiles/${postData.author.name}`
+              }
+              title={postData.author.name}
+              onClick={() => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+                onRequestClose();
+              }}
+            >
+              <PostAvatar
+                src={
+                  postData.author.avatar
+                    ? postData.author.avatar
+                    : defaultAvatar
                 }
-                title={postData.author.name}
-                onClick={() => {
-                  window.scrollTo({ top: 0, behavior: "smooth" });
-                  onRequestClose();
-                }}
-              >
-                <PostAvatar
-                  src={
-                    postData.author.avatar
-                      ? postData.author.avatar
-                      : defaultAvatar
-                  }
-                  alt="Profile avatar"
-                />
-                <div>
-                  <Heading4>{postData.author.name}</Heading4>
-                  <PostDate>
-                    {new Date(postData.created).toLocaleString("en-GB", {
-                      day: "2-digit",
-                      month: "long",
-                      year: "numeric",
-                    })}
-                  </PostDate>
-                </div>
-              </PostLink>
-              <div>
-                <Heading3>{postData.title}</Heading3>
-                {postData.media && (
-                  <PostImage src={postData.media} alt="Post media" />
-                )}
-                <Paragraph small>{postData.body}</Paragraph>
-              </div>
-            </PostContentWrapper>
-            <PostBtnContainer>
-              <HandleReactions
-                postId={postData.id}
-                initialCount={getInitialCount}
-                setIsModified={setIsModified}
-                isOpen={isOpen}
+                alt="Profile avatar"
               />
               <div>
-                {postData._count.comments === 0 ? null : (
-                  <Paragraph align="right" xsmall m5>
-                    {commentCount} {commentCount === 1 ? "comment" : "comments"}
-                  </Paragraph>
-                )}
-                <PostCommentBtn borderNone>Comment</PostCommentBtn>
+                <Heading4>{postData.author.name}</Heading4>
+                <PostDate>
+                  {new Date(postData.created).toLocaleString("en-GB", {
+                    day: "2-digit",
+                    month: "long",
+                    year: "numeric",
+                  })}
+                </PostDate>
               </div>
-            </PostBtnContainer>
-            <div className="modalContainer_commentsList" ref={commentListRef}>
-              {comments.map((comment) => {
-                return (
-                  <PostCommentList key={comment.id}>
-                    <FlexContainer>
-                      <PostLink
-                        to={
-                          comment.author.name === auth.name
-                            ? `/account`
-                            : `/profiles/${comment.author.name}`
+            </PostLink>
+            <div>
+              <Heading3>{postData.title}</Heading3>
+              {postData.media && (
+                <PostImage src={postData.media} alt="Post media" />
+              )}
+              <Paragraph small>{postData.body}</Paragraph>
+            </div>
+          </PostContentWrapper>
+          <PostBtnContainer className="modalContainer_reactions">
+            <HandleReactions
+              postId={postData.id}
+              initialCount={getInitialCount}
+              setIsModified={setIsModified}
+              isOpen={isOpen}
+            />
+            <div>
+              {postData._count.comments === 0 ? null : (
+                <Paragraph align="right" xsmall m5>
+                  {""}
+                  {commentCount} {commentCount === 1 ? "comment" : "comments"}
+                </Paragraph>
+              )}
+              <PostCommentBtn borderNone className="modalButton_comment">Comment</PostCommentBtn>
+            </div>
+          </PostBtnContainer>
+          <div className="modalContainer_commentsList" ref={commentListRef}>
+            {comments.map((comment) => {
+              return (
+                <PostCommentList key={comment.id}>
+                  <FlexContainer>
+                    <PostLink
+                      to={
+                        comment.author.name === auth.name
+                          ? `/account`
+                          : `/profiles/${comment.author.name}`
+                      }
+                      title={comment.author.name}
+                      onClick={() => {
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                        setTimeout(onRequestClose, 1000);
+                      }}
+                    >
+                      <CommentAvatar
+                        src={
+                          comment.author.avatar
+                            ? comment.author.avatar
+                            : defaultAvatar
                         }
-                        title={comment.author.name}
-                        onClick={() => {
-                          window.scrollTo({ top: 0, behavior: "smooth" });
-                          setTimeout(onRequestClose, 1000);
-                        }}
-                      >
-                        <CommentAvatar
-                          src={
-                            comment.author.avatar
-                              ? comment.author.avatar
-                              : defaultAvatar
-                          }
-                          alt="profile avatar"
-                        />
-                        <Paragraph small>{comment.author.name}</Paragraph>
-                      </PostLink>
-                    </FlexContainer>
-                    <Paragraph xsmall ml30>
-                      {comment.body}
-                    </Paragraph>
-                  </PostCommentList>
-                );
-              })}
-              </div>
-              <div className="modalsContainer_commentForm">
-                <CommentForm
-                  accessToken={accessToken}
-                  postId={postData.id}
-                  onCommentAdded={handleCommentAdded}
-                  imageSrc={auth.avatar}
-                  showAlert={showAlert}
-                  isCommenting={isCommenting}
-                />
-              </div>
-           
-          </ModalPost>
-        </div>
+                        alt="profile avatar"
+                      />
+                      <Paragraph small>{comment.author.name}</Paragraph>
+                    </PostLink>
+                  </FlexContainer>
+                  <Paragraph xsmall ml30>
+                    {comment.body}
+                  </Paragraph>
+                </PostCommentList>
+              );
+            })}
+          </div>
+          <div className="modalsContainer_commentForm">
+            <CommentForm
+              accessToken={accessToken}
+              postId={postData.id}
+              onCommentAdded={handleCommentAdded}
+              imageSrc={auth.avatar}
+              showAlert={showAlert}
+              isCommenting={isCommenting}
+            />
+          </div>
+        </ModalPost>
       )}
-    </StyledModal>
+    </StyledPostModal>
   );
 }

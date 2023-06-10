@@ -39,7 +39,7 @@ heading: {
   
   button: {
     fontFamilyBold: brandFont,
-    fontFamilyNormal: bodyFont,
+    fontFamilyNormal: titleFont,
   },
   links: {
     fontFamily: bodyFont,

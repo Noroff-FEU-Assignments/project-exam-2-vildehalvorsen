@@ -3,7 +3,7 @@ const colors = {
   softPrimary: "#DEECEF",
   white: "#FAFAFA",
   black: "#292929",
-  gray: "#858585",
+  gray: "#b2b2b2",
   lightGray: "#E8E8E8",
   success: "#006A07",
   darkSuccess: "#1D4820",

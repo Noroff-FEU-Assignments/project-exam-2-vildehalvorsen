@@ -1,13 +1,12 @@
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
-import { useAlert } from "../../hooks/useAlert";
 
 import useRequireAuth from "../../hooks/useRequireAuth";
 import Head from "../../components/layout/Head";
 import Nav from "../../components/layout/Nav";
+import Footer from "../../components/layout/Footer";
 import LoadingIndicator from "../../components/common/LoadingIndicator";
-import AlertMessage from "../../components/common/AlertMessage";
 
 import ProfilesList from "../../components/profiles/ProfilesList";
 
@@ -26,7 +25,6 @@ export default function ProfilesListPage() {
   }, [checkAuth, navigate]);
 
   const [auth] = useContext(AuthContext);
-  const { showMessage, message, type, showAlert } = useAlert();
 
   if (!checkAuth) {
     return <LoadingIndicator />;
@@ -37,14 +35,13 @@ export default function ProfilesListPage() {
       <Head title="Profiles" />
       <Nav avatar={auth.avatar} />
 
-      {showMessage && <AlertMessage type={type} message={message} />}
-
       <BodyContainer>
         <BannerBackground>
           <LogoBannerHeading line1="good" line2="vibes" line3="only" />
         </BannerBackground>
 
         <ProfilesList />
+        <Footer />
       </BodyContainer>
     </>
   );

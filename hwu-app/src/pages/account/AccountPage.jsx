@@ -12,15 +12,18 @@ import CreatePost from "../../components/posts/settings/CreatePost";
 import DisplayPostsList from "../../components/posts/DisplayPostsList";
 import { useAlert } from "../../hooks/useAlert";
 
-import { BodyContainer, Container } from "../../components/styledComponents/Containers";
+import {
+  BodyContainer,
+  Container,
+} from "../../components/styledComponents/Containers";
 import AlertMessage from "../../components/common/AlertMessage";
 import LoadingIndicator from "../../components/common/LoadingIndicator";
-
+import Footer from "../../components/layout/Footer";
 
 export default function AccountPage() {
   const checkAuth = useRequireAuth();
   const navigate = useNavigate();
-  
+
   if (!checkAuth) {
     navigate("/");
   }
@@ -33,35 +36,35 @@ export default function AccountPage() {
     setRefreshKey((prevKey) => prevKey + 1);
   };
 
-  if(!checkAuth) {
-    return <LoadingIndicator />
+  if (!checkAuth) {
+    return <LoadingIndicator />;
   }
-  
+
   return (
     <>
       <Head title={"Hi " + auth.name} />
-      <Nav avatar={auth.avatar}/>
+      <Nav avatar={auth.avatar} />
 
-      {showMessage && (
-        <AlertMessage type={type} message={message}/>
-      )}
-      
+      {showMessage && <AlertMessage type={type} message={message} />}
+
       <BodyContainer>
-      <ProfileDetails name={auth.name} showAlert={showAlert} />
+        <ProfileDetails name={auth.name} showAlert={showAlert} />
 
-      <Container>
-        <CreatePost
-          handlePostModification={handlePostModification}
-          showAlert={showAlert}
-        />
+        <Container>
+          <CreatePost
+            handlePostModification={handlePostModification}
+            showAlert={showAlert}
+          />
 
-        <DisplayPostsList
-          key={refreshKey}
-          url={BASE_URL + PROFILES_PATH + `/${auth.name}/posts`}
-          handlePostModification={handlePostModification}
-          showAlert={showAlert}
-        />
-      </Container>
+          <DisplayPostsList
+            key={refreshKey}
+            url={BASE_URL + PROFILES_PATH + `/${auth.name}/posts`}
+            handlePostModification={handlePostModification}
+            showAlert={showAlert}
+          />
+        </Container>
+
+        <Footer />
       </BodyContainer>
     </>
   );

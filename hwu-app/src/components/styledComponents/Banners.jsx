@@ -160,4 +160,21 @@ const ProfileBanner = styled.img`
   }
 `;
 
-export { BannerBackground, ProfileBanner };
+
+const FooterBanner = styled.footer`
+height: 250px;
+width: 100%;
+background-color: ${colors.primary};
+border-radius: 65% 0 0 0;
+display: flex;
+justify-content: right;
+align-items: end;
+color: ${colors.softPrimary};
+margin-top: 100px;
+
+> p {
+  margin: 10px 30px;
+}
+`;
+
+export { BannerBackground, ProfileBanner, FooterBanner };

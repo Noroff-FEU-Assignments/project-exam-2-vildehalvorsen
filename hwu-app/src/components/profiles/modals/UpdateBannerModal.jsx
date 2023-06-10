@@ -10,6 +10,7 @@ import {
   ButtonPrimary,
   ButtonSecondary,
   ExitBtn,
+  ExitBtnContainer,
 } from "../../styledComponents/Buttons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -65,9 +66,11 @@ export default function UpdateBannerModal({
             ...auth,
             banner: data.banner,
           });
-
           handleModifications();
           showAlert("Banner updated", "success");
+          setTimeout(() => {
+            onRequestClose();
+          }, 200);
         }
       } catch (error) {
         console.log(error.toString());
@@ -108,8 +111,10 @@ export default function UpdateBannerModal({
 
           handleModifications();
           reset();
-          onRequestClose();
           showAlert("Banner deleted", "success");
+          setTimeout(() => {
+            onRequestClose();
+          }, 200);
         }
       } catch (error) {
         console.log(error);
@@ -120,9 +125,11 @@ export default function UpdateBannerModal({
 
   return (
     <StyledModal isOpen={isOpen} onRequestClose={onRequestClose} overlayClassName={"customOverlay"}>
+      <ExitBtnContainer>
       <ExitBtn className="closeBtn" onClick={onRequestClose}>
         <FontAwesomeIcon icon={faXmark} />
       </ExitBtn>
+      </ExitBtnContainer>
       <StyledForm
         onSubmit={handleSubmit(submitUpdateBanner)}
         id="updateBannerForm"

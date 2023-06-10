@@ -2,7 +2,6 @@ import styled from "styled-components";
 import colors from "../../theme/colors";
 import borders from "../../theme/borders";
 import device from "../../theme/device";
-import typography from "../../theme/typography";
 
 const MainAvatar = styled.img`
   width: 170px;

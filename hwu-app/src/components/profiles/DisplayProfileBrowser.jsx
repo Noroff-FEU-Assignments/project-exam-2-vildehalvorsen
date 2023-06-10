@@ -15,12 +15,11 @@ import LoadingIndicator from "../common/LoadingIndicator";
 import { Paragraph } from "../styledComponents/Paragraph";
 
 export default function DisplayProfileBrowser() {
-  const url = BASE_URL + PROFILES_PATH;
+  const url = BASE_URL + PROFILES_PATH + `?sortOrder=asc`;
   
   const navigate = useNavigate();
   const [auth] = useContext(AuthContext);
   const [randomProfiles, setRandomProfiles] = useState([]);
-  const [profilesModalIsOpen, setProfilesModalIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const accessToken = auth.accessToken;

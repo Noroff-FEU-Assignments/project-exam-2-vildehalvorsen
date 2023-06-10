@@ -1,7 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import colors from "../../theme/colors";
 import borders from "../../theme/borders";
-
 const spinAnimation = keyframes`
 0% {
   transform: rotate(0deg);

@@ -78,7 +78,10 @@ export default function RegistrationForm({ showAlert }) {
             id="reg-email"
             placeholder="email"
             {...register("email", {
-              required: true,
+              required: {
+                value: true,
+                message: "Email is required",
+              },
               pattern: {
                 value: regEmail,
                 message:

@@ -1,10 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
 import { BASE_URL, POSTS_PATH } from "../../../constants/api";
 import AuthContext from "../../../context/AuthContext";
-import { ButtonPrimary, ExitBtn } from "../../styledComponents/Buttons";
+import { ButtonPrimary, ExitBtn, ExitBtnContainer } from "../../styledComponents/Buttons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -25,7 +25,6 @@ export default function CreatePostModal({
 }) {
   const [auth] = useContext(AuthContext);
   const accessToken = auth.accessToken;
-  const [error, setError] = useState(null);
 
   const url = BASE_URL + POSTS_PATH;
 
@@ -68,9 +67,11 @@ export default function CreatePostModal({
       onRequestClose={onRequestClose}
       overlayClassName="customOverlay"
     >
+      <ExitBtnContainer>
       <ExitBtn className="closeBtn" onClick={onRequestClose}>
         <FontAwesomeIcon icon={faXmark} />
       </ExitBtn>
+      </ExitBtnContainer>
         <StyledForm
           onSubmit={handleSubmit(submitCreatePost)}
           id="createPostForm"
