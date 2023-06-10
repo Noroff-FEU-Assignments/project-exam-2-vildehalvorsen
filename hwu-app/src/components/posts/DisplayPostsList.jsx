@@ -23,6 +23,7 @@ export default function DisplayPostsList({
   const accessToken = auth.accessToken;
   const [isModified, setIsModified] = useState(false);
 
+  // eslint-disable-next-line
   useEffect(() => {
     getPostsData();
   }, [accessToken, url, page]);

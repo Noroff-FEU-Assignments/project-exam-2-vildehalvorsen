@@ -29,6 +29,7 @@ export default function ProfilesList() {
   const [auth] = useContext(AuthContext);
   const accessToken = auth.accessToken;
 
+  // eslint-disable-next-line
   useEffect(() => {
     fetchData();
   }, [accessToken, url]);

@@ -50,6 +50,7 @@ export default function PostsModal({
   const [commentCount, setCommentCount] = useState(0);
   const [isCommenting, setIsCommenting] = useState(true);
 
+  // eslint-disable-next-line
   useEffect(() => {
     fetchPostData();
   }, [accessToken, url]);

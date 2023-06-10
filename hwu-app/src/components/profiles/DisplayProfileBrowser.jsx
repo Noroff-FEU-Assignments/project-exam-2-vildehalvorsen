@@ -24,6 +24,7 @@ export default function DisplayProfileBrowser() {
   const [error, setError] = useState(null);
   const accessToken = auth.accessToken;
 
+  // eslint-disable-next-line
   useEffect(() => {
     getProfilesData();
   }, [accessToken, url]);
