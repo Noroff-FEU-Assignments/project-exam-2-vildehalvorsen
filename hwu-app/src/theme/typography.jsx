@@ -1,6 +1,7 @@
 const brandFont = "gill-sans-nova, sans-serif";
-const titleFont = "Menco, sans-serif";
+const titleFont = "Segoe UI, sans-serif";
 const bodyFont = "Segoe UI, sans-serif";
+const buttonFont = "Menco, sans-serif";
 
 const typography = {
 heading: {
@@ -10,17 +11,17 @@ heading: {
       fontWeight: "900",
     },
     h2: {
-      fontFamily: bodyFont,
+      fontFamily: titleFont,
       fontSize: "25px",
       fontWeight: "600",
     },
     h3: {
-      fontFamily: bodyFont,
+      fontFamily: titleFont,
       fontSize: "20px",
       fontWeight: "600",
     },
     h4: {
-      fontFamily: bodyFont,
+      fontFamily: titleFont,
       fontSize: "15px",
       fontWeight: "600",
     },
@@ -38,8 +39,7 @@ heading: {
   },
   
   button: {
-    fontFamilyBold: brandFont,
-    fontFamilyNormal: titleFont,
+    fontFamilyNormal: buttonFont,
   },
   links: {
     fontFamily: bodyFont,

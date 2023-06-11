@@ -22,13 +22,15 @@ const StyledForm = styled.form`
 
 const StyledInput = styled.input`
   appearance: none;
+  border: none;
+  background: ${colors.white};
   font-family: ${typography.body.fontFamily};
   font-size: ${typography.body.xsmall};
-  border: 1px solid ${colors.gray};
   border-radius: ${borders.mainBorder};
   padding: 10px;
   width: 100%;
   margin-bottom: 25px;
+  filter: drop-shadow(0 3px 4px ${colors.gray});
 
   &:focus {
     outline: 2px solid ${colors.primary};

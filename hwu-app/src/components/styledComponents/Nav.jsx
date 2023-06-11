@@ -17,12 +17,12 @@ z-index: 10000;
   margin-bottom: env(safe-area-inset-bottom);
 
   li {
-    margin: 0 23px;
+    margin: 0 30px;
   }
 
   @media (${device.laptop}) {
     position: fixed;
-    top: 0;
+    top: env(safe-area-inset-top);
     bottom: initial;
 
     li {

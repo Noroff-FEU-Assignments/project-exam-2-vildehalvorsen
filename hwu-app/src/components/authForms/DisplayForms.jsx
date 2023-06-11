@@ -5,7 +5,7 @@ import RegistrationForm from "./RegistrationForm";
 import {
   MobileCurtain,
   CurtainTop,
-  Container,
+  LaptopContainer,
 } from "../styledComponents/Curtain";
 import { LogoHeading } from "../layout/LogoHeading";
 import { ButtonPrimary, ButtonSecondary } from "../styledComponents/Buttons";
@@ -37,7 +37,7 @@ export default function DisplayForms({ showAlert }) {
 
   return (
     <div>
-      <Container position={curtainSwitch}>
+      <LaptopContainer position={curtainSwitch}>
         <CurtainTop position={curtainSwitch} active={curtainAnimation}>
           {showLogin ? (
             <div>
@@ -63,7 +63,7 @@ export default function DisplayForms({ showAlert }) {
         <Link onClick={toggleForm} className="mobileLink">
           {showLogin ? "Register now ->" : "<- Back to log in"}
         </Link>
-      </Container>
+      </LaptopContainer>
 
       <MobileCurtain active={active}>
         <LogoHeading line1="hang" line2="with" line3="us." />

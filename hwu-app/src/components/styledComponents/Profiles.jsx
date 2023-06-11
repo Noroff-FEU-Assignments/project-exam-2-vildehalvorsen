@@ -13,6 +13,7 @@ const ProfilesBrowser = styled.div`
     display: flex;
     padding: 20px 0;
     width: 100%;
+    height: 160px;
     max-width: 1000px;
     overflow: scroll;
 
@@ -46,6 +47,7 @@ const ProfilesBrowser = styled.div`
     margin: 50px 0;
 
     > ul {
+      height: 100%;
       li {
         width: 140px;
       }

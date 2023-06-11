@@ -12,7 +12,7 @@ const ButtonPrimary = styled.button`
   color: ${colors.white};
   border: 1px solid ${colors.white};
   border-radius: ${borders.mainBorder};
-  padding: 10px;
+  padding: 12px 0 10px;
   cursor: pointer;
   width: 100px;
 
@@ -25,7 +25,7 @@ const ButtonPrimary = styled.button`
     cursor: initial;
   }
   
-  @media (${device.tablet}) {
+  @media (${device.laptop}) {
     font-size: 13px;
   }
 `;
@@ -38,7 +38,7 @@ const ButtonSecondary = styled.button`
   color: ${colors.primary};
   border: 1.5px solid ${colors.primary};
   border-radius: ${borders.mainBorder};
-  padding: 10px;
+  padding: 12px 0 10px;
   cursor: pointer;
   width: 100px;
 
@@ -53,7 +53,7 @@ const ButtonSecondary = styled.button`
     cursor: initial;
   }
   
-  @media (${device.tablet}) {
+  @media (${device.laptop}) {
     font-size: 13px;
   }
 `;
@@ -61,7 +61,6 @@ const ButtonSecondary = styled.button`
 const BrowseBtn = styled(ButtonPrimary)`
   font-weight: bolder;
   width: 100px;
-  padding: 12px 0 10px;
 `;
 
 const PostCommentBtn = styled(ButtonPrimary)`
@@ -163,7 +162,10 @@ const EditImageBtn = styled(EditBtn)`
 
 const FollowBtn = styled(ButtonSecondary)`
   width: 63px;
-  padding: 12px 0 10px;
+  
+  @media (${device.laptop}) {
+    width: 70px;
+  }
 `;
 
 const LogoutBtn = styled(FollowBtn)`

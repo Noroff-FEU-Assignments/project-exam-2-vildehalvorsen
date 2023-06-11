@@ -55,7 +55,7 @@ to {
 }
 `;
 
-const Container = styled.div`
+const LaptopContainer = styled.div`
   display: flex;
   flex-direction: column;
 
@@ -80,7 +80,7 @@ const Container = styled.div`
   @media (${device.laptop}) {
     form {
       position: absolute;
-      top: 35%;
+      top: ${({ position }) => (position ? "30%" : "38%")};
       left: ${({ position }) => (position ? "10%" : "initial")};
       right: ${({ position }) => (position ? "initial" : "10%")};
       margin: 0;
@@ -223,4 +223,4 @@ const CurtainTop = styled.div`
   }
 `;
 
-export { Container, MobileCurtain, CurtainTop };
+export { LaptopContainer, MobileCurtain, CurtainTop };

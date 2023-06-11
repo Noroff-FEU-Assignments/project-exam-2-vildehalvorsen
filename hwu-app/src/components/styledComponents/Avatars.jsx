@@ -39,15 +39,16 @@ const CommentAvatar = styled.img`
 `;
 
 const ProfileListAvatar = styled.img`
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   object-fit: cover;
   border-radius: ${borders.imageBorder};
   filter: drop-shadow(0 3px 4px ${colors.gray});
+  margin-bottom: 10px;
   
   @media (${device.mobileL}) {
-    width: 120px;
-    height: 120px;
+    width: 110px;
+    height: 110px;
   }
   
 `;
