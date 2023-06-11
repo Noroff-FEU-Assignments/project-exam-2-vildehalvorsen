@@ -18,17 +18,8 @@ export default function DisplayForms({ showAlert }) {
 
   const toggleForm = () => {
     setShowLogin((prevState) => !prevState);
-
-    if (showLogin) {
-      setCurtainSwitch(true);
-      setCurtainAnimation(true);
-    }
-
-    if (!showLogin) {
-      setCurtainSwitch(false);
-      setCurtainAnimation(false);
-    }
-  
+    setCurtainAnimation((prevState) => !prevState);
+    setCurtainSwitch((prevState) => !prevState);
   };
 
   const handleButtonClick = (isLogin) => {

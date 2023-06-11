@@ -55,15 +55,6 @@ to {
 }
 `;
 
-const appearAnimation = keyframes`
-from {
-  opacity: 0;
-}
-to {
-  opacity: 1;
-}
-`;
-
 const LaptopContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -127,7 +118,7 @@ const MobileCurtain = styled.div`
   min-height: 500px;
   border-radius: 0 0 40% 54%;
   background-color: ${colors.primary};
-  animation: ${({ active }) => (active ? curtainAnimationMobile : "none")} 2s
+  animation: ${({ active }) => (active ? curtainAnimationMobile : "none")} 1.5s
     forwards;
 
   h1 {
