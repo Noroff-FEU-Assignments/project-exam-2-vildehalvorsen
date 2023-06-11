@@ -76,9 +76,9 @@ export default function RegistrationForm({ showAlert }) {
           <StyledInput
             name="email"
             id="reg-email"
-            placeholder="email"
+            placeholder="email@stud.noroff.no"
             {...register("email", {
-              required: true,
+              required: "A valid stud.noroff.no email is required",
               pattern: {
                 value: regEmail,
                 message:
@@ -97,9 +97,9 @@ export default function RegistrationForm({ showAlert }) {
             type="password"
             name="password"
             id="reg-password"
-            placeholder="password"
+            placeholder="choose password"
             {...register("password", {
-              required: true,
+              required: "Password is required",
               minLength: {
                 value: 8,
                 message: "Must be at least 8 characters",

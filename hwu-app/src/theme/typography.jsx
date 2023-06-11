@@ -38,7 +38,7 @@ heading: {
   },
   
   button: {
-    fontFamilyNormal: buttonFont,
+    fontFamily: buttonFont,
     mobileSize: "13px",
     tabletSize: "15px",
     laptopSize: "15px",

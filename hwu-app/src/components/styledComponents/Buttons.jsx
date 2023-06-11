@@ -5,7 +5,7 @@ import typography from "../../theme/typography";
 import device from "../../theme/device";
 
 const ButtonPrimary = styled.button`
-  font-family: ${typography.button.fontFamilyNormal};
+  font-family: ${typography.button.fontFamily};
   font-size: ${typography.button.mobileSize};
   text-align: center;
   background-color: ${colors.primary};
@@ -35,7 +35,7 @@ const ButtonPrimary = styled.button`
 `;
 
 const ButtonSecondary = styled.button`
-  font-family: ${typography.button.fontFamilyNormal};
+  font-family: ${typography.button.fontFamily};
   font-size: ${typography.button.mobileSize};
   text-align: center;
   background-color: ${colors.white};

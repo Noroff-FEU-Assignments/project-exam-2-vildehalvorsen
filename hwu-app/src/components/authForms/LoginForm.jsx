@@ -55,7 +55,7 @@ export default function LoginForm({ showAlert }) {
           <StyledInput
             name="email"
             id="login-email"
-            placeholder="email"
+            placeholder="email@stud.noroff.no"
             {...register("email", {
               required: true,
               pattern: {
