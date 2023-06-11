@@ -26,6 +26,11 @@ li {
     display: block;
 }
 
+img {
+    text-align: center;
+    color: white;
+}
+
 
 /* Modal overlay */
 

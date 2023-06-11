@@ -34,7 +34,7 @@ const ProfilesBrowser = styled.div`
     h4 {
       text-align: center;
       word-break: break-word;
-      margin-top: auto;
+      margin-bottom: auto;
     }
   }
 
