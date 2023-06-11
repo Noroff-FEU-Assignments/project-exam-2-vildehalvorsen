@@ -170,7 +170,6 @@ const FooterBanner = styled.footer`
   align-items: flex-end;
   color: ${colors.softPrimary};
   margin-top: 100px;
-  margin-bottom: env(safe-area-inset-bottom);
 
   > p {
     margin: 10px 30px;
