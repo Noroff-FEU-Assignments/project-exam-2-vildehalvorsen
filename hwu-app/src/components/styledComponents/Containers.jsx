@@ -156,7 +156,7 @@ const FollowerListContainer = styled.div`
     flex-wrap: wrap;
     width: 150px;
     max-height: 300px;
-    justify-content: start;
+    justify-content: flex-start;
 
     > *:not(:first-child) {
       margin: 0 5px;

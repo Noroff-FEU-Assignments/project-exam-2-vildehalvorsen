@@ -166,14 +166,15 @@ const FooterBanner = styled.footer`
   background-color: ${colors.primary};
   border-radius: 65% 0 0 0;
   display: flex;
-  justify-content: right;
-  align-items: end;
+  justify-content: flex-end;
+  align-items: flex-end;
   color: ${colors.softPrimary};
   margin-top: 100px;
   margin-bottom: env(safe-area-inset-bottom);
 
   > p {
     margin: 10px 30px;
+    text-align:right;
   }
 `;
 
