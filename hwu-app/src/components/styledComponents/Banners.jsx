@@ -80,7 +80,7 @@ const BannerBackground = styled.div`
   }
 
   @media (${device.tablet}) {
-    height: 300px;
+    height: 275px;
     border-radius: 0 0 45%;
     
     .bannerLogo {
