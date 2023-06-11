@@ -28,6 +28,8 @@ export default function RegistrationForm({ showAlert }) {
 
   async function onSubmit(data) {
     setSubmitting(true);
+    
+    data.email = data.email.toLowerCase();
 
     try {
       await axios.post(url, data, {

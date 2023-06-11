@@ -27,6 +27,8 @@ export default function LoginForm({ showAlert }) {
 
   async function onSubmit(data) {
     setSubmitting(true);
+    
+    data.email = data.email.toLowerCase();
 
     try {
       const response = await axios.post(url, data, {
