@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
@@ -19,6 +20,7 @@ const url = BASE_URL + REGISTER_PATH;
 
 export default function RegistrationForm({ showAlert }) {
   const [submitting, setSubmitting] = useState(false);
+  const navigate = useNavigate();
 
   const {
     register,
@@ -28,7 +30,7 @@ export default function RegistrationForm({ showAlert }) {
 
   async function onSubmit(data) {
     setSubmitting(true);
-    
+
     data.email = data.email.toLowerCase();
 
     try {
@@ -37,7 +39,7 @@ export default function RegistrationForm({ showAlert }) {
           "Content-Type": "application/json",
         },
       });
-      window.location.reload();
+      navigate("/account");
     } catch (error) {
       console.log("error: ", error.response.data.errors[0].message);
       const regError = error.response.data.errors[0].message;
