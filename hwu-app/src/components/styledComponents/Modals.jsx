@@ -94,6 +94,10 @@ const ModalPost = styled.div`
   @media (min-width: 500px) {
     border-radius: ${borders.mainBorder};
     filter: drop-shadow(0 3px 4px ${colors.gray});
+    
+    .modalsContainer_commentForm {
+      margin: auto 0 10px;
+    }
   }
   
   @media (${device.tablet}) {  
@@ -135,7 +139,8 @@ const ModalPost = styled.div`
     
     .modalContainer_commentsList {
       grid-area: comments;
-      max-height: 350px;
+      height: 100%;
+      max-height: 375px;
     }
     
     .modalsContainer_commentForm {
