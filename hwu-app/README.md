@@ -17,12 +17,12 @@ To start the app locally, follow these steps:
 - Netlify
 
 You can visit the app demo on this link:
-Link here
+https://hangwithus.netlify.app/
 
 ### Instructions
 > All admin functionality is managed by an existing application. This project only covers the front-end application for the API.
 
-1. You can register with a `stud.noroff.no` or `noroff.no` email address.
+1. You can register with a `stud.noroff.no` email address.
 2. When successfully registered, you can log in with your email and chosen password to get access to the app content.
 #### When logged in
 3. You can update your avatar and banner on your Account Page

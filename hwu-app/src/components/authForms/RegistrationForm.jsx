@@ -82,7 +82,7 @@ export default function RegistrationForm({ showAlert }) {
               pattern: {
                 value: regEmail,
                 message:
-                  "Must be a valid stud.noroff.no or noroff.no email address",
+                  "Must be a valid stud.noroff.no email address",
               },
             })}
           />
