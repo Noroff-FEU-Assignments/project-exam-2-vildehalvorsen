@@ -111,7 +111,7 @@ export default function PostsListHtml({
                   >
                     <Heading3>{title}</Heading3>
                     {media && <PostImage src={media} alt="Post media" />}
-                    <Paragraph small>{body}</Paragraph>
+                    <Paragraph>{body}</Paragraph>
                   </div>
                 </PostContentWrapper>
                 <PostBtnContainer>
@@ -122,7 +122,7 @@ export default function PostsListHtml({
                   />
                   <div>
                     {_count.comments === 0 ? null : (
-                      <Paragraph align="right" xsmall m5>
+                      <Paragraph align="right" m5>
                         {_count.comments}{" "}
                         {_count.comments === 1 ? "comment" : "comments"}
                       </Paragraph>

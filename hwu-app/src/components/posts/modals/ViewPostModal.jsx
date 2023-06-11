@@ -155,7 +155,7 @@ export default function ViewPostModal({
               {postData.media && (
                 <PostImage src={postData.media} alt="Post media" />
               )}
-              <Paragraph small>{postData.body}</Paragraph>
+              <Paragraph>{postData.body}</Paragraph>
             </div>
           </PostContentWrapper>
           <PostBtnContainer className="modalContainer_reactions">
@@ -202,10 +202,10 @@ export default function ViewPostModal({
                         }
                         alt="profile avatar"
                       />
-                      <Paragraph small>{comment.author.name}</Paragraph>
+                      <Paragraph>{comment.author.name}</Paragraph>
                     </PostLink>
                   </FlexContainer>
-                  <Paragraph xsmall ml30>
+                  <Paragraph ml30>
                     {comment.body}
                   </Paragraph>
                 </PostCommentList>

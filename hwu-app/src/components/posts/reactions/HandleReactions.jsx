@@ -42,7 +42,7 @@ export default function HandleReactions({
     <>
       <div>
         {reactionCount === 0 ? null : (
-          <Paragraph xsmall m5>
+          <Paragraph m5>
             {reactionCount} {reactionCount === 1 ? "like" : "likes"}
           </Paragraph>
         )}

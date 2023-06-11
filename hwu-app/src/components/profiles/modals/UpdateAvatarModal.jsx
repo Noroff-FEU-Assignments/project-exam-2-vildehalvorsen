@@ -111,7 +111,7 @@ export default function UpdateAvatarModal({
           
           handleModifications();
           reset();
-          showAlert("Avatar updated", "success");
+          showAlert("Avatar deleted", "success");
           setTimeout(() => {
             onRequestClose();
           }, 200);
