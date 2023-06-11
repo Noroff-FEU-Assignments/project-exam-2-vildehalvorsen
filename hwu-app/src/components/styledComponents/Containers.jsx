@@ -125,7 +125,7 @@ const FollowerContainer = styled.div`
   @media (${device.laptop}) {
     float: left;
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
     width: auto;
     margin: 50px;
     position: absolute;
