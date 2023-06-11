@@ -11,8 +11,8 @@ export const replaceSpaces = (e) => {
 export const validateName = (value) => {
   if (/^[_]+$/.test(value)) {
     return "Must contain at least one alphanumeric character";
-  } 
-  
+  }
+
   if (!regName.test(value)) {
     return "Must not contain special characters or punctuation symbols other than underscore _";
   }

@@ -12,19 +12,19 @@ to {
 `;
 
 const BodyContainer = styled.div`
-opacity: 0;
-animation: ${appearAnimation} .5s forwards .5s;
+  opacity: 0;
+  animation: ${appearAnimation} 0.5s forwards 0.5s;
 
   @media (${device.laptop}) {
     margin-top: 47.6px;
-    
+
     .profile__topContent {
       margin-bottom: 70px;
     }
   }
 `;
 
-const Container = styled.div`
+const ProfileContentContainer = styled.div`
   width: 95%;
   margin: 0 auto;
   display: flex;
@@ -170,7 +170,7 @@ const FollowerListContainer = styled.div`
 
 export {
   BodyContainer,
-  Container,
+  ProfileContentContainer,
   FlexContainer,
   SectionContainer,
   AvatarContainer,

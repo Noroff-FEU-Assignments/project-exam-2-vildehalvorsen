@@ -24,11 +24,11 @@ const ButtonPrimary = styled.button`
     background-color: ${colors.gray};
     cursor: initial;
   }
-  
+
   @media (${device.tablet}) {
     font-size: ${typography.button.tabletSize};
   }
-  
+
   @media (${device.laptop}) {
     font-size: ${typography.button.laptopSize};
   }
@@ -56,11 +56,11 @@ const ButtonSecondary = styled.button`
     color: ${colors.gray};
     cursor: initial;
   }
-  
+
   @media (${device.tablet}) {
     font-size: ${typography.button.tabletSize};
   }
-  
+
   @media (${device.laptop}) {
     font-size: ${typography.button.laptopSize};
   }
@@ -75,18 +75,19 @@ const PostCommentBtn = styled(ButtonPrimary)`
   border-left: 1px solid ${colors.white};
   width: 100%;
   height: 40px;
+  padding: 10px;
 
   border-radius: ${(props) => {
     if (props.borderNone) return "0";
     return "0 0 20px 0";
   }};
-
 `;
 
 const PostReactionBtn = styled(ButtonPrimary)`
   border-right: 1px solid ${colors.white};
   width: 100%;
   height: 40px;
+  padding: 10px;
 
   border-radius: ${(props) => {
     if (props.borderNone) return "0";
@@ -94,15 +95,34 @@ const PostReactionBtn = styled(ButtonPrimary)`
   }};
 `;
 
+const CommentSubmitBtn = styled.button`
+  color: ${colors.primary};
+  font-size: 18px;
+  appearance: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 10px;
+
+  &:disabled,
+  &:disabled:hover {
+    color: ${colors.gray};
+  }
+
+  &:hover {
+    color: ${colors.primaryHover};
+  }
+`;
+
 const ExitBtnContainer = styled.div`
-position: fixed;
-top: 0;
-left: 0;
-right: 0;
-background: ${colors.white};
-padding: 20px 30px;
-display: flex;
-justify-content: flex-end;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: ${colors.white};
+  padding: 20px 30px;
+  display: flex;
+  justify-content: flex-end;
 `;
 
 const ExitBtn = styled.button`
@@ -172,7 +192,7 @@ const EditImageBtn = styled(EditBtn)`
 
 const FollowBtn = styled(ButtonSecondary)`
   width: 63px;
-  
+
   @media (${device.laptop}) {
     width: 70px;
   }
@@ -195,6 +215,7 @@ export {
   BrowseBtn,
   PostCommentBtn,
   PostReactionBtn,
+  CommentSubmitBtn,
   ExitBtnContainer,
   ExitBtn,
   CreatePostBtn,

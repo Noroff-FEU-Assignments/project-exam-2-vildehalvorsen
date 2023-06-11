@@ -1,20 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import useRequireAuth from "../../hooks/useRequireAuth";
+import { useAlert } from "../../hooks/useAlert";
+import { BASE_URL, POSTS_PATH } from "../../constants/api";
+import AuthContext from "../../context/AuthContext";
 
 import Head from "../../components/layout/Head";
 import Nav from "../../components/layout/Nav";
+import { LogoBannerHeading } from "../../components/layout/LogoHeading";
+import LoadingIndicator from "../../components/common/LoadingIndicator";
+import AlertMessage from "../../components/common/AlertMessage";
+
 import DisplayProfileBrowser from "../../components/profiles/DisplayProfileBrowser";
 import DisplayPostsList from "../../components/posts/DisplayPostsList";
-import useRequireAuth from "../../hooks/useRequireAuth";
-import { useAlert } from "../../hooks/useAlert";
 
-import { BASE_URL, POSTS_PATH } from "../../constants/api";
-import { LogoBannerHeading } from "../../components/layout/LogoHeading";
 import { BannerBackground } from "../../components/styledComponents/Banners";
-import AlertMessage from "../../components/common/AlertMessage";
-import { useContext } from "react";
-import AuthContext from "../../context/AuthContext";
-import LoadingIndicator from "../../components/common/LoadingIndicator";
+
 import {
   BodyContainer,
   FlexContainer,
@@ -26,6 +27,7 @@ export default function DashboardPage() {
   const checkAuth = useRequireAuth();
   const navigate = useNavigate();
 
+  // eslint-disable-next-line
   useEffect(() => {
     if (!checkAuth) {
       navigate("/");

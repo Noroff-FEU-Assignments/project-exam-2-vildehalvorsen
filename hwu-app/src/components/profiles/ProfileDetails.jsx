@@ -4,7 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 import { BASE_URL, PROFILES_PATH } from "../../constants/api";
-import FollowButton from "../../components/profiles/follow/FollowButton";
+import DisplayActionsBtn from "./actions/DisplayActionsBtn";
 
 import defaultBanner from "../../images/banner_default.jpg";
 import defaultAvatar from "../../images/avatar_default.jpg";
@@ -32,6 +32,7 @@ export default function ProfileDetails({ name, showAlert }) {
 
   const url = BASE_URL + PROFILES_PATH + `/${name}`;
 
+  // eslint-disable-next-line
   useEffect(() => {
     getDetails();
   }, [accessToken, url]);
@@ -84,7 +85,7 @@ export default function ProfileDetails({ name, showAlert }) {
           </BannerBackground>
 
           <FollowBtnContainer>
-            <FollowButton
+            <DisplayActionsBtn
               name={name}
               handleModifications={handleModifications}
               showAlert={showAlert}
@@ -110,7 +111,7 @@ export default function ProfileDetails({ name, showAlert }) {
 
         <ProfileTitle>{details.name}</ProfileTitle>
       </div>
-      
+
       <FollowerContainer>
         <div>
           <Heading4 align="center">

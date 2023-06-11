@@ -60,8 +60,7 @@ export default function LoginForm({ showAlert }) {
               required: true,
               pattern: {
                 value: regEmail,
-                message:
-                  "Must be a valid stud.noroff.no email address",
+                message: "Must be a valid stud.noroff.no email address",
               },
             })}
           />

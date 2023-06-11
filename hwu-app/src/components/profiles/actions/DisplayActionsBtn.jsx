@@ -2,10 +2,14 @@ import { useContext, useState, useEffect } from "react";
 import { BASE_URL, PROFILES_PATH } from "../../../constants/api";
 import axios from "axios";
 import AuthContext from "../../../context/AuthContext";
-import { FollowBtn} from "../../styledComponents/Buttons";
-import LogOut from "../settings/LogOut";
+import { FollowBtn } from "../../styledComponents/Buttons";
+import HandleLogOut from "./HandleLogOut";
 
-export default function FollowButton({ name, handleModifications, showAlert }) {
+export default function DisplayActionsBtn({
+  name,
+  handleModifications,
+  showAlert,
+}) {
   const [auth] = useContext(AuthContext);
   const [isFollowing, setIsFollowing] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -17,7 +21,8 @@ export default function FollowButton({ name, handleModifications, showAlert }) {
       Authorization: `Bearer ${accessToken}`,
     },
   };
-
+  
+  // eslint-disable-next-line
   useEffect(() => {
     checkFollowing();
   }, [accessToken, url]);
@@ -74,7 +79,7 @@ export default function FollowButton({ name, handleModifications, showAlert }) {
   return (
     <>
       {name === auth.name ? (
-       <LogOut showAlert={showAlert}/>
+        <HandleLogOut showAlert={showAlert} />
       ) : (
         <FollowBtn disabled={loading} onClick={handleClick}>
           {isFollowing ? "Unfollow" : "Follow"}

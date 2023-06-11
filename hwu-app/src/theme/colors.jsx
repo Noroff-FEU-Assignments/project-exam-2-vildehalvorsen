@@ -11,7 +11,7 @@ const colors = {
   error: "#FF6464",
   darkError: "#B23636",
   softError: "#FFD0D0",
-  link: "#707070",
+  dateLink: "#707070",
   primaryHover: "#437981",
 };
 

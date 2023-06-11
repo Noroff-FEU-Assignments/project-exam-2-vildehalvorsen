@@ -82,7 +82,7 @@ const BannerBackground = styled.div`
   @media (${device.tablet}) {
     height: 275px;
     border-radius: 0 0 45%;
-    
+
     .bannerLogo {
       max-width: 900px;
       .line1 {
@@ -111,7 +111,7 @@ const BannerBackground = styled.div`
   @media (${device.laptop}) {
     height: 400px;
     border-radius: 0 0 35%;
-    
+
     .bannerLogo {
       max-width: 1200px;
       .line1 {
@@ -160,22 +160,21 @@ const ProfileBanner = styled.img`
   }
 `;
 
-
 const FooterBanner = styled.footer`
-height: 250px;
-width: 100%;
-background-color: ${colors.primary};
-border-radius: 65% 0 0 0;
-display: flex;
-justify-content: right;
-align-items: end;
-color: ${colors.softPrimary};
-margin-top: 100px;
-margin-bottom: env(safe-area-inset-bottom);
+  height: 250px;
+  width: 100%;
+  background-color: ${colors.primary};
+  border-radius: 65% 0 0 0;
+  display: flex;
+  justify-content: right;
+  align-items: end;
+  color: ${colors.softPrimary};
+  margin-top: 100px;
+  margin-bottom: env(safe-area-inset-bottom);
 
-> p {
-  margin: 10px 30px;
-}
+  > p {
+    margin: 10px 30px;
+  }
 `;
 
 export { BannerBackground, ProfileBanner, FooterBanner };

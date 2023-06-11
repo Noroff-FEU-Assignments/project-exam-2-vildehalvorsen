@@ -124,11 +124,15 @@ export default function UpdateBannerModal({
   }
 
   return (
-    <StyledModal isOpen={isOpen} onRequestClose={onRequestClose} overlayClassName={"customOverlay"}>
+    <StyledModal
+      isOpen={isOpen}
+      onRequestClose={onRequestClose}
+      overlayClassName={"customOverlay"}
+    >
       <ExitBtnContainer>
-      <ExitBtn className="closeBtn" onClick={onRequestClose}>
-        <FontAwesomeIcon icon={faXmark} />
-      </ExitBtn>
+        <ExitBtn className="closeBtn" onClick={onRequestClose}>
+          <FontAwesomeIcon icon={faXmark} />
+        </ExitBtn>
       </ExitBtnContainer>
       <StyledForm
         onSubmit={handleSubmit(submitUpdateBanner)}

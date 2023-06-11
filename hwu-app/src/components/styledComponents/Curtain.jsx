@@ -58,7 +58,7 @@ to {
 const LaptopContainer = styled.div`
   display: flex;
   flex-direction: column;
-  
+
   form {
     z-index: 10;
     margin-bottom: 0;
@@ -96,7 +96,7 @@ const LaptopContainer = styled.div`
       display: none;
     }
   }
-  
+
   @media (${device.laptopL}) {
     form {
       left: ${({ position }) => (position ? "10%" : "initial")};
@@ -128,7 +128,7 @@ const MobileCurtain = styled.div`
     animation: ${({ active }) => (active ? disappearAnimation : "none")} 0.2s
       forwards;
   }
-  
+
   .btnContainer {
     display: flex;
     flex-direction: column;
@@ -156,7 +156,7 @@ const CurtainTop = styled.div`
     top: 15%;
     margin-left: 30px;
   }
-  
+
   h1 {
     font-size: 40px;
     line-height: 1;
@@ -173,7 +173,7 @@ const CurtainTop = styled.div`
     > div {
       margin-left: 40px;
     }
-    
+
     h1 {
       font-size: 45px;
     }
@@ -182,11 +182,11 @@ const CurtainTop = styled.div`
   @media (${device.tablet}) {
     height: 250px;
     border-radius: 0 0 70%;
-    
+
     > div {
       margin-left: 60px;
     }
-    
+
     h1 {
       font-size: 50px;
     }
@@ -203,7 +203,9 @@ const CurtainTop = styled.div`
     min-height: 600px;
     width: 65%;
     border-radius: ${({ position }) => (position ? "0 0 0 100%" : "0 0 100%")};
-    animation: ${({active }) => (active ? curtainAnimationToLeft : curtainAnimationToRight)} 1s ease-in-out;
+    animation: ${({ active }) =>
+        active ? curtainAnimationToLeft : curtainAnimationToRight}
+      1s ease-in-out;
 
     > div {
       z-index: 1000;
@@ -212,8 +214,8 @@ const CurtainTop = styled.div`
       left: ${({ position }) => (position ? "42%" : "24%")};
       margin-left: 0;
       width: fit-content;
-  }
-    
+    }
+
     h1 {
       z-index: 1000;
       font-size: 100px;

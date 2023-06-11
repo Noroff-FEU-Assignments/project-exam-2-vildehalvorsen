@@ -17,9 +17,9 @@ ul::-webkit-scrollbar {
 }
 
 body {
-    background-color: #FAFAFA;
+    background-color: #fafafa;
     min-width: 280px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 li {

@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import { BASE_URL, PROFILES_PATH } from "../../constants/api";
+import LoadingIndicator from "../common/LoadingIndicator";
 
 import defaultAvatar from "../../images/avatar_default.jpg";
-import LoadingIndicator from "../common/LoadingIndicator";
 import { Heading4 } from "../styledComponents/Headings";
 import { Paragraph } from "../styledComponents/Paragraph";
 import { ProfileListAvatar } from "../styledComponents/Avatars";
@@ -22,7 +22,7 @@ export default function ProfilesList() {
   const [error, setError] = useState(null);
 
   const url = BASE_URL + PROFILES_PATH + `?sortOrder=asc&limit=${100}`;
-  
+
   const limit = 15;
   const totalProfiles = 500;
 
@@ -48,10 +48,7 @@ export default function ProfilesList() {
       let offset = 100;
 
       while (offset < totalProfiles) {
-        const response = await axios.get(
-          `${url}&offset=${offset}`,
-          options
-        );
+        const response = await axios.get(`${url}&offset=${offset}`, options);
         profiles.push(...response.data);
         offset += 100;
       }
@@ -65,7 +62,7 @@ export default function ProfilesList() {
       setLoading(false);
     }
   }
-  
+
   function handleSearch(e) {
     const searchValue = e.target.value.trim();
     setSearch(searchValue);
@@ -125,45 +122,40 @@ export default function ProfilesList() {
   );
 }
 
+// async function fetchData() {
+//   setLoading(true);
+//   setError(null);
+//   try {
+//     const options = {
+//       headers: {
+//         Authorization: `Bearer ${accessToken}`,
+//       },
+//     };
 
+//     const profiles = [];
+//     let offset = 0;
 
+//     while (offset < totalProfiles) {
+//       const response = await axios.get(
+//         `${url}&offset=${offset}`,
+//         options
+//       );
+//       profiles.push(...response.data);
+//       offset += 100; // Increment offset by 100 for the next batch
+//     }
 
+//     setAllProfiles(profiles);
+//     setDisplayedProfiles(profiles.slice(0, limit));
+//   } catch (error) {
+//     console.log(error);
+//     setError(error.toString());
+//   } finally {
+//     setLoading(false);
+//   }
+// }
 
-  // async function fetchData() {
-  //   setLoading(true);
-  //   setError(null);
-  //   try {
-  //     const options = {
-  //       headers: {
-  //         Authorization: `Bearer ${accessToken}`,
-  //       },
-  //     };
-
-  //     const profiles = [];
-  //     let offset = 0;
-
-  //     while (offset < totalProfiles) {
-  //       const response = await axios.get(
-  //         `${url}&offset=${offset}`,
-  //         options
-  //       );
-  //       profiles.push(...response.data);
-  //       offset += 100; // Increment offset by 100 for the next batch
-  //     }
-
-  //     setAllProfiles(profiles);
-  //     setDisplayedProfiles(profiles.slice(0, limit));
-  //   } catch (error) {
-  //     console.log(error);
-  //     setError(error.toString());
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // }
-
-
-
-{/*
+{
+  /*
 
   useEffect(() => {
     fetchData();
@@ -190,4 +182,5 @@ export default function ProfilesList() {
   }
 
 
-*/}
+*/
+}

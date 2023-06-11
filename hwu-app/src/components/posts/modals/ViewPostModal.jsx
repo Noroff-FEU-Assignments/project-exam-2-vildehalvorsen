@@ -3,12 +3,16 @@ import AuthContext from "../../../context/AuthContext";
 import axios from "axios";
 
 import { BASE_URL, POSTS_PATH } from "../../../constants/api";
-import CommentForm from "../comments/CommentForm";
+import DisplayCommentForm from "../comments/DisplayCommentForm";
 import HandleReactions from "../reactions/HandleReactions";
 import defaultAvatar from "../../../images/avatar_default.jpg";
 
 import { PostAvatar, CommentAvatar } from "../../styledComponents/Avatars";
-import { ExitBtn, ExitBtnContainer, PostCommentBtn } from "../../styledComponents/Buttons";
+import {
+  ExitBtn,
+  ExitBtnContainer,
+  PostCommentBtn,
+} from "../../styledComponents/Buttons";
 import {
   PostBtnContainer,
   PostCommentList,
@@ -17,10 +21,7 @@ import {
   PostLink,
   PostDate,
 } from "../../styledComponents/Posts";
-import {
-  ModalPost,
-  StyledPostModal,
-} from "../../styledComponents/Modals";
+import { ModalPost, StyledPostModal } from "../../styledComponents/Modals";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Heading3, Heading4 } from "../../styledComponents/Headings";
@@ -28,7 +29,7 @@ import { Paragraph } from "../../styledComponents/Paragraph";
 import { FlexContainer } from "../../styledComponents/Containers";
 import LoadingIndicator from "../../common/LoadingIndicator";
 
-export default function PostsModal({
+export default function ViewPostModal({
   isOpen,
   onRequestClose,
   post,
@@ -107,9 +108,9 @@ export default function PostsModal({
       overlayClassName={"customOverlay"}
     >
       <ExitBtnContainer>
-      <ExitBtn onClick={onRequestClose} className="modalButton_exit">
-        <FontAwesomeIcon icon={faXmark} />
-      </ExitBtn>
+        <ExitBtn onClick={onRequestClose} className="modalButton_exit">
+          <FontAwesomeIcon icon={faXmark} />
+        </ExitBtn>
       </ExitBtnContainer>
       {loading ? (
         <LoadingIndicator />
@@ -171,7 +172,9 @@ export default function PostsModal({
                   {commentCount} {commentCount === 1 ? "comment" : "comments"}
                 </Paragraph>
               )}
-              <PostCommentBtn borderNone className="modalButton_comment">Comment</PostCommentBtn>
+              <PostCommentBtn borderNone className="modalButton_comment">
+                Comment
+              </PostCommentBtn>
             </div>
           </PostBtnContainer>
           <div className="modalContainer_commentsList" ref={commentListRef}>
@@ -210,7 +213,7 @@ export default function PostsModal({
             })}
           </div>
           <div className="modalsContainer_commentForm">
-            <CommentForm
+            <DisplayCommentForm
               accessToken={accessToken}
               postId={postData.id}
               onCommentAdded={handleCommentAdded}

@@ -1,15 +1,15 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export const useAlert = () => {
-  const [message, setMessage] = useState('');
-  const [type, setType] = useState('');
+  const [message, setMessage] = useState("");
+  const [type, setType] = useState("");
   const [showMessage, setShowMessage] = useState(false);
 
   const showAlert = (msg, alertType) => {
     setMessage(msg);
     setType(alertType);
     setShowMessage(true);
-    setTimeout((hideAlert), 0);
+    setTimeout(hideAlert, 3000);
   };
 
   const hideAlert = () => {
@@ -22,6 +22,6 @@ export const useAlert = () => {
     message,
     type,
     showMessage,
-    showAlert
+    showAlert,
   };
 };

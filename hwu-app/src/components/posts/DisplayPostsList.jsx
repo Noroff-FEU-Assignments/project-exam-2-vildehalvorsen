@@ -1,10 +1,10 @@
-import axios from "axios";
-
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/AuthContext";
+import axios from "axios";
 import PostsListHtml from "./PostsListHtml";
-import { SectionContainer } from "../styledComponents/Containers";
 import LoadingIndicator from "../common/LoadingIndicator";
+
+import { SectionContainer } from "../styledComponents/Containers";
 import { Paragraph } from "../styledComponents/Paragraph";
 
 export default function DisplayPostsList({

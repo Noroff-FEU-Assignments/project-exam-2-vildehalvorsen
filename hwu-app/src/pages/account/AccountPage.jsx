@@ -3,22 +3,23 @@ import { useNavigate } from "react-router-dom";
 import useRequireAuth from "../../hooks/useRequireAuth";
 import { BASE_URL, PROFILES_PATH } from "../../constants/api";
 import AuthContext from "../../context/AuthContext";
+import { useAlert } from "../../hooks/useAlert";
 
 import Nav from "../../components/layout/Nav";
 import Head from "../../components/layout/Head";
+import Footer from "../../components/layout/Footer";
+
 import ProfileDetails from "../../components/profiles/ProfileDetails";
 import CreatePost from "../../components/posts/settings/CreatePost";
 
 import DisplayPostsList from "../../components/posts/DisplayPostsList";
-import { useAlert } from "../../hooks/useAlert";
+import AlertMessage from "../../components/common/AlertMessage";
+import LoadingIndicator from "../../components/common/LoadingIndicator";
 
 import {
   BodyContainer,
-  Container,
+  ProfileContentContainer,
 } from "../../components/styledComponents/Containers";
-import AlertMessage from "../../components/common/AlertMessage";
-import LoadingIndicator from "../../components/common/LoadingIndicator";
-import Footer from "../../components/layout/Footer";
 
 export default function AccountPage() {
   const checkAuth = useRequireAuth();
@@ -50,7 +51,7 @@ export default function AccountPage() {
       <BodyContainer>
         <ProfileDetails name={auth.name} showAlert={showAlert} />
 
-        <Container>
+        <ProfileContentContainer>
           <CreatePost
             handlePostModification={handlePostModification}
             showAlert={showAlert}
@@ -62,7 +63,7 @@ export default function AccountPage() {
             handlePostModification={handlePostModification}
             showAlert={showAlert}
           />
-        </Container>
+        </ProfileContentContainer>
 
         <Footer />
       </BodyContainer>

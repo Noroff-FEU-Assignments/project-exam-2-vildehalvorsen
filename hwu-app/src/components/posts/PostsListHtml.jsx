@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import PostsModal from "../posts/modals/PostsModal";
+import ViewPostModal from "../posts/modals/ViewPostModal";
 import HandleReactions from "./reactions/HandleReactions";
 import AuthContext from "../../context/AuthContext";
 import EditPost from "./settings/EditPost";
@@ -16,7 +16,6 @@ import {
   PostContentWrapper,
   PostBtnContainer,
 } from "../styledComponents/Posts";
-
 import { PostCommentBtn } from "../styledComponents/Buttons";
 import {
   FlexContainer,
@@ -81,12 +80,14 @@ export default function PostsListHtml({
               <PostCard key={id}>
                 <PostContentWrapper>
                   <FlexContainer spaceBetween>
-                    <PostLink to={
-                          author.name === auth.name
-                            ? `/account`
-                            : `/profiles/${author.name}`
-                        }
-                        title={author.name}>
+                    <PostLink
+                      to={
+                        author.name === auth.name
+                          ? `/account`
+                          : `/profiles/${author.name}`
+                      }
+                      title={author.name}
+                    >
                       <PostAvatar
                         src={author.avatar ? author.avatar : defaultAvatar}
                         alt="Profile avatar"
@@ -104,7 +105,10 @@ export default function PostsListHtml({
                       />
                     )}
                   </FlexContainer>
-                  <div className="postContent" onClick={() => handleOpenModal(id)}>
+                  <div
+                    className="postContent"
+                    onClick={() => handleOpenModal(id)}
+                  >
                     <Heading3>{title}</Heading3>
                     {media && <PostImage src={media} alt="Post media" />}
                     <Paragraph small>{body}</Paragraph>
@@ -134,7 +138,7 @@ export default function PostsListHtml({
         </ul>
       </SectionContainer>
       {selectedPost && (
-        <PostsModal
+        <ViewPostModal
           post={selectedPost}
           accessToken={accessToken}
           isOpen={postModalIsOpen}

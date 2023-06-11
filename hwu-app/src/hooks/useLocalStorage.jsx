@@ -30,4 +30,4 @@ export default function useLocalStorage(key, initialValue) {
   };
 
   return [storedValue, setValue];
-};
+}

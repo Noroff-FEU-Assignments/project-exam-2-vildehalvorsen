@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import RegistrationForm from "./RegistrationForm";
+import { LogoHeading } from "../layout/LogoHeading";
+
 import {
   MobileCurtain,
   CurtainTop,
   LaptopContainer,
 } from "../styledComponents/Curtain";
-import { LogoHeading } from "../layout/LogoHeading";
 import { ButtonPrimary, ButtonSecondary } from "../styledComponents/Buttons";
 
 export default function DisplayForms({ showAlert }) {

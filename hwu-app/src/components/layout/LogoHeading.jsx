@@ -1,5 +1,6 @@
 import React from "react";
-import {Heading1} from "../styledComponents/Headings";
+import PropTypes from "prop-types";
+import { Heading1 } from "../styledComponents/Headings";
 export function LogoHeading(props) {
   return (
     <>
@@ -29,3 +30,15 @@ export function LogoBannerHeading(props) {
     </div>
   );
 }
+
+LogoHeading.propTypes = {
+  line1: PropTypes.string,
+  line2: PropTypes.string,
+  line3: PropTypes.string,
+};
+
+LogoBannerHeading.propTypes = {
+  line1: PropTypes.string,
+  line2: PropTypes.string,
+  line3: PropTypes.string,
+};

@@ -5,7 +5,12 @@ import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import UpdateAvatarModal from "../modals/UpdateAvatarModal";
 import { EditImageBtn } from "../../styledComponents/Buttons";
 
-export default function EditAvatar({ name, details, handleModifications, showAlert }) {
+export default function EditAvatar({
+  name,
+  details,
+  handleModifications,
+  showAlert,
+}) {
   const [avatarModalIsOpen, setAvatarModalIsOpen] = useState(false);
 
   const handleOpenModal = () => {

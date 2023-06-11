@@ -36,7 +36,7 @@ const StyledPostModal = styled(Modal)`
   z-index: 9999;
   overflow-y: auto;
   background: ${colors.white};
-  
+
   @media (${device.laptop}) {
     top: 50%;
     left: 50%;
@@ -109,7 +109,7 @@ const ModalPost = styled.div`
     "post comments"
     "post form";
     grid-template-columns: 60% 40%;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: 10% 1fr 10%;
     width: 100%;
     max-width: none;
     height: fit-content;
@@ -120,7 +120,6 @@ const ModalPost = styled.div`
     .modalContent_main {
       grid-area: post;
       max-height: none;
-      height: 95%;
       width: 100%
       max-width: 500px;
       padding: 0 20px;
@@ -141,6 +140,7 @@ const ModalPost = styled.div`
     
     .modalsContainer_commentForm {
       grid-area: form;
+      margin: 10px 0 -20px;
     }
   }
   

@@ -13,11 +13,11 @@ const PostCard = styled.li`
   padding-top: 5px;
   margin: 0 auto 50px;
   filter: drop-shadow(0 3px 4px ${colors.gray});
-  
+
   @media (${device.mobileL}) {
     width: 400px;
   }
-  
+
   @media (${device.tablet}) {
     width: 500px;
   }
@@ -36,7 +36,7 @@ const PostLink = styled(Link)`
 `;
 
 const PostDate = styled.p`
-  color: ${colors.link};
+  color: ${colors.dateLink};
   font-family: ${typography.links.fontFamily};
   font-size: ${typography.links.mobileSize};
 `;
@@ -49,7 +49,7 @@ const PostImage = styled.img`
 
 const PostContentWrapper = styled.div`
   margin: 10px;
-  
+
   @media (${device.mobileL}) {
     margin: 20px;
   }
@@ -66,18 +66,17 @@ const PostBtnContainer = styled.div`
 `;
 
 const CommentsListContainer = styled.div`
-position: relative;
-height: 200px;
-overflow-y: scroll;
+  position: relative;
+  height: 200px;
+  overflow-y: scroll;
 
-> div {
-  background-color: ${colors.white};
-  position: sticky;
-  bottom: 0;
-  padding: 20px;
-  height: fit-content;
-}
-
+  > div {
+    background-color: ${colors.white};
+    position: sticky;
+    bottom: 0;
+    padding: 20px;
+    height: fit-content;
+  }
 `;
 
 const PostCommentList = styled.li`
@@ -96,7 +95,7 @@ const PostCommentForm = styled.form`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
+
   &:focus-within {
     outline: 2px solid ${colors.primary};
   }
@@ -116,25 +115,6 @@ const PostCommentTextarea = styled.textarea`
   }
 `;
 
-const CommentSubmitBtn = styled.button`
-  color: ${colors.primary};
-  font-size: 18px;
-  appearance: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0 10px;
-
-  &:disabled,
-  &:disabled:hover {
-    color: ${colors.gray};
-  }
-
-  &:hover {
-    color: ${colors.primaryHover};
-  }
-`;
-
 export {
   PostCard,
   PostLink,
@@ -146,5 +126,4 @@ export {
   PostCommentList,
   PostCommentForm,
   PostCommentTextarea,
-  CommentSubmitBtn,
 };

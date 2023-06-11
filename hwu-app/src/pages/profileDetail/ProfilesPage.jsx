@@ -3,19 +3,19 @@ import AuthContext from "../../context/AuthContext";
 import { useParams, useNavigate } from "react-router-dom";
 import { BASE_URL, PROFILES_PATH } from "../../constants/api";
 import { useAlert } from "../../hooks/useAlert";
+import useRequireAuth from "../../hooks/useRequireAuth";
 
 import Head from "../../components/layout/Head";
 import Nav from "../../components/layout/Nav";
-
-import useRequireAuth from "../../hooks/useRequireAuth";
-import ProfileDetails from "../../components/profiles/ProfileDetails";
-import DisplayPostList from "../../components/posts/DisplayPostsList";
 import LoadingIndicator from "../../components/common/LoadingIndicator";
 import AlertMessage from "../../components/common/AlertMessage";
 
+import ProfileDetails from "../../components/profiles/ProfileDetails";
+import DisplayPostList from "../../components/posts/DisplayPostsList";
+
 import {
   BodyContainer,
-  Container,
+  ProfileContentContainer,
 } from "../../components/styledComponents/Containers";
 import Footer from "../../components/layout/Footer";
 
@@ -23,6 +23,7 @@ export default function ProfilesPage() {
   const checkAuth = useRequireAuth();
   const navigate = useNavigate();
 
+  // eslint-disable-next-line
   useEffect(() => {
     if (!checkAuth) {
       navigate("/");
@@ -54,14 +55,14 @@ export default function ProfilesPage() {
       <BodyContainer>
         <ProfileDetails name={name} showAlert={showAlert} />
 
-        <Container>
+        <ProfileContentContainer>
           <DisplayPostList
             key={refreshKey}
             url={url}
             handlePostModification={handlePostModification}
             showAlert={showAlert}
           />
-        </Container>
+        </ProfileContentContainer>
 
         <Footer />
       </BodyContainer>

@@ -4,19 +4,18 @@ import { BASE_URL, PROFILES_PATH } from "../../constants/api";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
+import LoadingIndicator from "../common/LoadingIndicator";
 
 import defaultAvatar from "../../images/avatar_default.jpg";
 import { BrowseBtn } from "../styledComponents/Buttons";
 import { ProfileListAvatar } from "../styledComponents/Avatars";
-
 import { ProfilesBrowser } from "../styledComponents/Profiles";
 import { Heading4 } from "../styledComponents/Headings";
-import LoadingIndicator from "../common/LoadingIndicator";
 import { Paragraph } from "../styledComponents/Paragraph";
 
 export default function DisplayProfileBrowser() {
   const url = BASE_URL + PROFILES_PATH + `?sortOrder=asc`;
-  
+
   const navigate = useNavigate();
   const [auth] = useContext(AuthContext);
   const [randomProfiles, setRandomProfiles] = useState([]);
@@ -87,7 +86,9 @@ export default function DisplayProfileBrowser() {
             })}
           </ul>
           <div>
-            <BrowseBtn onClick={() => navigate("/profilelist")}>Browse</BrowseBtn>
+            <BrowseBtn onClick={() => navigate("/profilelist")}>
+              Browse
+            </BrowseBtn>
           </div>
         </>
       )}

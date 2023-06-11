@@ -23,16 +23,15 @@ const Paragraph = styled.p`
     return "0 0 5px";
   }};
   word-break: break-word;
-  
-  
+
   @media (${device.mobileS}) {
     font-size: ${typography.body.mobileSize};
   }
-  
+
   @media (${device.tablet}) {
     font-size: ${typography.body.tabletSize};
   }
-  
+
   @media (${device.laptop}) {
     font-size: ${typography.body.laptopSize};
   }

@@ -7,7 +7,12 @@ import UpdateBannerModal from "../modals/UpdateBannerModal";
 import { EditImageBtn } from "../../styledComponents/Buttons";
 import { EditBannerBtnContainer } from "../../styledComponents/Containers";
 
-export default function EditBanner({ name, details, handleModifications, showAlert }) {
+export default function EditBanner({
+  name,
+  details,
+  handleModifications,
+  showAlert,
+}) {
   const [bannerModalIsOpen, setBannerModalIsOpen] = useState(false);
 
   const handleOpenModal = () => {
@@ -26,7 +31,7 @@ export default function EditBanner({ name, details, handleModifications, showAle
     <>
       <EditBannerBtnContainer>
         <EditImageBtn onClick={handleOpenModal}>
-          <FontAwesomeIcon icon={faCamera} title="Edit Banner"/>
+          <FontAwesomeIcon icon={faCamera} title="Edit Banner" />
         </EditImageBtn>
         {bannerModalIsOpen && (
           <UpdateBannerModal

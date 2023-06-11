@@ -8,12 +8,12 @@ import { faCaretRight } from "@fortawesome/free-solid-svg-icons";
 import defaultAvatar from "../../../images/avatar_default.jpg";
 import { CommentAvatar } from "../../styledComponents/Avatars";
 import {
-  CommentSubmitBtn,
   PostCommentForm,
   PostCommentTextarea,
 } from "../../styledComponents/Posts";
+import { CommentSubmitBtn } from "../../styledComponents/Buttons";
 
-export default function CommentForm({
+export default function DisplayCommentForm({
   postId,
   accessToken,
   onCommentAdded,
@@ -55,7 +55,7 @@ export default function CommentForm({
       showAlert("Something went wrong trying to add comment", "error");
     }
   }
-  
+
   return (
     <PostCommentForm id="commentForm" onSubmit={handleSubmit(submitNewComment)}>
       <CommentAvatar
