@@ -95,9 +95,11 @@ const PostCommentForm = styled.form`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  &:focus-within {
+  
+  &:focus-within,
+  &:focus-visible {
     outline: 2px solid ${colors.primary};
+    border-radius: ${borders.mainBorder};
   }
 `;
 
