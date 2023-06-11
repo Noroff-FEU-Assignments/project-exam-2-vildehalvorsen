@@ -6,7 +6,7 @@ import device from "../../theme/device";
 
 const ButtonPrimary = styled.button`
   font-family: ${typography.button.fontFamilyNormal};
-  font-size: 11px;
+  font-size: ${typography.button.mobileSize};
   text-align: center;
   background-color: ${colors.primary};
   color: ${colors.white};
@@ -25,14 +25,18 @@ const ButtonPrimary = styled.button`
     cursor: initial;
   }
   
+  @media (${device.tablet}) {
+    font-size: ${typography.button.tabletSize};
+  }
+  
   @media (${device.laptop}) {
-    font-size: 13px;
+    font-size: ${typography.button.laptopSize};
   }
 `;
 
 const ButtonSecondary = styled.button`
   font-family: ${typography.button.fontFamilyNormal};
-  font-size: 11px;
+  font-size: ${typography.button.mobileSize};
   text-align: center;
   background-color: ${colors.white};
   color: ${colors.primary};
@@ -53,8 +57,12 @@ const ButtonSecondary = styled.button`
     cursor: initial;
   }
   
+  @media (${device.tablet}) {
+    font-size: ${typography.button.tabletSize};
+  }
+  
   @media (${device.laptop}) {
-    font-size: 13px;
+    font-size: ${typography.button.laptopSize};
   }
 `;
 
@@ -116,7 +124,7 @@ const CreatePostBtn = styled.button`
 
   border-radius: ${borders.mainBorder};
   border: none;
-  padding: 10px;
+  padding: 12px 10px;
   margin-top: 50px;
   width: 330px;
   cursor: text;
@@ -126,10 +134,12 @@ const CreatePostBtn = styled.button`
 
   @media (${device.mobileL}) {
     width: 400px;
+    max-width: none;
   }
 
   @media (${device.tablet}) {
     width: 500px;
+    padding: 15px 12px;
   }
   @media (${device.laptop}) {
     margin-top: 0;

@@ -3,6 +3,7 @@ import colors from "../../theme/colors";
 import borders from "../../theme/borders";
 import device from "../../theme/device";
 import Modal from "react-modal";
+import typography from "../../theme/typography";
 
 const StyledModal = styled(Modal)`
   position: fixed;
@@ -37,15 +38,16 @@ const StyledPostModal = styled(Modal)`
   background: ${colors.white};
   
   @media (${device.laptop}) {
-    top: 70px;
+    top: 50%;
     left: 50%;
     right: initial;
-    bottom: 70px;
-    transform: translateX(-50%);
+    bottom: initial;
+    transform: translate(-50%, -50%);
     background: none;
     border-radius: ${borders.mainBorder};
     width: 80vw;
-    height: 80vh;
+    height: fit-content;
+    max-height: 80vh;
   }
 `;
 
@@ -64,7 +66,18 @@ const ModalPost = styled.div`
     max-height: 250px;
     overflow-y: scroll;
   }
-
+  
+  .modalContainer_reactions {
+    p {
+      font-size: ${typography.body.mobileSize};
+    }
+    
+    .modalButton_comment:hover {
+    background-color: ${colors.primary};
+    cursor: default;
+  }
+}
+  
   .modalContainer_commentsList {
     height: 100%;
     max-height: 150px;
@@ -112,7 +125,7 @@ const ModalPost = styled.div`
       max-width: 500px;
       padding: 0 20px;
       margin-right: 0;
-      border-right: 2px solid ${colors.softPrimary}
+      border-right: 2px solid ${colors.softPrimary};
     }
     
     .modalContainer_reactions {
@@ -123,7 +136,7 @@ const ModalPost = styled.div`
     
     .modalContainer_commentsList {
       grid-area: comments;
-      max-height: 400px;
+      max-height: 350px;
     }
     
     .modalsContainer_commentForm {

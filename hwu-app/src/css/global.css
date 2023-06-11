@@ -18,7 +18,7 @@ ul::-webkit-scrollbar {
 
 body {
     background-color: #FAFAFA;
-    min-width: 330px;
+    min-width: 280px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -36,8 +36,4 @@ li {
     right: 0;
     bottom: 0;
     background-color: rgba(222, 236, 239, 0.7);
-}
-
-.modal-open {
-    overflow: hidden;
 }

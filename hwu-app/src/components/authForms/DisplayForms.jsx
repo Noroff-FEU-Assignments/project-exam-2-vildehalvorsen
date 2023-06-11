@@ -28,8 +28,7 @@ export default function DisplayForms({ showAlert }) {
       setCurtainSwitch(false);
       setCurtainAnimation(false);
     }
-    
-    console.log(curtainSwitch);
+  
   };
 
   const handleButtonClick = (isLogin) => {
@@ -40,7 +39,7 @@ export default function DisplayForms({ showAlert }) {
   return (
     <div>
       <LaptopContainer position={curtainSwitch}>
-        <CurtainTop position={curtainSwitch} active={curtainSwitch}>
+        <CurtainTop position={curtainSwitch} active={curtainAnimation}>
           {showLogin ? (
             <div>
               <LogoHeading line1="hang" line2="with" line3="us." />

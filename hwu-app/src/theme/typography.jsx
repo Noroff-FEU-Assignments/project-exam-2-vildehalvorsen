@@ -32,18 +32,22 @@ heading: {
   },
   body: {
     fontFamily: bodyFont,
-    xsmall: "13px",
-    small: "15px",
-    medium: "17px",
-    large: "18px",
+    mobileSize: "13px",
+    tabletSize: "15px",
+    laptopSize: "15px",
   },
   
   button: {
     fontFamilyNormal: buttonFont,
+    mobileSize: "13px",
+    tabletSize: "15px",
+    laptopSize: "15px",
   },
   links: {
     fontFamily: bodyFont,
-    fontSize: "13px",
+    mobileSize: "13px",
+    tabletSize: "13px",
+    laptopSize: "15px",
   }
 };
 

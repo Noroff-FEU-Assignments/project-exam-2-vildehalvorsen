@@ -79,10 +79,6 @@ export default function LoginForm({ showAlert }) {
             placeholder="password"
             {...register("password", {
               required: true,
-              minLength: {
-                value: 8,
-                message: "Must be at least 8 characters",
-              },
             })}
           />
           {errors.password && <Paragraph>{errors.password.message}</Paragraph>}

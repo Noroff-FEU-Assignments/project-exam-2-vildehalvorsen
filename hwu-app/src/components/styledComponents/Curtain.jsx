@@ -55,10 +55,19 @@ to {
 }
 `;
 
+const appearAnimation = keyframes`
+from {
+  opacity: 0;
+}
+to {
+  opacity: 1;
+}
+`;
+
 const LaptopContainer = styled.div`
   display: flex;
   flex-direction: column;
-
+  
   form {
     z-index: 10;
     margin-bottom: 0;
@@ -69,7 +78,7 @@ const LaptopContainer = styled.div`
     z-index: 10;
     font-family: ${typography.links.fontFamily};
     color: ${colors.black};
-    font-size: ${typography.links.fontSize};
+    font-size: ${typography.links.mobileSize};
     text-align: center;
   }
 
@@ -81,9 +90,10 @@ const LaptopContainer = styled.div`
     form {
       position: absolute;
       top: ${({ position }) => (position ? "30%" : "38%")};
-      left: ${({ position }) => (position ? "10%" : "initial")};
-      right: ${({ position }) => (position ? "initial" : "10%")};
+      left: ${({ position }) => (position ? "8%" : "initial")};
+      right: ${({ position }) => (position ? "initial" : "8%")};
       margin: 0;
+      width: 300px;
     }
 
     a {
@@ -95,6 +105,13 @@ const LaptopContainer = styled.div`
       display: none;
     }
   }
+  
+  @media (${device.laptopL}) {
+    form {
+      left: ${({ position }) => (position ? "10%" : "initial")};
+      right: ${({ position }) => (position ? "initial" : "10%")};
+    }
+  }
 `;
 
 const MobileCurtain = styled.div`
@@ -103,10 +120,11 @@ const MobileCurtain = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  min-width: 330px;
-  height: 100%;
-  min-height: 450px;
-  max-height: 550px;
+  display: flex;
+  flex-direction: column;
+  min-width: 280px;
+  height: 90%;
+  min-height: 500px;
   border-radius: 0 0 40% 54%;
   background-color: ${colors.primary};
   animation: ${({ active }) => (active ? curtainAnimationMobile : "none")} 2s
@@ -114,12 +132,12 @@ const MobileCurtain = styled.div`
 
   h1 {
     text-align: center;
-    font-size: 50px;
-    margin: 50px auto;
+    font-size: 60px;
+    margin: 60px auto;
     animation: ${({ active }) => (active ? disappearAnimation : "none")} 0.2s
       forwards;
   }
-
+  
   .btnContainer {
     display: flex;
     flex-direction: column;

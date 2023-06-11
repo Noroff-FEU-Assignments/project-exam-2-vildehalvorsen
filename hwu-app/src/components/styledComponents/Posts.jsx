@@ -38,7 +38,7 @@ const PostLink = styled(Link)`
 const PostDate = styled.p`
   color: ${colors.link};
   font-family: ${typography.links.fontFamily};
-  font-size: ${typography.links.fontSize};
+  font-size: ${typography.links.mobileSize};
 `;
 
 const PostImage = styled.img`

@@ -40,6 +40,7 @@ const Container = styled.div`
     float: right;
     width: 70%;
     border-left: 2px solid ${colors.softPrimary};
+    padding-bottom: 100px;
     margin-top: 50px;
   }
 `;

@@ -9,7 +9,7 @@ export const useAlert = () => {
     setMessage(msg);
     setType(alertType);
     setShowMessage(true);
-    setTimeout((hideAlert), 3000);
+    setTimeout((hideAlert), 0);
   };
 
   const hideAlert = () => {

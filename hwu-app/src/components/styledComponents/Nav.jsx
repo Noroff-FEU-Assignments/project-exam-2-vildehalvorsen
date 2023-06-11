@@ -4,7 +4,7 @@ import device from "../../theme/device";
 import { NavLink } from "react-router-dom";
 
 const StyledNav = styled.nav`
-z-index: 10000;
+  z-index: 10000;
   position: fixed;
   bottom: 0;
   left: 0;
