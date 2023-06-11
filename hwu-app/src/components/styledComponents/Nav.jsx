@@ -14,6 +14,7 @@ z-index: 10000;
   justify-content: center;
   background-color: ${colors.white};
   padding: 8px 0;
+  margin-bottom: env(safe-area-inset-bottom);
 
   li {
     margin: 0 23px;
