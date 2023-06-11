@@ -37,9 +37,11 @@ https://hangwithus.netlify.app/
 12. You can log out.
 
 ## Limitations
-1. On the profile list page, the profiles displayed are limited to 500 and doesn't include all registered profiles. The sort order is set to ascending, which makes only the 500 first profiles in an ascending order available for search. This is to limit the data being returned.
+1. Only users with `stud.noroff.no` email can register and log in.
 
-2. It is not possible to delete or remove comments and reactions.
+2. On the profile list page, the profiles displayed are limited to 500 and doesn't include all registered profiles. The sort order is set to ascending, which makes only the 500 first profiles in an ascending order available for search. This is to limit the data being returned.
+
+3. It is not possible to delete or remove comments and reactions.
 
 ## API
 The API for this project is found under Social EndPoints in the [Noroff API documentation](https://noroff-api-docs.netlify.app/).
