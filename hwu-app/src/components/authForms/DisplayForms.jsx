@@ -28,6 +28,8 @@ export default function DisplayForms({ showAlert }) {
       setCurtainSwitch(false);
       setCurtainAnimation(false);
     }
+    
+    console.log(curtainSwitch);
   };
 
   const handleButtonClick = (isLogin) => {
