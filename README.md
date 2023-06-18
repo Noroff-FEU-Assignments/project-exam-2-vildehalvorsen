@@ -1,25 +1,9 @@
-# Project Exam 2
+# Social Media App / Project Exam 2
 
-## Goal
-To take the skills learned over the last two years and take on an extensive project where the finished product should reflect the candidate's general development capabilities, in addition to visual and technical skills.
-
-## Brief
+The brief for the exam:
 An existing Social Media company has approached you to create a brand new front end for their application. While they have a list of required features, the design and user experience has not been specified. Working with the official API documentation, plan, design and build a modern front end social media application.
 
-## Getting started locally
-To start the app locally, follow these steps:
-1. Clone the repository from GitHub
-2. In your code editor, open the terminal and run `cd hwu-app` to get to the correct directory.
-3. Run `npm install` to install dependencies
-4. Run `npm start`. This will run the app in development mode in your browser: http://localhost:3000
-
-### Hosting Service
-- Netlify
-
-You can visit the app demo on this link:
-https://hangwithus.netlify.app/
-
-### Instructions
+## Description
 > All admin functionality is managed by an existing application. This project only covers the front-end application for the API.
 
 1. You can register with a `stud.noroff.no` email address.
@@ -36,22 +20,48 @@ https://hangwithus.netlify.app/
 11. You can follow and unfollow any profile.
 12. You can log out.
 
-## Limitations
-1. Only users with `stud.noroff.no` email can register and log in.
+#### Limitations
+1. Only users with a `stud.noroff.no` email can register and log in.
 
 2. On the profile list page, the profiles displayed are limited to 500 and doesn't include all registered profiles. The sort order is set to ascending, which makes only the 500 first profiles in an ascending order available for search. This is to limit the data being returned.
 
 3. It is not possible to delete or remove comments and reactions.
 
-## API
-The API for this project is found under Social EndPoints in the [Noroff API documentation](https://noroff-api-docs.netlify.app/).
+## Installing
 
-### Resources
+1. Clone the repo:
+```bash
+git clone git@github.com:Noroff-FEU-Assignments/project-exam-2-vildehalvorsen.git
+```
+
+2. Get to the root directory:
+```bash
+cd hwu-app
+```
+
+3. Install dependencies:
+```
+npm install
+```
+
+## Getting started locally
+This will run the app in development mode in your browser: http://localhost:3000
+```bash
+npm start
+```
+
+## Built with
+- React (>16)
+- Styled Components
+
+## Resources
+[Noroff API documentation](https://noroff-api-docs.netlify.app/)
 [API Guide](https://noroff-api-docs.netlify.app/social-endpoints/authentication)
 [API Documentation](https://nf-api.onrender.com/docs)
 
-### JavaScript Frameworks
-- React (>16)
+## Hosting Service
+- Netlify
 
-### CSS Frameworks
-- Styled Components
+You can visit the app demo on this link:
+https://hangwithus.netlify.app/
+
